@@ -1,0 +1,48 @@
+.weight-input {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+
+  &__label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__field {
+    flex: 1;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #0f1117;
+    color: #f0f0f0;
+    outline: none;
+    width: 100%;
+  }
+
+  &__unit {
+    font-size: 14px;
+    color: #888;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  &__saved {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    font-size: 12px;
+    margin-top: 6px;
+    opacity: 0.8;
+  }
+}

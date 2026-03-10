@@ -1,0 +1,27 @@
+.phase-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 14px 14px 0;
+
+  &__btn {
+    flex: 1;
+    padding: 10px 6px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+    transition: all 0.2s;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  &__emoji {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+
+  &__sub {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+}
