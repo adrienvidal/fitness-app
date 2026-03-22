@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./WeightInput.scss";
 
 interface Props {
@@ -8,30 +8,18 @@ interface Props {
 
 export function WeightInput({ exKey, accentColor }: Props) {
   const storageKey = `weight:${exKey}`;
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(() => localStorage.getItem(storageKey) ?? "");
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const res = await (window as any).storage.get(storageKey);
-        if (res) setValue(res.value);
-      } catch {}
-    };
-    load();
-  }, [storageKey]);
-
-  const handleSave = async (val: string) => {
+  const handleSave = (val: string) => {
     setValue(val);
-    setSaved(false);
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (window as any).storage.set(storageKey, val);
-      setSaved(true);
-      setTimeout(() => setSaved(false), 1500);
-    } catch {}
+    localStorage.setItem(storageKey, val);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1500);
   };
+
+  console.log('test', {value});
+  
 
   return (
     <div
