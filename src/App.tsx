@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { days } from "./data/days";
 import { Header } from "./components/Header/Header";
 import { DayTabs } from "./components/DayTabs/DayTabs";
@@ -11,6 +11,21 @@ export default function App() {
   const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set());
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme(prev => {
+      const next = prev === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", next);
+      return next;
+    });
+  }
 
   const day = days[activeDay];
 
@@ -31,7 +46,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header day={day} />
+      <Header day={day} theme={theme} onToggleTheme={toggleTheme} />
 
       <DayTabs
         days={days}

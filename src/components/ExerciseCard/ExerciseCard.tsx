@@ -23,7 +23,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
     <div
       className={`exercise-card${isCompleted ? ' exercise-card--done' : ''}`}
       style={{
-        border: `1.5px solid ${isCompleted ? '#2a3a2a' : isOpen ? accentColor : '#2a2d3a'}`,
+        border: `1.5px solid ${isCompleted ? 'var(--card-done-border)' : isOpen ? accentColor : 'var(--card-inactive-border)'}`,
         boxShadow: isOpen && !isCompleted ? `0 4px 24px ${accentColor}28` : 'none'
       }}
     >
@@ -31,7 +31,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
         <div
           className='exercise-card__index'
           style={{
-            background: isCompleted ? '#1e3a1e' : isOpen ? accentColor : `${accentColor}20`,
+            background: isCompleted ? 'var(--check-done-bg)' : isOpen ? accentColor : `${accentColor}20`,
             color: isCompleted ? '#4caf50' : isOpen ? '#fff' : accentColor
           }}
         >

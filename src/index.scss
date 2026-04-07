@@ -1,3 +1,41 @@
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #1c1f2a;
+  --bg-tertiary: #131520;
+  --bg-tab: #181b25;
+  --bg-track: #1e2130;
+  --bg-image: #111111;
+  --text-primary: #f0f0f0;
+  --text-secondary: #666666;
+  --text-muted: #bbbbbb;
+  --text-done: #888888;
+  --text-faint: #1e2028;
+  --border-primary: #2a2d3a;
+  --border-secondary: #232633;
+  --check-done-bg: #1e3a1e;
+  --card-done-border: #2a3a2a;
+  --card-inactive-border: #2a2d3a;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #eef0f5;
+  --bg-tab: #e8eaf0;
+  --bg-track: #e2e5ed;
+  --bg-image: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #4b5563;
+  --text-done: #9ca3af;
+  --text-faint: #d1d5db;
+  --border-primary: #e5e7eb;
+  --border-secondary: #e5e7eb;
+  --check-done-bg: #dcfce7;
+  --card-done-border: #86efac;
+  --card-inactive-border: #e5e7eb;
+}
+
 *,
 *::before,
 *::after {
@@ -6,10 +44,11 @@
 
 body {
   margin: 0;
-  background-color: #0f1117;
-  color: #f0f0f0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 button {

@@ -1,8 +1,9 @@
 .app {
   font-family: "Segoe UI", system-ui, sans-serif;
-  background: #0f1117;
+  background: var(--bg-primary);
   min-height: 100vh;
-  color: #f0f0f0;
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
   max-width: 600px;
   margin: 0 auto;
 
@@ -38,7 +39,7 @@
   &__footer {
     text-align: center;
     padding: 4px 16px 20px;
-    color: #1e2028;
+    color: var(--text-faint);
     font-size: 11px;
   }
 }

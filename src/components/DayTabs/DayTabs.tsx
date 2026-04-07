@@ -17,7 +17,7 @@ export function DayTabs({ days, activeDay, onSelect }: Props) {
           className="day-tabs__btn"
           style={{
             border: `2px solid ${activeDay === i ? d.accent : "transparent"}`,
-            background: activeDay === i ? `${d.accent}1a` : "#181b25",
+            background: activeDay === i ? `${d.accent}1a` : "var(--bg-tab)",
             color: activeDay === i ? d.accent : "#555",
           }}
         >

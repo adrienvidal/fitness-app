@@ -21,7 +21,7 @@
 
   &__track {
     height: 5px;
-    background: #1e2130;
+    background: var(--bg-track);
     border-radius: 99px;
     overflow: hidden;
   }
