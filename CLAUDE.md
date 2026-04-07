@@ -25,7 +25,7 @@ Day → Exercise[]
 
 - 4 days: Jour 1 PUSH (8 exercises), Jour 2 PULL (7 exercises), Jour 3 CALI (13 exercises), Jour 4 CARDIO (3 activities)
 - Each `Day` has: `id`, `label`, `type` (`push | pull | cali | cardio`), `color`, `accent`, `emoji`, `exercises[]`
-- Each exercise carries metadata: muscle groups, sets/reps/rest, images, description, tips, optional `warmupSeries` (e.g. "2×15" for warm-up sets before working sets), and an optional `hasWeight` flag
+- Each exercise carries metadata: muscle groups, sets/reps/rest, images, description, tips, optional `warmupSeries` (e.g. "2×15"), optional `hasWeight` flag, optional `defaultWeight` (number), optional `assistedWeight` (boolean — flips label to "Mon assistance")
 
 ### State management
 
@@ -36,9 +36,26 @@ All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `isPanelOpen` (boolean) — controls the right side panel visibility
 - `theme` (`"dark" | "light"`) — persisted in `localStorage` under key `"theme"`
 
-No Context, Redux, or Zustand. The only persistence is in [src/components/WeightInput](src/components/WeightInput/), which reads/writes `localStorage` with keys formatted as `weight:d{day}-{exerciseName}`.
+`exKey` format: `d{dayIndex}-{exerciseName_with_underscores}` — used as the weight storage key and completion tracking key.
 
-`exKey` format: `d{dayIndex}-{exerciseName_with_underscores}` — used as both the `WeightInput` storage key prefix and the completion tracking key.
+No Context, Redux, or Zustand.
+
+### Supabase integration
+
+[src/lib/supabase.ts](src/lib/supabase.ts) exports the Supabase client. Two tables are used:
+
+- `exercise_weights` — columns: `user_id`, `ex_key`, `weight_kg`
+- `workout_logs` — columns: `user_id`, `session_date`, `day_type`
+
+**Hooks** (all in [src/hooks/](src/hooks/)):
+
+- `useSupabase` — on mount, resumes existing session or signs in anonymously; returns `{ userId, isReady }`
+- `useExerciseWeight(exKey, userId)` — loads weight from Supabase (with localStorage as cache), migrates any existing localStorage value on first use; returns `{ weight, saveWeight }`
+- `useWorkoutLog(userId)` — loads workout history from Supabase (with localStorage cache), migrates old localStorage data on first run; returns `{ workoutLog, saveSession }`
+
+`WeightInput` now delegates entirely to `useExerciseWeight` instead of managing `localStorage` directly. It receives `userId` as a prop.
+
+**Session logging**: `App.tsx` exposes a "Terminer la séance" button that calls `saveSession(dateStr, day.type, userId)` from `useWorkoutLog`.
 
 ### Styling
 
@@ -50,7 +67,11 @@ No Context, Redux, or Zustand. The only persistence is in [src/components/Weight
 
 ### Side panel
 
-[src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Currently contains the theme toggle (moved out of the Header). The Header now has a `☰` burger button (`onOpenPanel` prop) instead of the direct theme toggle.
+[src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Contains:
+- Theme toggle (dark/light)
+- `WorkoutCalendar` — displays workout history from `workoutLog` prop (a `Record<string, DayType>`)
+
+The Header has a `☰` burger button (`onOpenPanel` prop) that opens the panel.
 
 ### Session progress
 
