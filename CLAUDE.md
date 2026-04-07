@@ -53,7 +53,7 @@ No Context, Redux, or Zustand.
 
 **Hooks** (all in [src/hooks/](src/hooks/)):
 
-- `useSupabase` — on mount, resumes existing session or signs in anonymously; returns `{ userId, isReady }`
+- `useSupabase` — on mount, resumes existing session via `getSession`; provides Google OAuth sign-in and sign-out; returns `{ userId, isReady, signIn, signOut }`
 - `useExerciseWeight(exKey, userId)` — loads weight from Supabase (with localStorage as cache), migrates any existing localStorage value on first use; returns `{ weight, saveWeight }`
 - `useWorkoutLog(userId)` — loads workout history from Supabase (with localStorage cache), migrates old localStorage data on first run; returns `{ workoutLog, saveSession }`
 
@@ -69,11 +69,16 @@ No Context, Redux, or Zustand.
 - Each day has a `color` (primary) and `accent` (highlight) defined in the days data
 - J3 (CALI) exercises use `cat` badges with colors from `catColors` (Mobilité, Gainage, Force au sol, Flexibilité)
 
+### Authentication
+
+[src/components/LoginScreen/LoginScreen.tsx](src/components/LoginScreen/LoginScreen.tsx) is rendered by `App.tsx` when `isReady && !userId`. It shows a Google OAuth sign-in button (`signIn` from `useSupabase`). Once authenticated, the main app renders. The `SidePanel` exposes a "Déconnexion" button that calls `signOut`.
+
 ### Side panel
 
 [src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Contains:
 - Theme toggle (moved out of the Header; Header now has a `☰` burger button via `onOpenPanel` prop)
 - Workout history via [src/components/WorkoutCalendar/WorkoutCalendar.tsx](src/components/WorkoutCalendar/WorkoutCalendar.tsx), which receives `workoutLog` and renders a calendar view of past sessions
+- Sign-out button ("Déconnexion") via `onSignOut` prop
 
 ### Session progress
 
