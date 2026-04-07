@@ -33,6 +33,8 @@ All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `activeDay` (0–3)
 - `activeExercise` (null or index)
 - `completedExercises` (`Set<string>`) — set of `exKey` strings for exercises marked done; reset on day change
+- `isPanelOpen` (boolean) — controls the right side panel visibility
+- `theme` (`"dark" | "light"`) — persisted in `localStorage` under key `"theme"`
 
 No Context, Redux, or Zustand. The only persistence is in [src/components/WeightInput](src/components/WeightInput/), which reads/writes `localStorage` with keys formatted as `weight:d{day}-{exerciseName}`.
 
@@ -45,6 +47,10 @@ No Context, Redux, or Zustand. The only persistence is in [src/components/Weight
 - Dark-themed mobile-first layout (max-width 600px)
 - Each day has a `color` (primary) and `accent` (highlight) defined in the days data
 - J3 (CALI) exercises use `cat` badges with colors from `catColors` (Mobilité, Gainage, Force au sol, Flexibilité)
+
+### Side panel
+
+[src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Currently contains the theme toggle (moved out of the Header). The Header now has a `☰` burger button (`onOpenPanel` prop) instead of the direct theme toggle.
 
 ### Session progress
 
