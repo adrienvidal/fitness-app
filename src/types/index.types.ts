@@ -4,6 +4,7 @@ export type Exercise = {
   warmupSeries?: string
   rest: string
   hasWeight: boolean
+  defaultWeight?: number
   img: string
   muscles: string[]
   desc: string

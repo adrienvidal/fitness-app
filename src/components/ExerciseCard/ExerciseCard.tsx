@@ -123,7 +123,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
               ))}
             </div>
 
-            {ex.hasWeight && <WeightInput exKey={exKey} accentColor={accentColor} />}
+            {ex.hasWeight && <WeightInput exKey={exKey} accentColor={accentColor} defaultWeight={ex.defaultWeight} />}
 
             <div
               className='exercise-card__desc'

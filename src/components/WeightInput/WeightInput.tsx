@@ -4,9 +4,10 @@ import "./WeightInput.scss";
 interface Props {
   exKey: string;
   accentColor: string;
+  defaultWeight?: number;
 }
 
-export function WeightInput({ exKey, accentColor }: Props) {
+export function WeightInput({ exKey, accentColor, defaultWeight }: Props) {
   const storageKey = `weight:${exKey}`;
   const [value, setValue] = useState(() => localStorage.getItem(storageKey) ?? "");
   const [saved, setSaved] = useState(false);
@@ -35,7 +36,7 @@ export function WeightInput({ exKey, accentColor }: Props) {
       <div className="weight-input__row">
         <input
           type="number"
-          placeholder="ex: 60"
+          placeholder={defaultWeight ? `ex: ${defaultWeight}` : 'ex: 60'}
           value={value}
           onChange={e => handleSave(e.target.value)}
           className="weight-input__field"
