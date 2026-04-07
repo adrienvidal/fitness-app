@@ -32,8 +32,11 @@ Day → Exercise[]
 All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `activeDay` (0–3)
 - `activeExercise` (null or index)
+- `completedExercises` (`Set<string>`) — set of `exKey` strings for exercises marked done; reset on day change
 
 No Context, Redux, or Zustand. The only persistence is in [src/components/WeightInput](src/components/WeightInput/), which reads/writes `localStorage` with keys formatted as `weight:d{day}-{exerciseName}`.
+
+`exKey` format: `d{dayIndex}-{exerciseName_with_underscores}` — used as both the `WeightInput` storage key prefix and the completion tracking key.
 
 ### Styling
 
@@ -42,3 +45,9 @@ No Context, Redux, or Zustand. The only persistence is in [src/components/Weight
 - Dark-themed mobile-first layout (max-width 600px)
 - Each day has a `color` (primary) and `accent` (highlight) defined in the days data
 - J3 (CALI) exercises use `cat` badges with colors from `catColors` (Mobilité, Gainage, Force au sol, Flexibilité)
+
+### Session progress
+
+[src/components/SessionProgress/SessionProgress.tsx](src/components/SessionProgress/SessionProgress.tsx) renders a thin progress bar + `X / Y exercices` label above the exercise list. It receives `completed`, `total`, and `accentColor` as props — no internal state.
+
+Each `ExerciseCard` has a circular checkbox button (top-right, `stopPropagation` so it doesn't toggle the accordion). When completed: index badge turns green ✓, name gets a strikethrough, card opacity drops to 0.6.
