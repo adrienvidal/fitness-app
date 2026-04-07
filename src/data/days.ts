@@ -80,7 +80,7 @@ export const days: Day[] = [
         name: "Tirage vertical divergent",
         warmupSeries: "2×15",
         series: "3×10", rest: "2 min", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/09/lat-pulldown.jpg",
+        img: "https://www.renewfit.com/photos_grd/ph1678706313526",
         muscles: ["Grand dorsal", "Biceps", "Rhomboïdes"],
         desc: "Diverging lat pulldown machine : les poignées s'écartent dans le bas du mouvement, ce qui maximise l'étirement du grand dorsal. Saisir les poignées, s'asseoir et tirer vers les épaules en pensant à ramener les coudes vers les hanches.",
         tips: ["Penser 'coudes vers les poches de pantalon'", "Ne pas incliner excessivement le buste en arrière", "Contraction dorsale maximale en bas"],
@@ -88,7 +88,7 @@ export const days: Day[] = [
       {
         name: "Tirage vertical (lat pull)",
         series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/09/lat-pulldown.jpg",
+        img: "https://louismove.com/wp-content/uploads/2022/12/01971101-Cable-Wide-Pulldown_Back-FIX_medium.png.webp",
         muscles: ["Grand dorsal", "Biceps", "Trapèzes"],
         desc: "Poulie lat pulldown classique, prise pronation légèrement plus large que les épaules. Tirer la barre vers le haut de la poitrine en sortant les coudes vers le bas et l'extérieur. Contrôler la remontée.",
         tips: ["Buste légèrement incliné en arrière (10–15°)", "Ne pas tirer avec les bras uniquement — penser aux dorsaux", "Amplitude complète, bras bien tendus en haut"],
@@ -96,7 +96,7 @@ export const days: Day[] = [
       {
         name: "Tractions assistées",
         series: "3×10", rest: "90s", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/11/assisted-pull-up.jpg",
+        img: "https://julienquaglierini.com/wp-content/uploads/2017/10/tractions-assistees.jpg",
         muscles: ["Grand dorsal", "Biceps", "Rhomboïdes"],
         desc: "Sur machine à tractions assistées. Prise pronation, mains légèrement plus larges que les épaules. Partir bras tendus, tirer jusqu'à ce que le menton dépasse la barre. Descendre lentement en 3 sec. Réduire l'assistance au fil du temps.",
         tips: ["Full range of motion obligatoire", "Serrer les omoplates en haut", "Réduire l'assistance dès que les reps sont propres"],
@@ -104,7 +104,7 @@ export const days: Day[] = [
       {
         name: "Tirage horizontal (seated row)",
         series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/cable-seated-row.jpg",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjQnW4j7qKJYK6V1QLkE1qYaf03C-sF4PrnQ&s",
         muscles: ["Grand dorsal", "Rhomboïdes", "Biceps"],
         desc: "Assis face à la poulie basse, pieds sur les repose-pieds, genoux légèrement fléchis. Saisir la poignée, dos droit. Tirer vers le bas de l'abdomen en ramenant les coudes derrière le corps. Contraction maximale, puis retour contrôlé.",
         tips: ["Ne pas arrondir le dos au retour", "Le mouvement part des coudes, pas des mains", "Serrer les omoplates à chaque rep"],
@@ -112,7 +112,7 @@ export const days: Day[] = [
       {
         name: "Pupitre biceps",
         series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/dumbbell-preacher-curl.jpg",
+        img: "https://louismove.com/wp-content/uploads/2023/01/03721101-Dumbbell-Preacher-Curl_Upper-Arms_medium.png.webp",
         muscles: ["Biceps", "Avant-bras"],
         desc: "Sur banc pupitre (preacher curl). Bras posés sur le coussin incliné, saisir la barre ou les haltères. Fléchir les coudes en enroulant les biceps, amener les mains vers les épaules. Descendre lentement jusqu'à l'extension complète.",
         tips: ["Amplitude complète — descendre jusqu'à l'extension", "Pas d'élan, mouvement pur des biceps", "Contraction 1 sec en haut"],
@@ -120,7 +120,7 @@ export const days: Day[] = [
       {
         name: "Poulie biceps",
         series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/cable-curl.jpg",
+        img: "https://www.docteur-fitness.com/wp-content/uploads/2021/10/curl-biceps-poulie-basse.gif",
         muscles: ["Biceps", "Avant-bras"],
         desc: "Debout face à la poulie basse, saisir la corde ou la barre. Coudes collés au corps et fixes. Fléchir les avant-bras vers les épaules en rotation supination. Descendre lentement. La tension constante de la poulie stimule le muscle différemment des haltères.",
         tips: ["Coudes fixes et collés aux côtes", "Supination maximale en haut (paumes vers le plafond)", "Ne pas basculer le buste en arrière"],
@@ -128,7 +128,7 @@ export const days: Day[] = [
       {
         name: "Lombaires (finish)",
         series: "3×10", rest: "60s", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/04/back-extension.jpg",
+        img: "https://julienquaglierini.com/wp-content/uploads/2017/10/extension-lombaire-au-banc.jpg",
         muscles: ["Érecteurs du dos", "Fessiers", "Ischio-jambiers"],
         desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
         tips: ["Ne pas dépasser la ligne droite en haut", "Gainage abdominal léger pendant le mouvement", "Respiration régulière"],
