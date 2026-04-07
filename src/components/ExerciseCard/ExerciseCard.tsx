@@ -76,15 +76,6 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
         </div>
       </button>
 
-      <button
-        className={`exercise-card__check${isCompleted ? ' exercise-card__check--done' : ''}`}
-        onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
-        style={{ borderColor: isCompleted ? '#4caf50' : `${accentColor}40`, color: isCompleted ? '#4caf50' : `${accentColor}60` }}
-        aria-label={isCompleted ? 'Marquer comme non terminé' : 'Marquer comme terminé'}
-      >
-        {isCompleted ? '✓' : '○'}
-      </button>
-
       {isOpen && (
         <div className='exercise-card__body'>
           <div className='exercise-card__image-wrap'>
@@ -153,6 +144,17 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
                 <span>{tip}</span>
               </div>
             ))}
+
+            <button
+              className={`exercise-card__validate${isCompleted ? ' exercise-card__validate--done' : ''}`}
+              onClick={onToggleComplete}
+              style={isCompleted
+                ? { background: 'var(--check-done-bg)', color: '#4caf50', borderColor: '#4caf50' }
+                : { background: `${accentColor}18`, color: accentColor, borderColor: `${accentColor}60` }
+              }
+            >
+              {isCompleted ? '✓ Validé' : 'Valider'}
+            </button>
           </div>
         </div>
       )}
