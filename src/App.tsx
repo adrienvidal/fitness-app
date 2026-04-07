@@ -5,12 +5,13 @@ import { DayTabs } from "./components/DayTabs/DayTabs";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
+import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
 import "./App.scss";
 
 export default function App() {
-  const { userId } = useSupabase();
+  const { userId, isReady, signIn, signOut } = useSupabase();
   const { workoutLog, saveSession } = useWorkoutLog(userId);
   const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
@@ -23,6 +24,10 @@ export default function App() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  if (isReady && !userId) {
+    return <LoginScreen onSignIn={signIn} />;
+  }
 
   function toggleTheme() {
     setTheme(prev => {
@@ -65,6 +70,7 @@ export default function App() {
         theme={theme}
         onToggleTheme={toggleTheme}
         workoutLog={workoutLog}
+        onSignOut={signOut}
       />
 
       <DayTabs
