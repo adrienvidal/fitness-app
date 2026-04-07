@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { days } from "./data/days";
 import { Header } from "./components/Header/Header";
 import { DayTabs } from "./components/DayTabs/DayTabs";
-import { CaliLegend } from "./components/CaliLegend/CaliLegend";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import "./App.scss";
@@ -53,8 +52,6 @@ export default function App() {
         activeDay={activeDay}
         onSelect={handleDaySelect}
       />
-
-      {day.type === "cali" && <CaliLegend />}
 
       <SessionProgress
         completed={completedExercises.size}
