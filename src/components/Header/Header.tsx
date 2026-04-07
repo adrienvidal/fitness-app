@@ -31,11 +31,8 @@ export function Header({ day, theme, onToggleTheme }: Props) {
       >
         {theme === "dark" ? "☀️" : "🌙"}
       </button>
-      <div className="header__label">
-        Programme Upper Body + Callisthénie
-      </div>
-      <div className="header__title">Guide des Exercices</div>
-      <div className="header__subtitle">41 ans · 75 kg · 1m75</div>
+      <div className="header__title">FitnessPal</div>
+      <div className="header__subtitle">Adrien</div>
     </div>
   );
 }
