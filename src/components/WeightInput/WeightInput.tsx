@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useExerciseWeight } from "../../hooks/useExerciseWeight";
 import "./WeightInput.scss";
 
 interface Props {
@@ -6,21 +7,18 @@ interface Props {
   accentColor: string;
   defaultWeight?: number;
   assistedWeight?: boolean;
+  userId: string | null;
 }
 
-export function WeightInput({ exKey, accentColor, defaultWeight, assistedWeight }: Props) {
-  const storageKey = `weight:${exKey}`;
-  const [value, setValue] = useState(() => localStorage.getItem(storageKey) ?? "");
+export function WeightInput({ exKey, accentColor, defaultWeight, assistedWeight, userId }: Props) {
+  const { weight: value, saveWeight } = useExerciseWeight(exKey, userId);
   const [saved, setSaved] = useState(false);
 
   const handleSave = (val: string) => {
-    setValue(val);
-    localStorage.setItem(storageKey, val);
+    saveWeight(val, userId ?? "");
     setSaved(true);
     setTimeout(() => setSaved(false), 1500);
   };
-
-  console.log('test', {value});
   
 
   return (
