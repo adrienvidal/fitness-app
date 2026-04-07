@@ -21,6 +21,11 @@ export default function App() {
     return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -39,6 +44,7 @@ export default function App() {
   }
 
   const day = days[activeDay];
+  const sessionFinished = workoutLog[todayStr] === day.type;
 
   function handleDaySelect(i: number) {
     setActiveDay(i);
@@ -47,10 +53,15 @@ export default function App() {
   }
 
   function handleFinishSession() {
+    setShowConfirmModal(true);
+  }
+
+  function confirmFinishSession() {
+    setShowConfirmModal(false);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
     if (!userId) return;
-    const today = new Date();
-    const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-    saveSession(dateStr, day.type, userId);
+    saveSession(todayStr, day.type, userId);
   }
 
   function toggleComplete(key: string) {
@@ -82,7 +93,7 @@ export default function App() {
       />
 
       <SessionProgress
-        completed={completedExercises.size}
+        completed={sessionFinished ? day.exercises.length : completedExercises.size}
         total={day.exercises.length}
         accentColor={day.accent}
       />
@@ -120,6 +131,33 @@ export default function App() {
       <div className="app__footer">
         Jour {day.id} · {day.label}
       </div>
+
+      {showConfirmModal && (
+        <div className="app__modal-backdrop" onClick={() => setShowConfirmModal(false)}>
+          <div className="app__modal" onClick={e => e.stopPropagation()}>
+            <p className="app__modal-title">Terminer la séance ?</p>
+            <p className="app__modal-body">La séance sera enregistrée dans ton historique.</p>
+            <div className="app__modal-actions">
+              <button className="app__modal-cancel" onClick={() => setShowConfirmModal(false)}>
+                Annuler
+              </button>
+              <button
+                className="app__modal-confirm"
+                style={{ background: day.accent }}
+                onClick={confirmFinishSession}
+              >
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showToast && (
+        <div className="app__toast">
+          ✓ Séance enregistrée !
+        </div>
+      )}
     </div>
   );
 }
