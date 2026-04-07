@@ -5,10 +5,13 @@ import { DayTabs } from "./components/DayTabs/DayTabs";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
-import type { DayType } from "./types/index.types";
+import { useSupabase } from "./hooks/useSupabase";
+import { useWorkoutLog } from "./hooks/useWorkoutLog";
 import "./App.scss";
 
 export default function App() {
+  const { userId } = useSupabase();
+  const { workoutLog, saveSession } = useWorkoutLog(userId);
   const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set());
@@ -16,13 +19,6 @@ export default function App() {
     return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [workoutLog, setWorkoutLog] = useState<Record<string, DayType>>(() => {
-    try {
-      return JSON.parse(localStorage.getItem("workoutLog") ?? "{}");
-    } catch {
-      return {};
-    }
-  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -45,13 +41,10 @@ export default function App() {
   }
 
   function handleFinishSession() {
+    if (!userId) return;
     const today = new Date();
     const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-    setWorkoutLog(prev => {
-      const next = { ...prev, [dateStr]: day.type };
-      localStorage.setItem("workoutLog", JSON.stringify(next));
-      return next;
-    });
+    saveSession(dateStr, day.type, userId);
   }
 
   function toggleComplete(key: string) {
