@@ -36,6 +36,32 @@
     gap: 10px;
   }
 
+  &__finish {
+    padding: 0 14px 16px;
+
+    &-btn {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      border: 1.5px solid;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s, opacity 0.15s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      &:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+      }
+    }
+  }
+
   &__footer {
     text-align: center;
     padding: 4px 16px 20px;

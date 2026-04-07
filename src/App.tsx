@@ -5,6 +5,7 @@ import { DayTabs } from "./components/DayTabs/DayTabs";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
+import type { DayType } from "./types/index.types";
 import "./App.scss";
 
 export default function App() {
@@ -15,6 +16,13 @@ export default function App() {
     return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [workoutLog, setWorkoutLog] = useState<Record<string, DayType>>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("workoutLog") ?? "{}");
+    } catch {
+      return {};
+    }
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -36,6 +44,16 @@ export default function App() {
     setCompletedExercises(new Set());
   }
 
+  function handleFinishSession() {
+    const today = new Date();
+    const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+    setWorkoutLog(prev => {
+      const next = { ...prev, [dateStr]: day.type };
+      localStorage.setItem("workoutLog", JSON.stringify(next));
+      return next;
+    });
+  }
+
   function toggleComplete(key: string) {
     setCompletedExercises(prev => {
       const next = new Set(prev);
@@ -53,6 +71,7 @@ export default function App() {
         onClose={() => setIsPanelOpen(false)}
         theme={theme}
         onToggleTheme={toggleTheme}
+        workoutLog={workoutLog}
       />
 
       <DayTabs
@@ -84,6 +103,16 @@ export default function App() {
             />
           );
         })}
+      </div>
+
+      <div className="app__finish">
+        <button
+          className="app__finish-btn"
+          style={{ borderColor: day.accent, color: day.accent }}
+          onClick={handleFinishSession}
+        >
+          Terminer la séance
+        </button>
       </div>
 
       <div className="app__footer">

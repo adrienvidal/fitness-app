@@ -1,0 +1,112 @@
+.workout-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      background: none;
+      border: none;
+      color: var(--text-secondary, #999);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 2px 8px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-primary, #fff);
+      }
+    }
+  }
+
+  &__month {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary, #fff);
+    text-transform: capitalize;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  &__weekday {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-secondary, #666);
+    padding-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  &__day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 3px 1px;
+    border-radius: 5px;
+    min-height: 30px;
+
+    &--today &-num {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text-primary, #fff);
+      font-weight: 700;
+      border-radius: 50%;
+    }
+  }
+
+  &__day-num {
+    font-size: 10px;
+    color: var(--text-secondary, #777);
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  &__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-secondary, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__legend-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}

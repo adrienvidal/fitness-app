@@ -1,3 +1,5 @@
+import { WorkoutCalendar } from "../WorkoutCalendar/WorkoutCalendar";
+import type { DayType } from "../../types/index.types";
 import "./SidePanel.scss";
 
 interface Props {
@@ -5,9 +7,10 @@ interface Props {
   onClose: () => void;
   theme: "dark" | "light";
   onToggleTheme: () => void;
+  workoutLog: Record<string, DayType>;
 }
 
-export function SidePanel({ isOpen, onClose, theme, onToggleTheme }: Props) {
+export function SidePanel({ isOpen, onClose, theme, onToggleTheme, workoutLog }: Props) {
   return (
     <>
       <div
@@ -32,6 +35,11 @@ export function SidePanel({ isOpen, onClose, theme, onToggleTheme }: Props) {
               <span className="side-panel__theme-icon">{theme === "dark" ? "☀️" : "🌙"}</span>
               <span>{theme === "dark" ? "Mode clair" : "Mode sombre"}</span>
             </button>
+          </div>
+
+          <div className="side-panel__section">
+            <span className="side-panel__label">Historique</span>
+            <WorkoutCalendar workoutLog={workoutLog} />
           </div>
         </div>
       </div>
