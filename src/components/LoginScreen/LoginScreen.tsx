@@ -2,9 +2,10 @@ import "./LoginScreen.scss";
 
 interface Props {
   onSignIn: () => void;
+  onGuestAccess: () => void;
 }
 
-export function LoginScreen({ onSignIn }: Props) {
+export function LoginScreen({ onSignIn, onGuestAccess }: Props) {
   return (
     <div className="login">
       <div className="login__content">
@@ -19,6 +20,9 @@ export function LoginScreen({ onSignIn }: Props) {
             <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.962L3.964 7.294C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
           </svg>
           Continuer avec Google
+        </button>
+        <button className="login__btn login__btn--guest" onClick={onGuestAccess}>
+          Continuer sans compte
         </button>
       </div>
     </div>

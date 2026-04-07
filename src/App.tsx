@@ -12,6 +12,7 @@ import "./App.scss";
 
 export default function App() {
   const { userId, isReady, signIn, signOut } = useSupabase();
+  const [isGuest, setIsGuest] = useState(false);
   const { workoutLog, saveSession } = useWorkoutLog(userId);
   const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
@@ -25,8 +26,8 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  if (isReady && !userId) {
-    return <LoginScreen onSignIn={signIn} />;
+  if (isReady && !userId && !isGuest) {
+    return <LoginScreen onSignIn={signIn} onGuestAccess={() => setIsGuest(true)} />;
   }
 
   function toggleTheme() {
@@ -71,6 +72,7 @@ export default function App() {
         onToggleTheme={toggleTheme}
         workoutLog={workoutLog}
         onSignOut={signOut}
+        isGuest={isGuest}
       />
 
       <DayTabs
