@@ -1,278 +1,373 @@
-import type { Day } from "../types/index.types";
+import type { Day } from '../types/index.types'
 
 export const days: Day[] = [
   {
-    id: 1, label: "PUSH", type: "push",
-    color: "#3D1A00", accent: "#FF6B35", emoji: "💪",
+    id: 1,
+    label: 'PUSH',
+    type: 'push',
+    color: '#3D1A00',
+    accent: '#FF6B35',
+    emoji: '💪',
     exercises: [
       {
-        name: "Développé couché barre",
-        warmupSeries: "2×15",
-        series: "3×10", rest: "2 min", hasWeight: true,
-        img: "https://www.body-burn.com/wp-content/uploads/2023/07/developpe-couche-halteres.webp",
-        muscles: ["Pectoraux", "Triceps", "Épaules ant."],
-        desc: "Allongé sur un banc plat, pieds à plat au sol. Saisir la barre en prise pronation, mains légèrement plus larges que les épaules. Descendre lentement la barre vers le milieu des pectoraux, puis pousser de manière explosive. Coudes à 45–75° du corps.",
-        tips: ["Omoplates serrées et fesses sur le banc", "Ne jamais rebondir la barre sur la poitrine", "Expirer à la poussée"],
+        name: 'Développé couché barre',
+        warmupSeries: '2×15',
+        series: '3×10',
+        rest: '2 min',
+        hasWeight: true,
+        img: 'https://www.body-burn.com/wp-content/uploads/2023/07/developpe-couche-halteres.webp',
+        muscles: ['Pectoraux', 'Triceps', 'Épaules ant.'],
+        desc: 'Allongé sur un banc plat, pieds à plat au sol. Saisir la barre en prise pronation, mains légèrement plus larges que les épaules. Descendre lentement la barre vers le milieu des pectoraux, puis pousser de manière explosive. Coudes à 45–75° du corps.',
+        tips: [
+          'Omoplates serrées et fesses sur le banc',
+          'Ne jamais rebondir la barre sur la poitrine',
+          'Expirer à la poussée'
+        ]
       },
       {
-        name: "Développé incliné haltères",
-        series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://weighttraining.guide/wp-content/uploads/2016/11/incline-dumbbell-bench-press-resized.png",
-        muscles: ["Pectoraux hauts", "Épaules ant.", "Triceps"],
+        name: 'Développé incliné haltères',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        img: 'https://weighttraining.guide/wp-content/uploads/2016/11/incline-dumbbell-bench-press-resized.png',
+        muscles: ['Pectoraux hauts', 'Épaules ant.', 'Triceps'],
         desc: "Banc incliné à 30–45°. Haltères au niveau des épaules, paumes vers l'avant. Pousser verticalement en arc de cercle jusqu'à ce que les haltères se rejoignent au-dessus. Descendre lentement en contrôlant le mouvement.",
-        tips: ["Angle 30–45° pour cibler le chef claviculaire", "Ne pas écraser les épaules vers l'avant", "Amplitude complète à chaque répétition"],
+        tips: [
+          'Angle 30–45° pour cibler le chef claviculaire',
+          "Ne pas écraser les épaules vers l'avant",
+          'Amplitude complète à chaque répétition'
+        ]
       },
       {
-        name: "Pecfly",
-        series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://images.squarespace-cdn.com/content/v1/5ffcea9416aee143500ea103/1638118361003-NS91NYZJQD5144EO2VIL/Seated%2BPec%2BFly%2BMachine.jpeg",
-        muscles: ["Pectoraux", "Épaules ant."],
-        desc: "Sur machine pec deck ou câbles. Bras légèrement fléchis, partir en ouverture complète. Ramener les bras devant en arc de cercle, en imaginant serrer quelque chose entre les pectoraux. Contraction maximale en fin de mouvement.",
-        tips: ["Coudes légèrement fléchis et fixes pendant tout le mouvement", "Contraction 1 sec en position fermée", "Descendre lentement à l'ouverture"],
+        name: 'Pecfly',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        img: 'https://images.squarespace-cdn.com/content/v1/5ffcea9416aee143500ea103/1638118361003-NS91NYZJQD5144EO2VIL/Seated%2BPec%2BFly%2BMachine.jpeg',
+        muscles: ['Pectoraux', 'Épaules ant.'],
+        desc: 'Sur machine pec deck ou câbles. Bras légèrement fléchis, partir en ouverture complète. Ramener les bras devant en arc de cercle, en imaginant serrer quelque chose entre les pectoraux. Contraction maximale en fin de mouvement.',
+        tips: [
+          'Coudes légèrement fléchis et fixes pendant tout le mouvement',
+          'Contraction 1 sec en position fermée',
+          "Descendre lentement à l'ouverture"
+        ]
       },
       {
-        name: "Dips assistés",
-        series: "3×10", rest: "90s", hasWeight: false,
-        img: "https://images.squarespace-cdn.com/content/v1/5ffcea9416aee143500ea103/1638261887966-89KVMRDCF0WGGE7CH5YV/Assisted%2BTriceps%2BDips.jpeg",
-        muscles: ["Triceps", "Pectoraux inf.", "Épaules ant."],
+        name: 'Dips assistés',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: false,
+        img: 'https://images.squarespace-cdn.com/content/v1/5ffcea9416aee143500ea103/1638261887966-89KVMRDCF0WGGE7CH5YV/Assisted%2BTriceps%2BDips.jpeg',
+        muscles: ['Triceps', 'Pectoraux inf.', 'Épaules ant.'],
         desc: "Sur machine à dips assistés. Corps légèrement incliné vers l'avant pour cibler les pectoraux. Descendre lentement jusqu'à 90° de flexion du coude, remonter en extension. L'assistance permet de progresser vers les dips libres.",
-        tips: ["Épaules vers le bas, pas vers les oreilles", "Descendre lentement (2–3 sec)", "Réduire l'assistance au fil des semaines"],
+        tips: [
+          'Épaules vers le bas, pas vers les oreilles',
+          'Descendre lentement (2–3 sec)',
+          "Réduire l'assistance au fil des semaines"
+        ]
       },
       {
-        name: "Développé militaire machine",
-        series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://www.docteur-fitness.com/wp-content/uploads/2022/11/developpe-epaules-a-la-machine-shoulder-press.gif",
-        muscles: ["Épaules (deltoïdes)", "Triceps", "Trapèzes"],
-        desc: "Sur machine shoulder press ou avec haltères assis. Partir à hauteur des épaules, pousser verticalement sans verrouiller les coudes en haut. Revenir lentement. Dos en contact avec le dossier, gainage serré.",
-        tips: ["Ne pas cambrer le bas du dos", "Amplitude complète : bras presque tendus en haut", "Expirer à la poussée"],
+        name: 'Développé militaire machine',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        img: 'https://www.docteur-fitness.com/wp-content/uploads/2022/11/developpe-epaules-a-la-machine-shoulder-press.gif',
+        muscles: ['Épaules (deltoïdes)', 'Triceps', 'Trapèzes'],
+        desc: 'Sur machine shoulder press ou avec haltères assis. Partir à hauteur des épaules, pousser verticalement sans verrouiller les coudes en haut. Revenir lentement. Dos en contact avec le dossier, gainage serré.',
+        tips: [
+          'Ne pas cambrer le bas du dos',
+          'Amplitude complète : bras presque tendus en haut',
+          'Expirer à la poussée'
+        ]
       },
       {
-        name: "Triceps poulie",
-        series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://muscu-street-et-crossfit.fr/wp-content/uploads/2022/08/Muscles-extension-triceps-poulie.001.jpeg",
-        muscles: ["Triceps"],
+        name: 'Triceps poulie',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: true,
+        img: 'https://muscu-street-et-crossfit.fr/wp-content/uploads/2022/08/Muscles-extension-triceps-poulie.001.jpeg',
+        muscles: ['Triceps'],
         desc: "Debout face à la poulie haute, saisir la corde ou la barre. Coudes collés au corps et fixes, pousser vers le bas jusqu'à extension complète. Remonter lentement en contrôlant.",
-        tips: ["Coudes ne bougent pas — seuls les avant-bras se déplacent", "Extension complète à chaque rep", "Contraction maximale en bas"],
+        tips: [
+          'Coudes ne bougent pas — seuls les avant-bras se déplacent',
+          'Extension complète à chaque rep',
+          'Contraction maximale en bas'
+        ]
       },
       {
-        name: "Barre au front",
-        series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJRoQnrxukXyCTGelkVz20j9Y3XxAZHuEAQ&s",
-        muscles: ["Triceps"],
-        desc: "Allongé sur un banc, barre EZ au-dessus de la poitrine, bras tendus. Fléchir les coudes pour descendre la barre vers le front (ou légèrement derrière la tête). Remonter en extension sans bouger les coudes.",
-        tips: ["Coudes pointés vers le plafond et fixes", "Descendre lentement pour contrôler", "Ne pas verrouiller brutalement les coudes en haut"],
+        name: 'Barre au front',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: true,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJRoQnrxukXyCTGelkVz20j9Y3XxAZHuEAQ&s',
+        muscles: ['Triceps'],
+        desc: 'Allongé sur un banc, barre EZ au-dessus de la poitrine, bras tendus. Fléchir les coudes pour descendre la barre vers le front (ou légèrement derrière la tête). Remonter en extension sans bouger les coudes.',
+        tips: [
+          'Coudes pointés vers le plafond et fixes',
+          'Descendre lentement pour contrôler',
+          'Ne pas verrouiller brutalement les coudes en haut'
+        ]
       },
       {
-        name: "Lombaires (finish)",
-        series: "3×10", rest: "60s", hasWeight: false,
-        img: "https://julienquaglierini.com/wp-content/uploads/2017/10/extension-lombaire-au-banc.jpg",
-        muscles: ["Érecteurs du dos", "Fessiers", "Ischio-jambiers"],
+        name: 'Lombaires (finish)',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: false,
+        img: 'https://julienquaglierini.com/wp-content/uploads/2017/10/extension-lombaire-au-banc.jpg',
+        muscles: ['Érecteurs du dos', 'Fessiers', 'Ischio-jambiers'],
         desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
-        tips: ["Ne pas dépasser la ligne droite en haut", "Gainage abdominal léger pendant le mouvement", "Respiration régulière"],
-      },
-    ],
+        tips: [
+          'Ne pas dépasser la ligne droite en haut',
+          'Gainage abdominal léger pendant le mouvement',
+          'Respiration régulière'
+        ]
+      }
+    ]
   },
   {
-    id: 2, label: "PULL", type: "pull",
-    color: "#001F3D", accent: "#4A90D9", emoji: "🔵",
+    id: 2,
+    label: 'PULL',
+    type: 'pull',
+    color: '#001F3D',
+    accent: '#4A90D9',
+    emoji: '🔵',
     exercises: [
       {
-        name: "Tirage vertical divergent",
-        warmupSeries: "2×15",
-        series: "3×10", rest: "2 min", hasWeight: true,
-        img: "https://www.renewfit.com/photos_grd/ph1678706313526",
-        muscles: ["Grand dorsal", "Biceps", "Rhomboïdes"],
+        name: 'Tirage vertical divergent',
+        warmupSeries: '2×15',
+        series: '3×10',
+        rest: '2 min',
+        hasWeight: true,
+        img: 'https://www.renewfit.com/photos_grd/ph1678706313526',
+        muscles: ['Grand dorsal', 'Biceps', 'Rhomboïdes'],
         desc: "Diverging lat pulldown machine : les poignées s'écartent dans le bas du mouvement, ce qui maximise l'étirement du grand dorsal. Saisir les poignées, s'asseoir et tirer vers les épaules en pensant à ramener les coudes vers les hanches.",
-        tips: ["Penser 'coudes vers les poches de pantalon'", "Ne pas incliner excessivement le buste en arrière", "Contraction dorsale maximale en bas"],
+        tips: [
+          "Penser 'coudes vers les poches de pantalon'",
+          'Ne pas incliner excessivement le buste en arrière',
+          'Contraction dorsale maximale en bas'
+        ]
       },
       {
-        name: "Tirage vertical (lat pull)",
-        series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://louismove.com/wp-content/uploads/2022/12/01971101-Cable-Wide-Pulldown_Back-FIX_medium.png.webp",
-        muscles: ["Grand dorsal", "Biceps", "Trapèzes"],
+        name: 'Tirage vertical (lat pull)',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        img: 'https://louismove.com/wp-content/uploads/2022/12/01971101-Cable-Wide-Pulldown_Back-FIX_medium.png.webp',
+        muscles: ['Grand dorsal', 'Biceps', 'Trapèzes'],
         desc: "Poulie lat pulldown classique, prise pronation légèrement plus large que les épaules. Tirer la barre vers le haut de la poitrine en sortant les coudes vers le bas et l'extérieur. Contrôler la remontée.",
-        tips: ["Buste légèrement incliné en arrière (10–15°)", "Ne pas tirer avec les bras uniquement — penser aux dorsaux", "Amplitude complète, bras bien tendus en haut"],
+        tips: [
+          'Buste légèrement incliné en arrière (10–15°)',
+          'Ne pas tirer avec les bras uniquement — penser aux dorsaux',
+          'Amplitude complète, bras bien tendus en haut'
+        ]
       },
       {
-        name: "Tractions assistées",
-        series: "3×10", rest: "90s", hasWeight: false,
-        img: "https://julienquaglierini.com/wp-content/uploads/2017/10/tractions-assistees.jpg",
-        muscles: ["Grand dorsal", "Biceps", "Rhomboïdes"],
+        name: 'Tractions assistées',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: false,
+        img: 'https://julienquaglierini.com/wp-content/uploads/2017/10/tractions-assistees.jpg',
+        muscles: ['Grand dorsal', 'Biceps', 'Rhomboïdes'],
         desc: "Sur machine à tractions assistées. Prise pronation, mains légèrement plus larges que les épaules. Partir bras tendus, tirer jusqu'à ce que le menton dépasse la barre. Descendre lentement en 3 sec. Réduire l'assistance au fil du temps.",
-        tips: ["Full range of motion obligatoire", "Serrer les omoplates en haut", "Réduire l'assistance dès que les reps sont propres"],
+        tips: [
+          'Full range of motion obligatoire',
+          'Serrer les omoplates en haut',
+          "Réduire l'assistance dès que les reps sont propres"
+        ]
       },
       {
-        name: "Tirage horizontal (seated row)",
-        series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjQnW4j7qKJYK6V1QLkE1qYaf03C-sF4PrnQ&s",
-        muscles: ["Grand dorsal", "Rhomboïdes", "Biceps"],
+        name: 'Tirage horizontal (seated row)',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjQnW4j7qKJYK6V1QLkE1qYaf03C-sF4PrnQ&s',
+        muscles: ['Grand dorsal', 'Rhomboïdes', 'Biceps'],
         desc: "Assis face à la poulie basse, pieds sur les repose-pieds, genoux légèrement fléchis. Saisir la poignée, dos droit. Tirer vers le bas de l'abdomen en ramenant les coudes derrière le corps. Contraction maximale, puis retour contrôlé.",
-        tips: ["Ne pas arrondir le dos au retour", "Le mouvement part des coudes, pas des mains", "Serrer les omoplates à chaque rep"],
+        tips: [
+          'Ne pas arrondir le dos au retour',
+          'Le mouvement part des coudes, pas des mains',
+          'Serrer les omoplates à chaque rep'
+        ]
       },
       {
-        name: "Pupitre biceps",
-        series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://louismove.com/wp-content/uploads/2023/01/03721101-Dumbbell-Preacher-Curl_Upper-Arms_medium.png.webp",
-        muscles: ["Biceps", "Avant-bras"],
+        name: 'Pupitre biceps',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: true,
+        img: 'https://louismove.com/wp-content/uploads/2023/01/03721101-Dumbbell-Preacher-Curl_Upper-Arms_medium.png.webp',
+        muscles: ['Biceps', 'Avant-bras'],
         desc: "Sur banc pupitre (preacher curl). Bras posés sur le coussin incliné, saisir la barre ou les haltères. Fléchir les coudes en enroulant les biceps, amener les mains vers les épaules. Descendre lentement jusqu'à l'extension complète.",
-        tips: ["Amplitude complète — descendre jusqu'à l'extension", "Pas d'élan, mouvement pur des biceps", "Contraction 1 sec en haut"],
+        tips: [
+          "Amplitude complète — descendre jusqu'à l'extension",
+          "Pas d'élan, mouvement pur des biceps",
+          'Contraction 1 sec en haut'
+        ]
       },
       {
-        name: "Poulie biceps",
-        series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://www.docteur-fitness.com/wp-content/uploads/2021/10/curl-biceps-poulie-basse.gif",
-        muscles: ["Biceps", "Avant-bras"],
-        desc: "Debout face à la poulie basse, saisir la corde ou la barre. Coudes collés au corps et fixes. Fléchir les avant-bras vers les épaules en rotation supination. Descendre lentement. La tension constante de la poulie stimule le muscle différemment des haltères.",
-        tips: ["Coudes fixes et collés aux côtes", "Supination maximale en haut (paumes vers le plafond)", "Ne pas basculer le buste en arrière"],
+        name: 'Poulie biceps',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: true,
+        img: 'https://www.docteur-fitness.com/wp-content/uploads/2021/10/curl-biceps-poulie-basse.gif',
+        muscles: ['Biceps', 'Avant-bras'],
+        desc: 'Debout face à la poulie basse, saisir la corde ou la barre. Coudes collés au corps et fixes. Fléchir les avant-bras vers les épaules en rotation supination. Descendre lentement. La tension constante de la poulie stimule le muscle différemment des haltères.',
+        tips: [
+          'Coudes fixes et collés aux côtes',
+          'Supination maximale en haut (paumes vers le plafond)',
+          'Ne pas basculer le buste en arrière'
+        ]
       },
       {
-        name: "Lombaires (finish)",
-        series: "3×10", rest: "60s", hasWeight: false,
-        img: "https://julienquaglierini.com/wp-content/uploads/2017/10/extension-lombaire-au-banc.jpg",
-        muscles: ["Érecteurs du dos", "Fessiers", "Ischio-jambiers"],
+        name: 'Lombaires (finish)',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: false,
+        img: 'https://julienquaglierini.com/wp-content/uploads/2017/10/extension-lombaire-au-banc.jpg',
+        muscles: ['Érecteurs du dos', 'Fessiers', 'Ischio-jambiers'],
         desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
-        tips: ["Ne pas dépasser la ligne droite en haut", "Gainage abdominal léger pendant le mouvement", "Respiration régulière"],
-      },
-    ],
+        tips: [
+          'Ne pas dépasser la ligne droite en haut',
+          'Gainage abdominal léger pendant le mouvement',
+          'Respiration régulière'
+        ]
+      }
+    ]
   },
   {
-    id: 3, label: "CALI", type: "cali",
-    color: "#0D2B0D", accent: "#2ECC71", emoji: "🟢",
+    id: 3,
+    label: 'CALI',
+    type: 'cali',
+    color: '#0D2B0D',
+    accent: '#2ECC71',
+    emoji: '🟢',
     exercises: [
       {
-        name: "Cat-Cow",
-        series: "3×10", rest: "30s", hasWeight: false, cat: "Mobilité",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/11/cat-cow-stretch.jpg",
-        muscles: ["Érecteurs du dos", "Abdominaux"],
-        desc: "À quatre pattes, mains sous les épaules et genoux sous les hanches. Cat : expirer en arrondissant le dos vers le plafond, tête vers le bas. Cow : inspirer en creusant le dos, tête et coccyx vers le plafond. Alterner lentement.",
-        tips: ["Mouvement guidé par la respiration", "Amplitude maximale dans les deux directions", "Lent et conscient — pas un exercice à bâcler"],
+        name: 'Jumping Jacks',
+        series: '3 × 30s',
+        rest: '30s',
+        hasWeight: false,
+        cat: 'Full body',
+        img: 'https://i0.wp.com/muscu-street-et-crossfit.fr/wp-content/uploads/2023/04/Muscles-Jumping-jacks.001.jpeg?resize=1024%2C576&ssl=1',
+        muscles: ['Corps entier', 'Cardio', 'Mollets'],
+        desc: "Debout, pieds joints et bras le long du corps. Sauter en écartant les jambes à largeur d'épaules tout en levant les bras au-dessus de la tête. Revenir à la position de départ. Maintenir un rythme régulier.",
+        tips: [
+          "Atterrir doucement sur l'avant du pied",
+          "Bras tendus jusqu'au-dessus de la tête",
+          'Maintenir le rythme sur toute la durée'
+        ]
       },
       {
-        name: "Hip circles",
-        series: "3×10/côté", rest: "30s", hasWeight: false, cat: "Mobilité",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/standing-hip-circles.jpg",
-        muscles: ["Hip flexors", "Fessiers"],
-        desc: "Debout, mains sur les hanches. Effectuer de grands cercles avec le bassin dans un sens, puis l'autre. Garder le buste stable et immobile — seul le bassin bouge. Amplitude maximale.",
-        tips: ["Buste et épaules restent fixes", "Cercles lents et amples", "Inspirer sur la montée, expirer sur la descente"],
+        name: 'Squats',
+        series: '3 × 30',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Bas du corps',
+        img: 'https://louismove.com/wp-content/uploads/2023/05/05341101-Kettlebell-Goblet-Squat_thighs_medium.png.webp',
+        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Pieds à largeur d'épaules, orteils légèrement vers l'extérieur. Descendre en poussant les hanches vers l'arrière et en fléchissant les genoux, comme pour s'asseoir sur une chaise. Cuisses parallèles au sol. Remonter en poussant dans les talons.",
+        tips: [
+          "Genoux dans l'axe des orteils, ne pas les laisser rentrer",
+          'Dos droit, regard devant soi',
+          'Talons au sol tout au long'
+        ]
       },
       {
-        name: "World's greatest stretch",
-        series: "3×5/côté", rest: "30s", hasWeight: false, cat: "Mobilité",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/10/worlds-greatest-stretch.jpg",
-        muscles: ["Corps entier", "Hip flexors", "Ischio-jambiers"],
-        desc: "Depuis la position de fente avant : poser la main côté avant au sol, ouvrir le bras vers le plafond en rotation thoracique. Maintenir 2 sec puis alterner. Cet enchaînement mobilise les hanches, les épaules et la colonne en une seule répétition.",
-        tips: ["Genou arrière peut toucher le sol si besoin", "Regard suit la main qui monte", "Inspirer à l'ouverture, expirer au retour"],
+        name: 'Genoux',
+        series: '3 × 50',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Bas du corps',
+        img: 'https://8e336598.delivery.rocketcdn.me/wp-content/uploads/2024/06/Montees-de-genoux-768x1152.png.webp',
+        muscles: ['Hip flexors', 'Abdominaux', 'Cardio'],
+        desc: "Debout, courir sur place en levant alternativement chaque genou à hauteur des hanches. Pomper les bras en opposition avec les jambes pour maintenir le rythme. Atterrir sur l'avant du pied à chaque foulée.",
+        tips: [
+          'Genoux montent au minimum à hauteur du nombril',
+          'Dos droit, ne pas se pencher en arrière',
+          'Bras actifs pour maintenir la cadence'
+        ]
       },
       {
-        name: "Planche",
-        series: "3×45s", rest: "60s", hasWeight: false, cat: "Gainage",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/10/plank.jpg",
-        muscles: ["Core", "Épaules", "Abdominaux"],
-        desc: "En appui sur les avant-bras et les orteils. Corps aligné des talons aux épaules : ni les hanches en l'air, ni le bas du dos affaissé. Serrer les fessiers, les quadriceps et les abdominaux simultanément. Respiration régulière.",
-        tips: ["Coudes directement sous les épaules", "Regard vers le sol, nuque dans l'axe de la colonne", "Progression : planche sur les mains, puis planche dynamique"],
+        name: 'Fentes arrières',
+        series: '15',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Bas du corps',
+        img: 'https://louismove.com/wp-content/uploads/2023/05/35751101-Kettlebell-Backward-Lunge_Thighs_medium.png.webp',
+        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Debout, pieds joints. Reculer un pied en faisant un grand pas vers l'arrière et descendre le genou arrière à quelques centimètres du sol. Le genou avant reste dans l'axe du pied, à 90°. Pousser dans le talon avant pour revenir à la position initiale. Alterner les jambes.",
+        tips: [
+          'Genou avant ne dépasse pas la pointe du pied',
+          'Dos droit et regard devant soi',
+          'Contrôler la descente, ne pas laisser le genou arrière taper le sol'
+        ]
       },
       {
-        name: "Planche latérale",
-        series: "3×30s/côté", rest: "45s", hasWeight: false, cat: "Gainage",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/06/side-plank.jpg",
-        muscles: ["Core latéral", "Obliques", "Épaules"],
-        desc: "En appui sur un avant-bras et le tranchant du pied. Corps aligné de la tête aux pieds, hanches levées. Contraction active des obliques pour maintenir la position. Ne pas laisser la hanche du bas s'affaisser vers le sol.",
-        tips: ["Hanche ne touche pas le sol", "Corps forme une planche latérale rigide", "Progression : lever la jambe du dessus ou le bras"],
-      },
-      {
-        name: "Dead bug",
-        series: "3×10", rest: "60s", hasWeight: false, cat: "Gainage",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/11/dead-bug.jpg",
-        muscles: ["Core profond", "Abdominaux"],
-        desc: "Allongé sur le dos, bras tendus vers le plafond, hanches et genoux à 90°. Étendre simultanément le bras droit derrière la tête et la jambe gauche vers le sol sans les poser. Revenir et alterner. Lombaires plaquées au sol à tout moment.",
-        tips: ["Lombaires collées au sol — critère absolu n°1", "Mouvement lent et contrôlé", "Expirer pendant l'extension"],
-      },
-      {
-        name: "Hollow body hold",
-        series: "3×30s", rest: "60s", hasWeight: false, cat: "Gainage",
-        img: "https://hevyapp.com/wp-content/uploads/Hollow-Hold-1024x512.jpg",
-        muscles: ["Abdominaux", "Core profond", "Hip flexors"],
-        desc: "Allongé sur le dos, bras tendus derrière la tête et jambes tendues. Soulever simultanément épaules et jambes pour former une courbe creuse, comme une banane. Lombaires plaquées au sol en permanence.",
-        tips: ["Lombaires plaquées au sol — critère n°1", "Plus les bras/jambes sont hauts, plus c'est facile", "Progression : baisser les jambes semaine après semaine"],
-      },
-      {
-        name: "Superman hold",
-        series: "3×30s", rest: "60s", hasWeight: false, cat: "Gainage",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/11/superman-hold.jpg",
-        muscles: ["Érecteurs du dos", "Fessiers", "Trapèzes"],
-        desc: "À plat ventre, bras tendus devant. Soulever simultanément les bras, la poitrine et les jambes du sol. Maintenir la position en contractant les fessiers et les muscles du dos. Respiration régulière.",
-        tips: ["Regarder vers le sol, pas en avant (nuque neutre)", "Fessiers contractés pendant toute la durée", "Si douleur lombaire, réduire la hauteur"],
-      },
-      {
-        name: "Pike push-up",
-        series: "3×10", rest: "60s", hasWeight: false, cat: "Force au sol",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/11/pike-push-up.jpg",
-        muscles: ["Épaules (deltoïdes)", "Triceps"],
-        desc: "En position de V inversé (hanches hautes, dos droit). Fléchir les coudes pour amener la tête vers le sol entre les mains, puis remonter. Simule le développé militaire au sol et prépare au handstand push-up.",
-        tips: ["Hanches restent hautes tout au long", "Coudes légèrement vers l'extérieur", "Plus les pieds sont près des mains, plus c'est difficile"],
-      },
-      {
-        name: "Triceps dips au sol",
-        series: "3×12", rest: "60s", hasWeight: false, cat: "Force au sol",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2021/11/tricep-dips.jpg",
-        muscles: ["Triceps", "Pectoraux inf."],
-        desc: "Assis au sol, mains posées derrière les hanches doigts vers l'avant. Soulever les fessiers. Fléchir les coudes pour descendre les hanches vers le sol, puis remonter en extension. Corps en ligne droite épaules-hanches.",
-        tips: ["Coudes pointent vers l'arrière, pas vers les côtés", "Descendre jusqu'à 90° de flexion", "Épaules vers le bas, pas vers les oreilles"],
-      },
-      {
-        name: "Crunchs bicyclette",
-        series: "3×20", rest: "45s", hasWeight: false, cat: "Force au sol",
-        img: "https://training.fit/wp-content/uploads/2020/02/fahrradfahren-boden.png",
-        muscles: ["Abdominaux", "Obliques", "Hip flexors"],
-        desc: "Allongé sur le dos, mains derrière la tête, jambes levées à 45°. Ramener le genou droit vers la poitrine tout en tournant le coude gauche vers lui. Allonger simultanément la jambe gauche. Alterner.",
-        tips: ["Ne pas tirer sur la nuque avec les mains", "La jambe qui part s'allonge sans toucher le sol", "Rotation vient du buste, pas de la tête"],
-      },
-      {
-        name: "Étirement ischio-jambiers allongé",
-        series: "2×45s", rest: "30s", hasWeight: false, cat: "Flexibilité",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/lying-hamstring-stretch.jpg",
-        muscles: ["Ischio-jambiers"],
-        desc: "Allongé sur le dos, jambe à étirer levée et maintenue avec les deux mains (ou une sangle). Jambe opposée posée à plat au sol. Tirer doucement la jambe vers la poitrine jusqu'à sentir l'étirement. Respiration profonde.",
-        tips: ["Ne pas forcer — étirement doux et progressif", "Garder le bas du dos au sol", "Expirer à chaque relâchement"],
-      },
-      {
-        name: "Pigeon au sol",
-        series: "2×45s/côté", rest: "30s", hasWeight: false, cat: "Flexibilité",
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/02/pigeon-pose.jpg",
-        muscles: ["Hip flexors", "Fessiers"],
-        desc: "Depuis quatre pattes, amener le genou droit entre les mains (jambe avant pliée). Étendre la jambe gauche derrière soi. Descendre progressivement les hanches vers le sol. Incliner le buste en avant pour intensifier.",
-        tips: ["Hanches parallèles au sol autant que possible", "Respiration lente et profonde pour relâcher", "Utiliser un coussin sous la hanche si besoin"],
-      },
-    ],
+        name: 'Mountains climbers',
+        series: '30',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Full body',
+        img: 'https://louismove.com/wp-content/uploads/2023/10/Moutain-climber-execution.gif',
+        muscles: ['Abdominaux', 'Épaules', 'Hip flexors'],
+        desc: 'Position de pompes bras tendus, corps aligné des épaules aux talons. Ramener alternativement chaque genou vers la poitrine en courant sur place. Hanches basses et stables tout au long du mouvement.',
+        tips: [
+          'Hanches restent basses, ne pas les lever vers le plafond',
+          'Bras tendus et stables sous les épaules',
+          'Inspirer/expirer régulièrement sans bloquer la respiration'
+        ]
+      }
+    ]
   },
   {
-    id: 4, label: "CARDIO", type: "cardio",
-    color: "#001A2E", accent: "#00BCD4", emoji: "🏃",
+    id: 4,
+    label: 'CARDIO',
+    type: 'cardio',
+    color: '#001A2E',
+    accent: '#00BCD4',
+    emoji: '🏃',
     exercises: [
       {
-        name: "Rameur",
-        series: "10 min", rest: "", hasWeight: false,
-        img: "https://i0.wp.com/muscu-street-et-crossfit.fr/wp-content/uploads/2023/04/Muscles-rameur.001.jpeg?resize=1024%2C576&ssl=1",
-        muscles: ["Cardio", "Grand dorsal", "Biceps"],
+        name: 'Rameur',
+        series: '10 min',
+        rest: '',
+        hasWeight: false,
+        img: 'https://i0.wp.com/muscu-street-et-crossfit.fr/wp-content/uploads/2023/04/Muscles-rameur.001.jpeg?resize=1024%2C576&ssl=1',
+        muscles: ['Cardio', 'Grand dorsal', 'Biceps'],
         desc: "Séquence par phase : 60% de puissance avec le poussé des jambes, 20% avec le recul du tronc, 20% avec le tirage des bras. Retour dans l'ordre inverse. Objectif : maintenir une allure régulière sur 10 minutes, pas de sprint.",
-        tips: ["Jambes d'abord, puis tronc, puis bras — dans cet ordre", "Dos droit tout au long, jamais arrondi", "Cadence cible : 22–26 coups/min en endurance"],
+        tips: [
+          "Jambes d'abord, puis tronc, puis bras — dans cet ordre",
+          'Dos droit tout au long, jamais arrondi',
+          'Cadence cible : 22–26 coups/min en endurance'
+        ]
       },
       {
-        name: "Marche inclinée tapis",
-        series: "40 min", rest: "", hasWeight: false,
-        img: "https://contents.mediadecathlon.com/m22562489/k$b17cf0aba983bf2c71e9970bc98b1ef0/picture.jpg",
-        muscles: ["Cardio", "Fessiers", "Ischio-jambiers"],
-        desc: "Vitesse : 5 km/h. Inclinaison : commencer à 8 et progresser jusqu'à 10 en cours de séance. Ce protocole (\"12-3-30\" adapté) maximise la combustion des graisses sans impact articulaire. Ne pas tenir les barres — laisser les bras balancer naturellement.",
-        tips: ["Ne pas s'accrocher aux barres latérales", "Inclinaison 8 les 20 premières minutes, 10 ensuite si possible", "Maintenir un pas actif et régulier"],
+        name: 'Marche inclinée tapis',
+        series: '40 min',
+        rest: '',
+        hasWeight: false,
+        img: 'https://contents.mediadecathlon.com/m22562489/k$b17cf0aba983bf2c71e9970bc98b1ef0/picture.jpg',
+        muscles: ['Cardio', 'Fessiers', 'Ischio-jambiers'],
+        desc: 'Vitesse : 5 km/h. Inclinaison : commencer à 8 et progresser jusqu\'à 10 en cours de séance. Ce protocole ("12-3-30" adapté) maximise la combustion des graisses sans impact articulaire. Ne pas tenir les barres — laisser les bras balancer naturellement.',
+        tips: [
+          "Ne pas s'accrocher aux barres latérales",
+          'Inclinaison 8 les 20 premières minutes, 10 ensuite si possible',
+          'Maintenir un pas actif et régulier'
+        ]
       },
       {
-        name: "Vélo stationnaire",
-        series: "10 min", rest: "", hasWeight: false,
-        img: "https://static-content-2.boomfit.com/24749-large_default/bicicleta-estatica-inteligente-du30.jpg",
-        muscles: ["Cardio", "Quadriceps", "Fessiers"],
-        desc: "Récupération active post-marche. Résistance légère à modérée, cadence de 70–90 rpm. Permet de récupérer les jambes tout en maintenant le rythme cardiaque actif. Dernier effort de la séance.",
-        tips: ["Selle à hauteur des hanches pour protéger les genoux", "Résistance légère — c'est de la récupération active", "Rythme de pédalage régulier, ne pas mouliner"],
-      },
-    ],
-  },
-];
+        name: 'Vélo stationnaire',
+        series: '10 min',
+        rest: '',
+        hasWeight: false,
+        img: 'https://static-content-2.boomfit.com/24749-large_default/bicicleta-estatica-inteligente-du30.jpg',
+        muscles: ['Cardio', 'Quadriceps', 'Fessiers'],
+        desc: 'Récupération active post-marche. Résistance légère à modérée, cadence de 70–90 rpm. Permet de récupérer les jambes tout en maintenant le rythme cardiaque actif. Dernier effort de la séance.',
+        tips: [
+          'Selle à hauteur des hanches pour protéger les genoux',
+          "Résistance légère — c'est de la récupération active",
+          'Rythme de pédalage régulier, ne pas mouliner'
+        ]
+      }
+    ]
+  }
+]
