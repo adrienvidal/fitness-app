@@ -5,9 +5,10 @@ interface Props {
   exKey: string;
   accentColor: string;
   defaultWeight?: number;
+  assistedWeight?: boolean;
 }
 
-export function WeightInput({ exKey, accentColor, defaultWeight }: Props) {
+export function WeightInput({ exKey, accentColor, defaultWeight, assistedWeight }: Props) {
   const storageKey = `weight:${exKey}`;
   const [value, setValue] = useState(() => localStorage.getItem(storageKey) ?? "");
   const [saved, setSaved] = useState(false);
@@ -31,7 +32,7 @@ export function WeightInput({ exKey, accentColor, defaultWeight }: Props) {
       }}
     >
       <div className="weight-input__label" style={{ color: accentColor }}>
-        🏋️ Mon poids utilisé
+        {assistedWeight ? '🤝 Mon assistance' : '🏋️ Mon poids utilisé'}
       </div>
       <div className="weight-input__row">
         <input
@@ -47,7 +48,7 @@ export function WeightInput({ exKey, accentColor, defaultWeight }: Props) {
       </div>
       {value && (
         <div className="weight-input__info" style={{ color: accentColor }}>
-          Charge enregistrée : <strong>{value} kg</strong>
+          {assistedWeight ? 'Assistance enregistrée' : 'Charge enregistrée'} : <strong>{value} kg</strong>
         </div>
       )}
     </div>
