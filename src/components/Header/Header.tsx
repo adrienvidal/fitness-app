@@ -4,7 +4,7 @@ import "./Header.scss";
 interface Props {
   day: Day;
   theme: "dark" | "light";
-  onToggleTheme: () => void;
+  onOpenPanel: () => void;
 }
 
 const coolGradients: Record<string, string> = {
@@ -14,7 +14,7 @@ const coolGradients: Record<string, string> = {
   cardio: "linear-gradient(135deg, #1a4a5c 0%, #3abfcf 100%)",
 };
 
-export function Header({ day, theme, onToggleTheme }: Props) {
+export function Header({ day, theme, onOpenPanel }: Props) {
   const background = theme === "dark"
     ? `linear-gradient(135deg, ${day.color} 0%, ${day.accent} 100%)`
     : coolGradients[day.type];
@@ -25,11 +25,11 @@ export function Header({ day, theme, onToggleTheme }: Props) {
       style={{ background }}
     >
       <button
-        className="header__theme-toggle"
-        onClick={onToggleTheme}
-        aria-label={theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
+        className="header__menu-btn"
+        onClick={onOpenPanel}
+        aria-label="Ouvrir le menu"
       >
-        {theme === "dark" ? "☀️" : "🌙"}
+        ☰
       </button>
       <div className="header__title">FitnessPal</div>
       <div className="header__subtitle">Adrien</div>

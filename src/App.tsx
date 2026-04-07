@@ -4,6 +4,7 @@ import { Header } from "./components/Header/Header";
 import { DayTabs } from "./components/DayTabs/DayTabs";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
+import { SidePanel } from "./components/SidePanel/SidePanel";
 import "./App.scss";
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -45,7 +47,13 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header day={day} theme={theme} onToggleTheme={toggleTheme} />
+      <Header day={day} theme={theme} onOpenPanel={() => setIsPanelOpen(true)} />
+      <SidePanel
+        isOpen={isPanelOpen}
+        onClose={() => setIsPanelOpen(false)}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
 
       <DayTabs
         days={days}
