@@ -3,6 +3,42 @@
   background: #1c1f2a;
   overflow: hidden;
   transition: all 0.25s;
+  position: relative;
+
+  &--done {
+    opacity: 0.6;
+
+    .exercise-card__name {
+      text-decoration: line-through;
+      color: #888;
+    }
+  }
+
+  &__check {
+    position: absolute;
+    top: 12px;
+    right: 44px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    padding: 0;
+
+    &--done {
+      background: #1e3a1e;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
 
   &__header {
     width: 100%;

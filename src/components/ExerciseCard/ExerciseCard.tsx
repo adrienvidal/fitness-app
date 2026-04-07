@@ -11,29 +11,31 @@ interface Props {
   isOpen: boolean
   onClick: () => void
   exKey: string
+  isCompleted: boolean
+  onToggleComplete: () => void
 }
 
-export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey }: Props) {
+export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey, isCompleted, onToggleComplete }: Props) {
   const [imgOk, setImgOk] = useState(true)
   const catColor = (ex.cat && catColors[ex.cat]) || accentColor
 
   return (
     <div
-      className='exercise-card'
+      className={`exercise-card${isCompleted ? ' exercise-card--done' : ''}`}
       style={{
-        border: `1.5px solid ${isOpen ? accentColor : '#2a2d3a'}`,
-        boxShadow: isOpen ? `0 4px 24px ${accentColor}28` : 'none'
+        border: `1.5px solid ${isCompleted ? '#2a3a2a' : isOpen ? accentColor : '#2a2d3a'}`,
+        boxShadow: isOpen && !isCompleted ? `0 4px 24px ${accentColor}28` : 'none'
       }}
     >
       <button onClick={onClick} className='exercise-card__header'>
         <div
           className='exercise-card__index'
           style={{
-            background: isOpen ? accentColor : `${accentColor}20`,
-            color: isOpen ? '#fff' : accentColor
+            background: isCompleted ? '#1e3a1e' : isOpen ? accentColor : `${accentColor}20`,
+            color: isCompleted ? '#4caf50' : isOpen ? '#fff' : accentColor
           }}
         >
-          {ex.index}
+          {isCompleted ? '✓' : ex.index}
         </div>
         <div className='exercise-card__meta'>
           <div className='exercise-card__title-row'>
@@ -72,6 +74,15 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
         >
           ▾
         </div>
+      </button>
+
+      <button
+        className={`exercise-card__check${isCompleted ? ' exercise-card__check--done' : ''}`}
+        onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
+        style={{ borderColor: isCompleted ? '#4caf50' : `${accentColor}40`, color: isCompleted ? '#4caf50' : `${accentColor}60` }}
+        aria-label={isCompleted ? 'Marquer comme non terminé' : 'Marquer comme terminé'}
+      >
+        {isCompleted ? '✓' : '○'}
       </button>
 
       {isOpen && (
