@@ -93,6 +93,7 @@ export default function App() {
               onClick={() => setActiveExercise(activeExercise === i ? null : i)}
               isCompleted={completedExercises.has(exKey)}
               onToggleComplete={() => toggleComplete(exKey)}
+              userId={userId}
             />
           );
         })}

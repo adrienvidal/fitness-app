@@ -13,9 +13,10 @@ interface Props {
   exKey: string
   isCompleted: boolean
   onToggleComplete: () => void
+  userId: string | null
 }
 
-export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey, isCompleted, onToggleComplete }: Props) {
+export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey, isCompleted, onToggleComplete, userId }: Props) {
   const [imgOk, setImgOk] = useState(true)
   const catColor = (ex.cat && catColors[ex.cat]) || accentColor
 
@@ -123,7 +124,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
               ))}
             </div>
 
-            {ex.hasWeight && <WeightInput exKey={exKey} accentColor={accentColor} defaultWeight={ex.defaultWeight} assistedWeight={ex.assistedWeight} />}
+            {ex.hasWeight && <WeightInput exKey={exKey} accentColor={accentColor} defaultWeight={ex.defaultWeight} assistedWeight={ex.assistedWeight} userId={userId} />}
 
             <div
               className='exercise-card__desc'
