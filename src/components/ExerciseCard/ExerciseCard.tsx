@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Exercise, Phase } from '../../types/index.types'
+import type { Exercise } from '../../types/index.types'
 import { muscleColors, catColors } from '../../constants/colors'
 import { WeightInput } from '../WeightInput/WeightInput'
 import './ExerciseCard.scss'
@@ -7,13 +7,13 @@ import './ExerciseCard.scss'
 interface Props {
   ex: Exercise & { index: number }
   accentColor: string
-  phase: Phase
+  dayColor: string
   isOpen: boolean
   onClick: () => void
   exKey: string
 }
 
-export function ExerciseCard({ ex, accentColor, phase, isOpen, onClick, exKey }: Props) {
+export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey }: Props) {
   const [imgOk, setImgOk] = useState(true)
   const catColor = (ex.cat && catColors[ex.cat]) || accentColor
 
@@ -52,7 +52,15 @@ export function ExerciseCard({ ex, accentColor, phase, isOpen, onClick, exKey }:
             )}
           </div>
           <div className='exercise-card__series-info'>
-            {ex.series} · Repos {ex.rest}
+            {ex.warmupSeries && (
+              <span
+                className='exercise-card__warmup-badge'
+                style={{ color: `${accentColor}99`, borderColor: `${accentColor}40` }}
+              >
+                Éch. {ex.warmupSeries}
+              </span>
+            )}
+            <span>{ex.series}{ex.rest ? ` · Repos ${ex.rest}` : ''}</span>
           </div>
         </div>
         <div
@@ -80,7 +88,7 @@ export function ExerciseCard({ ex, accentColor, phase, isOpen, onClick, exKey }:
               <div
                 className='exercise-card__image-fallback'
                 style={{
-                  background: `linear-gradient(135deg, ${phase.color}55, ${accentColor}22)`,
+                  background: `linear-gradient(135deg, ${dayColor}55, ${accentColor}22)`,
                   color: accentColor
                 }}
               >
@@ -92,7 +100,7 @@ export function ExerciseCard({ ex, accentColor, phase, isOpen, onClick, exKey }:
               className='exercise-card__series-badge'
               style={{ background: accentColor }}
             >
-              {ex.series}
+              {ex.warmupSeries ? `Éch. ${ex.warmupSeries} → ${ex.series}` : ex.series}
             </div>
           </div>
 
@@ -125,7 +133,7 @@ export function ExerciseCard({ ex, accentColor, phase, isOpen, onClick, exKey }:
             <div className='exercise-card__tips-title' style={{ color: accentColor }}>
               ✦ Points clés
             </div>
-            
+
             {ex.tips.map((tip, j) => (
               <div key={j} className='exercise-card__tip'>
                 <span className='exercise-card__tip-arrow' style={{ color: accentColor }}>

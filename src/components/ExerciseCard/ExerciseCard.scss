@@ -54,9 +54,23 @@
   }
 
   &__series-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
     font-size: 12px;
     color: #666;
     margin-top: 2px;
+  }
+
+  &__warmup-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 20px;
+    border: 1px solid;
+    background: transparent;
+    letter-spacing: 0.3px;
   }
 
   &__chevron {

@@ -1,6 +1,7 @@
 export type Exercise = {
   name: string
   series: string
+  warmupSeries?: string
   rest: string
   hasWeight: boolean
   img: string
@@ -11,20 +12,14 @@ export type Exercise = {
   index?: number
 }
 
-export type Section = {
-  type: string
-  icon: string
-  tag?: string
-  exercises: Exercise[]
-}
+export type DayType = 'push' | 'pull' | 'cali' | 'cardio'
 
-export type Phase = {
+export type Day = {
   id: number
   label: string
-  sub: string
-  theme: string
+  type: DayType
   color: string
   accent: string
   emoji: string
-  sections: Section[]
+  exercises: Exercise[]
 }

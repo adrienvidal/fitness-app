@@ -1,21 +1,21 @@
-import type { Phase } from "../../types/index.types";
+import type { Day } from "../../types/index.types";
 import "./Header.scss";
 
 interface Props {
-  phase: Phase;
+  day: Day;
 }
 
-export function Header({ phase }: Props) {
+export function Header({ day }: Props) {
   return (
     <div
       className="header"
-      style={{ background: `linear-gradient(135deg, ${phase.color} 0%, ${phase.accent} 100%)` }}
+      style={{ background: `linear-gradient(135deg, ${day.color} 0%, ${day.accent} 100%)` }}
     >
       <div className="header__label">
-        Programme 12 Semaines · Haut du Corps + Callisthénie
+        Programme Upper Body + Callisthénie
       </div>
       <div className="header__title">Guide des Exercices</div>
-      <div className="header__subtitle">41 ans · 75 kg · 1m75 · 5 séances/sem</div>
+      <div className="header__subtitle">41 ans · 75 kg · 1m75</div>
     </div>
   );
 }

@@ -33,10 +33,8 @@ export const muscleColors: Record<string, string> = {
 };
 
 export const catColors: Record<string, string> = {
-  "Haut du corps": "#4A90D9",
-  "Core": "#e74c3c",
-  "Core rotation": "#e67e22",
-  "Bas du corps": "#27ae60",
-  "Full body": "#8e44ad",
-  "Chaîne post.": "#795548",
+  "Mobilité": "#4A90D9",
+  "Gainage": "#e74c3c",
+  "Force au sol": "#e67e22",
+  "Flexibilité": "#27ae60",
 };

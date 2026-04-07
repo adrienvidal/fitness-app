@@ -1,59 +1,42 @@
 import { useState } from "react";
-import { phases } from "./data/phases";
+import { days } from "./data/days";
 import { Header } from "./components/Header/Header";
-import { PhaseTabs } from "./components/PhaseTabs/PhaseTabs";
-import { SectionTabs } from "./components/SectionTabs/SectionTabs";
+import { DayTabs } from "./components/DayTabs/DayTabs";
 import { CaliLegend } from "./components/CaliLegend/CaliLegend";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import "./App.scss";
 
 export default function App() {
-  const [activePhase, setActivePhase] = useState(0);
-  const [activeSection, setActiveSection] = useState(0);
+  const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
 
-  const phase = phases[activePhase];
-  const section = phase.sections[activeSection];
-  const isCali = activeSection === 1;
-  const accentColor = isCali ? "#2ecc71" : phase.accent;
+  const day = days[activeDay];
 
   return (
     <div className="app">
-      <Header phase={phase} />
+      <Header day={day} />
 
-      <PhaseTabs
-        phases={phases}
-        activePhase={activePhase}
-        onSelect={(i) => { setActivePhase(i); setActiveSection(0); setActiveExercise(null); }}
+      <DayTabs
+        days={days}
+        activeDay={activeDay}
+        onSelect={(i) => { setActiveDay(i); setActiveExercise(null); }}
       />
 
-      <div className="app__theme-badge">
-        <span style={{ background: `${phase.accent}1a`, color: phase.accent }}>
-          {phase.theme}
-        </span>
-      </div>
-
-      <SectionTabs
-        phase={phase}
-        activeSection={activeSection}
-        onSelect={(i) => { setActiveSection(i); setActiveExercise(null); }}
-      />
-
-      {isCali && <CaliLegend />}
+      {day.type === "cali" && <CaliLegend />}
 
       <div className="app__count">
-        <span>{section.exercises.length} exercices</span>
+        <span>{day.exercises.length} exercices</span>
       </div>
 
       <div className="app__list">
-        {section.exercises.map((ex, i) => {
-          const exKey = `p${activePhase}-s${activeSection}-${ex.name.replace(/\s+/g, "_")}`;
+        {day.exercises.map((ex, i) => {
+          const exKey = `d${activeDay}-${ex.name.replace(/\s+/g, "_")}`;
           return (
             <ExerciseCard
               key={exKey}
               ex={{ ...ex, index: i + 1 }}
-              phase={phase}
-              accentColor={accentColor}
+              dayColor={day.color}
+              accentColor={day.accent}
               exKey={exKey}
               isOpen={activeExercise === i}
               onClick={() => setActiveExercise(activeExercise === i ? null : i)}
@@ -63,7 +46,7 @@ export default function App() {
       </div>
 
       <div className="app__footer">
-        {phase.label} · {phase.theme}
+        Jour {day.id} · {day.label}
       </div>
     </div>
   );
