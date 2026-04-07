@@ -17,7 +17,7 @@ export const days: Day[] = [
       {
         name: "Développé incliné haltères",
         series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/05/dumbbell-incline-press.jpg",
+        img: "https://weighttraining.guide/wp-content/uploads/2016/11/incline-dumbbell-bench-press-resized.png",
         muscles: ["Pectoraux hauts", "Épaules ant.", "Triceps"],
         desc: "Banc incliné à 30–45°. Haltères au niveau des épaules, paumes vers l'avant. Pousser verticalement en arc de cercle jusqu'à ce que les haltères se rejoignent au-dessus. Descendre lentement en contrôlant le mouvement.",
         tips: ["Angle 30–45° pour cibler le chef claviculaire", "Ne pas écraser les épaules vers l'avant", "Amplitude complète à chaque répétition"],
@@ -25,7 +25,7 @@ export const days: Day[] = [
       {
         name: "Pecfly",
         series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/02/cable-fly.jpg",
+        img: "https://images.squarespace-cdn.com/content/v1/5ffcea9416aee143500ea103/1638118361003-NS91NYZJQD5144EO2VIL/Seated%2BPec%2BFly%2BMachine.jpeg",
         muscles: ["Pectoraux", "Épaules ant."],
         desc: "Sur machine pec deck ou câbles. Bras légèrement fléchis, partir en ouverture complète. Ramener les bras devant en arc de cercle, en imaginant serrer quelque chose entre les pectoraux. Contraction maximale en fin de mouvement.",
         tips: ["Coudes légèrement fléchis et fixes pendant tout le mouvement", "Contraction 1 sec en position fermée", "Descendre lentement à l'ouverture"],
@@ -33,7 +33,7 @@ export const days: Day[] = [
       {
         name: "Dips assistés",
         series: "3×10", rest: "90s", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/06/parallel-bar-dip.jpg",
+        img: "https://images.squarespace-cdn.com/content/v1/5ffcea9416aee143500ea103/1638261887966-89KVMRDCF0WGGE7CH5YV/Assisted%2BTriceps%2BDips.jpeg",
         muscles: ["Triceps", "Pectoraux inf.", "Épaules ant."],
         desc: "Sur machine à dips assistés. Corps légèrement incliné vers l'avant pour cibler les pectoraux. Descendre lentement jusqu'à 90° de flexion du coude, remonter en extension. L'assistance permet de progresser vers les dips libres.",
         tips: ["Épaules vers le bas, pas vers les oreilles", "Descendre lentement (2–3 sec)", "Réduire l'assistance au fil des semaines"],
@@ -41,7 +41,7 @@ export const days: Day[] = [
       {
         name: "Développé militaire machine",
         series: "3×10", rest: "90s", hasWeight: true,
-        img: "https://www.body-burn.com/wp-content/uploads/2023/08/developpe-militaire-debout-exercices.webp",
+        img: "https://www.docteur-fitness.com/wp-content/uploads/2022/11/developpe-epaules-a-la-machine-shoulder-press.gif",
         muscles: ["Épaules (deltoïdes)", "Triceps", "Trapèzes"],
         desc: "Sur machine shoulder press ou avec haltères assis. Partir à hauteur des épaules, pousser verticalement sans verrouiller les coudes en haut. Revenir lentement. Dos en contact avec le dossier, gainage serré.",
         tips: ["Ne pas cambrer le bas du dos", "Amplitude complète : bras presque tendus en haut", "Expirer à la poussée"],
@@ -49,7 +49,7 @@ export const days: Day[] = [
       {
         name: "Triceps poulie",
         series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/cable-tricep-pushdown.jpg",
+        img: "https://muscu-street-et-crossfit.fr/wp-content/uploads/2022/08/Muscles-extension-triceps-poulie.001.jpeg",
         muscles: ["Triceps"],
         desc: "Debout face à la poulie haute, saisir la corde ou la barre. Coudes collés au corps et fixes, pousser vers le bas jusqu'à extension complète. Remonter lentement en contrôlant.",
         tips: ["Coudes ne bougent pas — seuls les avant-bras se déplacent", "Extension complète à chaque rep", "Contraction maximale en bas"],
@@ -57,7 +57,7 @@ export const days: Day[] = [
       {
         name: "Barre au front",
         series: "3×10", rest: "60s", hasWeight: true,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/02/ez-bar-skull-crusher.jpg",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJRoQnrxukXyCTGelkVz20j9Y3XxAZHuEAQ&s",
         muscles: ["Triceps"],
         desc: "Allongé sur un banc, barre EZ au-dessus de la poitrine, bras tendus. Fléchir les coudes pour descendre la barre vers le front (ou légèrement derrière la tête). Remonter en extension sans bouger les coudes.",
         tips: ["Coudes pointés vers le plafond et fixes", "Descendre lentement pour contrôler", "Ne pas verrouiller brutalement les coudes en haut"],
@@ -65,7 +65,7 @@ export const days: Day[] = [
       {
         name: "Lombaires (finish)",
         series: "3×10", rest: "60s", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/04/back-extension.jpg",
+        img: "https://julienquaglierini.com/wp-content/uploads/2017/10/extension-lombaire-au-banc.jpg",
         muscles: ["Érecteurs du dos", "Fessiers", "Ischio-jambiers"],
         desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
         tips: ["Ne pas dépasser la ligne droite en haut", "Gainage abdominal léger pendant le mouvement", "Respiration régulière"],
