@@ -103,4 +103,26 @@
   &__theme-icon {
     font-size: 18px;
   }
+
+  &__section--bottom {
+    margin-top: auto;
+  }
+
+  &__signout {
+    width: 100%;
+    padding: 10px 14px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: var(--text-secondary, #999);
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary, #fff);
+    }
+  }
 }

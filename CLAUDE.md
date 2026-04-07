@@ -42,7 +42,24 @@ No Context, Redux, or Zustand. Persistence:
 - `theme` in `localStorage` under `"theme"`
 - `workoutLog` in `localStorage` under `"workoutLog"`
 
-`exKey` format: `d{dayIndex}-{exerciseName_with_underscores}` — used as both the `WeightInput` storage key prefix and the completion tracking key.
+No Context, Redux, or Zustand.
+
+### Supabase integration
+
+[src/lib/supabase.ts](src/lib/supabase.ts) exports the Supabase client. Two tables are used:
+
+- `exercise_weights` — columns: `user_id`, `ex_key`, `weight_kg`
+- `workout_logs` — columns: `user_id`, `session_date`, `day_type`
+
+**Hooks** (all in [src/hooks/](src/hooks/)):
+
+- `useSupabase` — on mount, resumes existing session or signs in anonymously; returns `{ userId, isReady }`
+- `useExerciseWeight(exKey, userId)` — loads weight from Supabase (with localStorage as cache), migrates any existing localStorage value on first use; returns `{ weight, saveWeight }`
+- `useWorkoutLog(userId)` — loads workout history from Supabase (with localStorage cache), migrates old localStorage data on first run; returns `{ workoutLog, saveSession }`
+
+`WeightInput` now delegates entirely to `useExerciseWeight` instead of managing `localStorage` directly. It receives `userId` as a prop.
+
+**Session logging**: `App.tsx` exposes a "Terminer la séance" button that calls `saveSession(dateStr, day.type, userId)` from `useWorkoutLog`.
 
 ### Styling
 

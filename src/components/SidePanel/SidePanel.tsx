@@ -8,9 +8,10 @@ interface Props {
   theme: "dark" | "light";
   onToggleTheme: () => void;
   workoutLog: Record<string, DayType>;
+  onSignOut: () => void;
 }
 
-export function SidePanel({ isOpen, onClose, theme, onToggleTheme, workoutLog }: Props) {
+export function SidePanel({ isOpen, onClose, theme, onToggleTheme, workoutLog, onSignOut }: Props) {
   return (
     <>
       <div
@@ -40,6 +41,12 @@ export function SidePanel({ isOpen, onClose, theme, onToggleTheme, workoutLog }:
           <div className="side-panel__section">
             <span className="side-panel__label">Historique</span>
             <WorkoutCalendar workoutLog={workoutLog} />
+          </div>
+
+          <div className="side-panel__section side-panel__section--bottom">
+            <button className="side-panel__signout" onClick={onSignOut}>
+              Déconnexion
+            </button>
           </div>
         </div>
       </div>
