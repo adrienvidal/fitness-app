@@ -25,7 +25,7 @@ Day → Exercise[]
 
 - 4 days: Jour 1 PUSH (8 exercises), Jour 2 PULL (7 exercises), Jour 3 CALI (13 exercises), Jour 4 CARDIO (3 activities)
 - Each `Day` has: `id`, `label`, `type` (`push | pull | cali | cardio`), `color`, `accent`, `emoji`, `exercises[]`
-- Each exercise carries metadata: muscle groups, sets/reps/rest, images, description, tips, optional `warmupSeries` (e.g. "2×15" for warm-up sets before working sets), and an optional `hasWeight` flag
+- Each exercise carries metadata: muscle groups, sets/reps/rest, images, description, tips, optional `warmupSeries` (e.g. "2×15" for warm-up sets before working sets), `hasWeight` flag, optional `assistedWeight` (boolean, for machine-assisted moves where weight means assistance), and optional `defaultWeight` (number, pre-filled value in WeightInput)
 
 ### State management
 
@@ -35,8 +35,12 @@ All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `completedExercises` (`Set<string>`) — set of `exKey` strings for exercises marked done; reset on day change
 - `isPanelOpen` (boolean) — controls the right side panel visibility
 - `theme` (`"dark" | "light"`) — persisted in `localStorage` under key `"theme"`
+- `workoutLog` (`Record<string, DayType>`) — maps ISO date strings (`"YYYY-MM-DD"`) to day type; persisted in `localStorage` under key `"workoutLog"`; updated by `handleFinishSession` which records the current day's type for today's date
 
-No Context, Redux, or Zustand. The only persistence is in [src/components/WeightInput](src/components/WeightInput/), which reads/writes `localStorage` with keys formatted as `weight:d{day}-{exerciseName}`.
+No Context, Redux, or Zustand. Persistence:
+- [src/components/WeightInput](src/components/WeightInput/) reads/writes `localStorage` with keys formatted as `weight:d{day}-{exerciseName}`
+- `theme` in `localStorage` under `"theme"`
+- `workoutLog` in `localStorage` under `"workoutLog"`
 
 `exKey` format: `d{dayIndex}-{exerciseName_with_underscores}` — used as both the `WeightInput` storage key prefix and the completion tracking key.
 
@@ -50,7 +54,9 @@ No Context, Redux, or Zustand. The only persistence is in [src/components/Weight
 
 ### Side panel
 
-[src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Currently contains the theme toggle (moved out of the Header). The Header now has a `☰` burger button (`onOpenPanel` prop) instead of the direct theme toggle.
+[src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Contains:
+- Theme toggle (moved out of the Header; Header now has a `☰` burger button via `onOpenPanel` prop)
+- Workout history via [src/components/WorkoutCalendar/WorkoutCalendar.tsx](src/components/WorkoutCalendar/WorkoutCalendar.tsx), which receives `workoutLog` and renders a calendar view of past sessions
 
 ### Session progress
 
