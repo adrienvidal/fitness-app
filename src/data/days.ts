@@ -252,7 +252,7 @@ export const days: Day[] = [
       {
         name: "Rameur",
         series: "10 min", rest: "", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/06/rowing-machine.jpg",
+        img: "https://i0.wp.com/muscu-street-et-crossfit.fr/wp-content/uploads/2023/04/Muscles-rameur.001.jpeg?resize=1024%2C576&ssl=1",
         muscles: ["Cardio", "Grand dorsal", "Biceps"],
         desc: "Séquence par phase : 60% de puissance avec le poussé des jambes, 20% avec le recul du tronc, 20% avec le tirage des bras. Retour dans l'ordre inverse. Objectif : maintenir une allure régulière sur 10 minutes, pas de sprint.",
         tips: ["Jambes d'abord, puis tronc, puis bras — dans cet ordre", "Dos droit tout au long, jamais arrondi", "Cadence cible : 22–26 coups/min en endurance"],
@@ -260,7 +260,7 @@ export const days: Day[] = [
       {
         name: "Marche inclinée tapis",
         series: "40 min", rest: "", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/incline-treadmill-walking.jpg",
+        img: "https://contents.mediadecathlon.com/m22562489/k$b17cf0aba983bf2c71e9970bc98b1ef0/picture.jpg",
         muscles: ["Cardio", "Fessiers", "Ischio-jambiers"],
         desc: "Vitesse : 5 km/h. Inclinaison : commencer à 8 et progresser jusqu'à 10 en cours de séance. Ce protocole (\"12-3-30\" adapté) maximise la combustion des graisses sans impact articulaire. Ne pas tenir les barres — laisser les bras balancer naturellement.",
         tips: ["Ne pas s'accrocher aux barres latérales", "Inclinaison 8 les 20 premières minutes, 10 ensuite si possible", "Maintenir un pas actif et régulier"],
@@ -268,7 +268,7 @@ export const days: Day[] = [
       {
         name: "Vélo stationnaire",
         series: "10 min", rest: "", hasWeight: false,
-        img: "https://www.inspireusafoundation.org/wp-content/uploads/2022/01/stationary-bike.jpg",
+        img: "https://static-content-2.boomfit.com/24749-large_default/bicicleta-estatica-inteligente-du30.jpg",
         muscles: ["Cardio", "Quadriceps", "Fessiers"],
         desc: "Récupération active post-marche. Résistance légère à modérée, cadence de 70–90 rpm. Permet de récupérer les jambes tout en maintenant le rythme cardiaque actif. Dernier effort de la séance.",
         tips: ["Selle à hauteur des hanches pour protéger les genoux", "Résistance légère — c'est de la récupération active", "Rythme de pédalage régulier, ne pas mouliner"],
