@@ -34,8 +34,11 @@ All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `activeExercise` (null or index)
 - `completedExercises` (`Set<string>`) — set of `exKey` strings for exercises marked done; reset on day change
 - `isPanelOpen` (boolean) — controls the right side panel visibility
+- `isGuest` (boolean) — true when user chose "Continuer sans compte"; bypasses auth gate, disables session saving and sign-out button
+- `showConfirmModal` (boolean) — controls the session-finish confirmation modal
+- `showToast` (boolean) — controls the "✓ Séance enregistrée !" toast (auto-hides after 3 s)
 - `theme` (`"dark" | "light"`) — persisted in `localStorage` under key `"theme"`
-- `workoutLog` (`Record<string, DayType>`) — maps ISO date strings (`"YYYY-MM-DD"`) to day type; persisted in `localStorage` under key `"workoutLog"`; updated by `handleFinishSession` which records the current day's type for today's date
+- `workoutLog` (`Record<string, DayType>`) — maps ISO date strings (`"YYYY-MM-DD"`) to day type; persisted in `localStorage` under key `"workoutLog"`; updated by `confirmFinishSession` which records the current day's type for today's date
 
 No Context, Redux, or Zustand. Persistence:
 - [src/components/WeightInput](src/components/WeightInput/) reads/writes `localStorage` with keys formatted as `weight:d{day}-{exerciseName}`
@@ -59,7 +62,7 @@ No Context, Redux, or Zustand.
 
 `WeightInput` now delegates entirely to `useExerciseWeight` instead of managing `localStorage` directly. It receives `userId` as a prop.
 
-**Session logging**: `App.tsx` exposes a "Terminer la séance" button that calls `saveSession(dateStr, day.type, userId)` from `useWorkoutLog`.
+**Session logging**: `App.tsx` exposes a "Terminer la séance" button. Clicking it opens a confirmation modal (`showConfirmModal`). On confirm, `confirmFinishSession` calls `saveSession(dateStr, day.type, userId)` (skipped for guests) and shows a toast notification for 3 s. Session saving is skipped when `isGuest` is true.
 
 ### Styling
 
@@ -71,14 +74,16 @@ No Context, Redux, or Zustand.
 
 ### Authentication
 
-[src/components/LoginScreen/LoginScreen.tsx](src/components/LoginScreen/LoginScreen.tsx) is rendered by `App.tsx` when `isReady && !userId`. It shows a Google OAuth sign-in button (`signIn` from `useSupabase`). Once authenticated, the main app renders. The `SidePanel` exposes a "Déconnexion" button that calls `signOut`.
+[src/components/LoginScreen/LoginScreen.tsx](src/components/LoginScreen/LoginScreen.tsx) is rendered by `App.tsx` when `isReady && !userId && !isGuest`. It shows two options:
+- **Google OAuth** — "Continuer avec Google" (`signIn` from `useSupabase`); enables Supabase sync and session logging
+- **Guest access** — "Continuer sans compte" (`onGuestAccess` sets `isGuest = true`); skips auth, no Supabase writes, no sign-out button in the side panel
 
 ### Side panel
 
 [src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Contains:
 - Theme toggle (moved out of the Header; Header now has a `☰` burger button via `onOpenPanel` prop)
 - Workout history via [src/components/WorkoutCalendar/WorkoutCalendar.tsx](src/components/WorkoutCalendar/WorkoutCalendar.tsx), which receives `workoutLog` and renders a calendar view of past sessions
-- Sign-out button ("Déconnexion") via `onSignOut` prop
+- Sign-out button ("Déconnexion") via `onSignOut` prop — hidden when `isGuest` is true
 
 ### Session progress
 
