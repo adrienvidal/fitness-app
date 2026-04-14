@@ -5,6 +5,7 @@ interface Props {
   day: Day;
   theme: "dark" | "light";
   onOpenPanel: () => void;
+  onOpenTimer: () => void;
 }
 
 const coolGradients: Record<string, string> = {
@@ -14,7 +15,7 @@ const coolGradients: Record<string, string> = {
   cardio: "linear-gradient(135deg, #1a4a5c 0%, #3abfcf 100%)",
 };
 
-export function Header({ day, theme, onOpenPanel }: Props) {
+export function Header({ day, theme, onOpenPanel, onOpenTimer }: Props) {
   const background = theme === "dark"
     ? `linear-gradient(135deg, ${day.color} 0%, ${day.accent} 100%)`
     : coolGradients[day.type];
@@ -24,6 +25,13 @@ export function Header({ day, theme, onOpenPanel }: Props) {
       className="header"
       style={{ background }}
     >
+      <button
+        className="header__timer-btn"
+        onClick={onOpenTimer}
+        aria-label="Timer de repos"
+      >
+        ⏱
+      </button>
       <button
         className="header__menu-btn"
         onClick={onOpenPanel}

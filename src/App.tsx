@@ -77,7 +77,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header day={day} theme={theme} onOpenPanel={() => setIsPanelOpen(true)} />
+      <Header day={day} theme={theme} onOpenPanel={() => setIsPanelOpen(true)} onOpenTimer={() => setShowRestTimer(true)} />
       <SidePanel
         isOpen={isPanelOpen}
         onClose={() => setIsPanelOpen(false)}
@@ -160,14 +160,6 @@ export default function App() {
           ✓ Séance enregistrée !
         </div>
       )}
-
-      <button
-        className="app__rest-timer-btn"
-        style={{ color: day.accent, borderColor: `${day.accent}60` }}
-        onClick={() => setShowRestTimer(true)}
-      >
-        ⏱
-      </button>
 
       {showRestTimer && (
         <RestTimerModal

@@ -4,6 +4,29 @@
   transition: background 0.5s;
   position: relative;
 
+  &__timer-btn {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+    color: #f5f7fa;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+
   &__menu-btn {
     position: absolute;
     top: 12px;
