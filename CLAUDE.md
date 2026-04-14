@@ -37,6 +37,7 @@ All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `isGuest` (boolean) — true when user chose "Continuer sans compte"; bypasses auth gate, disables session saving and sign-out button
 - `showConfirmModal` (boolean) — controls the session-finish confirmation modal
 - `showToast` (boolean) — controls the "✓ Séance enregistrée !" toast (auto-hides after 3 s)
+- `showRestTimer` (boolean) — controls the rest timer modal visibility
 - `theme` (`"dark" | "light"`) — persisted in `localStorage` under key `"theme"`
 - `workoutLog` (`Record<string, DayType>`) — maps ISO date strings (`"YYYY-MM-DD"`) to day type; persisted in `localStorage` under key `"workoutLog"`; updated by `confirmFinishSession` which records the current day's type for today's date
 
@@ -78,10 +79,19 @@ No Context, Redux, or Zustand.
 - **Google OAuth** — "Continuer avec Google" (`signIn` from `useSupabase`); enables Supabase sync and session logging
 - **Guest access** — "Continuer sans compte" (`onGuestAccess` sets `isGuest = true`); skips auth, no Supabase writes, no sign-out button in the side panel
 
+### Rest timer
+
+[src/components/RestTimerModal/RestTimerModal.tsx](src/components/RestTimerModal/RestTimerModal.tsx) is a modal overlay controlled by `showRestTimer` in `App.tsx`. Opened via the `⏱` button in the Header (`onOpenTimer` prop). Features:
+- Three preset durations: 1 min, 1 min 30, 2 min
+- Circular SVG arc progress indicator that drains as time elapses
+- Displays countdown in `MM:SS`; shows a green `✓` when done
+- Uses `setInterval` (1 s tick); clears on unmount or when timer reaches 0
+- Receives `accentColor` (current day's accent) and `onClose` as props
+
 ### Side panel
 
 [src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Contains:
-- Theme toggle (moved out of the Header; Header now has a `☰` burger button via `onOpenPanel` prop)
+- Theme toggle (moved out of the Header; Header now has a `☰` burger button via `onOpenPanel` prop and a `⏱` timer button via `onOpenTimer` prop)
 - Workout history via [src/components/WorkoutCalendar/WorkoutCalendar.tsx](src/components/WorkoutCalendar/WorkoutCalendar.tsx), which receives `workoutLog` and renders a calendar view of past sessions
 - Sign-out button ("Déconnexion") via `onSignOut` prop — hidden when `isGuest` is true
 
