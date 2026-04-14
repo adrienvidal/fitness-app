@@ -125,6 +125,30 @@
     color: #000;
   }
 
+  &__rest-timer-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    background: var(--bg-secondary, #1e1e1e);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.15s, opacity 0.15s;
+
+    &:active {
+      transform: scale(0.92);
+      opacity: 0.8;
+    }
+  }
+
   &__toast {
     position: fixed;
     bottom: 32px;

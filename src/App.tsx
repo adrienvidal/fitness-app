@@ -6,6 +6,7 @@ import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen";
+import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
 import "./App.scss";
@@ -23,6 +24,7 @@ export default function App() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showRestTimer, setShowRestTimer] = useState(false);
 
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
@@ -157,6 +159,21 @@ export default function App() {
         <div className="app__toast">
           ✓ Séance enregistrée !
         </div>
+      )}
+
+      <button
+        className="app__rest-timer-btn"
+        style={{ color: day.accent, borderColor: `${day.accent}60` }}
+        onClick={() => setShowRestTimer(true)}
+      >
+        ⏱
+      </button>
+
+      {showRestTimer && (
+        <RestTimerModal
+          accentColor={day.accent}
+          onClose={() => setShowRestTimer(false)}
+        />
       )}
     </div>
   );
