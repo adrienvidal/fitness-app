@@ -6,7 +6,7 @@ const DAY_TYPE_COLOR: Record<DayType, string> = {
   push: "#FF6B35",
   pull: "#4A90D9",
   cali: "#2ECC71",
-  cardio: "#00BCD4",
+  cardio: "#7b00ce",
 };
 
 const DAY_TYPE_LABEL: Record<DayType, string> = {

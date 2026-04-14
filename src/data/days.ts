@@ -31,7 +31,7 @@ export const days: Day[] = [
         rest: '90s',
         hasWeight: true,
         defaultWeight: 12,
-        img: '/images/exercises/developpe-incline-halteres.png',
+        img: '/images/exercises/developpe-incline-halteres.webp',
         muscles: ['Pectoraux hauts', 'Épaules ant.', 'Triceps'],
         desc: "Banc incliné à 30–45°. Haltères au niveau des épaules, paumes vers l'avant. Pousser verticalement en arc de cercle jusqu'à ce que les haltères se rejoignent au-dessus. Descendre lentement en contrôlant le mouvement.",
         tips: [
@@ -46,7 +46,7 @@ export const days: Day[] = [
         rest: '90s',
         hasWeight: true,
         defaultWeight: 32,
-        img: '/images/exercises/pecfly.jpeg',
+        img: '/images/exercises/pecfly.webp',
         muscles: ['Pectoraux', 'Épaules ant.'],
         desc: 'Sur machine pec deck ou câbles. Bras légèrement fléchis, partir en ouverture complète. Ramener les bras devant en arc de cercle, en imaginant serrer quelque chose entre les pectoraux. Contraction maximale en fin de mouvement.',
         tips: [
@@ -62,7 +62,7 @@ export const days: Day[] = [
         hasWeight: true,
         assistedWeight: true,
         defaultWeight: 36,
-        img: '/images/exercises/dips-assistes.jpeg',
+        img: '/images/exercises/dips-assistes.webp',
         muscles: ['Triceps', 'Pectoraux inf.', 'Épaules ant.'],
         desc: "Sur machine à dips assistés. Corps légèrement incliné vers l'avant pour cibler les pectoraux. Descendre lentement jusqu'à 90° de flexion du coude, remonter en extension. L'assistance permet de progresser vers les dips libres.",
         tips: [
@@ -92,7 +92,7 @@ export const days: Day[] = [
         rest: '60s',
         hasWeight: true,
         defaultWeight: 23,
-        img: '/images/exercises/triceps-poulie.jpeg',
+        img: '/images/exercises/triceps-poulie.webp',
         muscles: ['Triceps'],
         desc: "Debout face à la poulie haute, saisir la corde ou la barre. Coudes collés au corps et fixes, pousser vers le bas jusqu'à extension complète. Remonter lentement en contrôlant.",
         tips: [
@@ -107,7 +107,7 @@ export const days: Day[] = [
         rest: '60s',
         hasWeight: true,
         defaultWeight: 0,
-        img: '/images/exercises/barre-au-front.jpg',
+        img: '/images/exercises/barre-au-front.webp',
         muscles: ['Triceps'],
         desc: 'Allongé sur un banc, barre EZ au-dessus de la poitrine, bras tendus. Fléchir les coudes pour descendre la barre vers le front (ou légèrement derrière la tête). Remonter en extension sans bouger les coudes.',
         tips: [
@@ -118,10 +118,10 @@ export const days: Day[] = [
       },
       {
         name: 'Lombaires (finish)',
-        series: '3×10',
+        series: '3×20',
         rest: '60s',
         hasWeight: false,
-        img: '/images/exercises/lombaires.jpg',
+        img: '/images/exercises/lombaires.webp',
         muscles: ['Érecteurs du dos', 'Fessiers', 'Ischio-jambiers'],
         desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
         tips: [
@@ -147,7 +147,7 @@ export const days: Day[] = [
         rest: '2 min',
         hasWeight: true,
         defaultWeight: 32,
-        img: '/images/exercises/tirage-vertical-divergent.jpg',
+        img: '/images/exercises/tirage-vertical-divergent.webp',
         muscles: ['Grand dorsal', 'Biceps', 'Rhomboïdes'],
         desc: "Diverging lat pulldown machine : les poignées s'écartent dans le bas du mouvement, ce qui maximise l'étirement du grand dorsal. Saisir les poignées, s'asseoir et tirer vers les épaules en pensant à ramener les coudes vers les hanches.",
         tips: [
@@ -178,7 +178,7 @@ export const days: Day[] = [
         hasWeight: true,
         assistedWeight: true,
         defaultWeight: 27,
-        img: '/images/exercises/tractions-assistees.jpg',
+        img: '/images/exercises/tractions-assistees.webp',
         muscles: ['Grand dorsal', 'Biceps', 'Rhomboïdes'],
         desc: "Sur machine à tractions assistées. Prise pronation, mains légèrement plus larges que les épaules. Partir bras tendus, tirer jusqu'à ce que le menton dépasse la barre. Descendre lentement en 3 sec. Réduire l'assistance au fil du temps.",
         tips: [
@@ -193,7 +193,7 @@ export const days: Day[] = [
         rest: '90s',
         hasWeight: true,
         defaultWeight: 32,
-        img: '/images/exercises/tirage-horizontal-seated-row.jpg',
+        img: '/images/exercises/tirage-horizontal-seated-row.webp',
         muscles: ['Grand dorsal', 'Rhomboïdes', 'Biceps'],
         desc: "Assis face à la poulie basse, pieds sur les repose-pieds, genoux légèrement fléchis. Saisir la poignée, dos droit. Tirer vers le bas de l'abdomen en ramenant les coudes derrière le corps. Contraction maximale, puis retour contrôlé.",
         tips: [
@@ -237,7 +237,7 @@ export const days: Day[] = [
         series: '3×10',
         rest: '60s',
         hasWeight: false,
-        img: '/images/exercises/lombaires.jpg',
+        img: '/images/exercises/lombaires.webp',
         muscles: ['Érecteurs du dos', 'Fessiers', 'Ischio-jambiers'],
         desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
         tips: [
@@ -262,7 +262,7 @@ export const days: Day[] = [
         rest: '30s',
         hasWeight: false,
         cat: 'Full body',
-        img: '/images/exercises/jumping-jacks.jpeg',
+        img: '/images/exercises/jumping-jacks.webp',
         muscles: ['Corps entier', 'Cardio', 'Mollets'],
         desc: "Debout, pieds joints et bras le long du corps. Sauter en écartant les jambes à largeur d'épaules tout en levant les bras au-dessus de la tête. Revenir à la position de départ. Maintenir un rythme régulier.",
         tips: [
@@ -338,7 +338,7 @@ export const days: Day[] = [
     label: 'CARDIO',
     type: 'cardio',
     color: '#001A2E',
-    accent: '#00BCD4',
+    accent: '#7b00ce',
     emoji: '🏃',
     exercises: [
       {
@@ -346,7 +346,7 @@ export const days: Day[] = [
         series: '10 min',
         rest: '',
         hasWeight: false,
-        img: '/images/exercises/rameur.jpeg',
+        img: '/images/exercises/rameur.webp',
         muscles: ['Cardio', 'Grand dorsal', 'Biceps'],
         desc: "Séquence par phase : 60% de puissance avec le poussé des jambes, 20% avec le recul du tronc, 20% avec le tirage des bras. Retour dans l'ordre inverse. Objectif : maintenir une allure régulière sur 10 minutes, pas de sprint.",
         tips: [
@@ -360,7 +360,7 @@ export const days: Day[] = [
         series: '40 min',
         rest: '',
         hasWeight: false,
-        img: '/images/exercises/marche-inclinees-tapis.jpg',
+        img: '/images/exercises/marche-inclinees-tapis.webp',
         muscles: ['Cardio', 'Fessiers', 'Ischio-jambiers'],
         desc: 'Vitesse : 5 km/h. Inclinaison : commencer à 8 et progresser jusqu\'à 10 en cours de séance. Ce protocole ("12-3-30" adapté) maximise la combustion des graisses sans impact articulaire. Ne pas tenir les barres — laisser les bras balancer naturellement.',
         tips: [
@@ -374,7 +374,7 @@ export const days: Day[] = [
         series: '10 min',
         rest: '',
         hasWeight: false,
-        img: '/images/exercises/velo-stationnaire.jpg',
+        img: '/images/exercises/velo-stationnaire.webp',
         muscles: ['Cardio', 'Quadriceps', 'Fessiers'],
         desc: 'Récupération active post-marche. Résistance légère à modérée, cadence de 70–90 rpm. Permet de récupérer les jambes tout en maintenant le rythme cardiaque actif. Dernier effort de la séance.',
         tips: [
