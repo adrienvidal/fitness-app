@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './RestTimerModal.scss'
 
 const PRESETS = [
@@ -20,6 +20,7 @@ interface Props {
 export function RestTimerModal({ accentColor, onClose }: Props) {
   const [remaining, setRemaining] = useState<number | null>(null)
   const [total, setTotal] = useState<number>(60)
+  const audioCtxRef = useRef<AudioContext | null>(null)
 
   useEffect(() => {
     if (remaining === null || remaining <= 0) return
@@ -29,7 +30,29 @@ export function RestTimerModal({ accentColor, onClose }: Props) {
     return () => clearInterval(id)
   }, [remaining])
 
+  useEffect(() => {
+    if (remaining !== 0) return
+
+    navigator.vibrate?.([400, 150, 400, 150, 400])
+
+    const ctx = audioCtxRef.current
+    if (!ctx) return
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.type = 'sine'
+    osc.frequency.value = 880
+    gain.gain.setValueAtTime(0.6, ctx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6)
+    osc.start(ctx.currentTime)
+    osc.stop(ctx.currentTime + 0.6)
+  }, [remaining])
+
   function startTimer(seconds: number) {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext()
+    }
     setTotal(seconds)
     setRemaining(seconds)
   }
