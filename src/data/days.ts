@@ -258,7 +258,7 @@ export const days: Day[] = [
     exercises: [
       {
         name: 'Jumping Jacks',
-        series: '3 × 30s',
+        series: '3×30s',
         rest: '30s',
         hasWeight: false,
         cat: 'Full body',
@@ -272,8 +272,38 @@ export const days: Day[] = [
         ]
       },
       {
+        name: 'Pompes',
+        series: '3×12',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Haut du corps',
+        img: '/images/exercises/pompes.webp',
+        muscles: ['Pectoraux', 'Triceps', 'Épaules ant.'],
+        desc: "Mains à largeur d'épaules, corps aligné des épaules aux talons. Descendre la poitrine vers le sol en fléchissant les coudes à 45° du corps. Remonter en extension complète sans verrouiller brutalement les coudes.",
+        tips: [
+          'Corps gainé de la tête aux talons — ne pas cambrer',
+          'Coudes à 45° du corps, pas écartés à 90°',
+          'Amplitude complète : poitrine au ras du sol'
+        ]
+      },
+      {
+        name: 'Dead bug',
+        series: '3×10',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Gainage',
+        img: '/images/exercises/dead-bug.webp',
+        muscles: ['Abdominaux', 'Transverse', 'Stabilisateurs'],
+        desc: "Allongé sur le dos, bras tendus vers le plafond, hanches et genoux à 90°. Abaisser simultanément le bras droit et la jambe gauche vers le sol sans les poser, en gardant le bas du dos collé au sol. Revenir et alterner.",
+        tips: [
+          'Bas du dos plaqué au sol en permanence',
+          'Expirer lentement pendant la descente',
+          'Mouvement lent et contrôlé, pas de balancement'
+        ]
+      },
+      {
         name: 'Squats',
-        series: '3 × 30',
+        series: '3×30',
         rest: '60s',
         hasWeight: false,
         cat: 'Bas du corps',
@@ -287,23 +317,8 @@ export const days: Day[] = [
         ]
       },
       {
-        name: 'Genoux',
-        series: '3 × 50',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Bas du corps',
-        img: '/images/exercises/genoux.webp',
-        muscles: ['Hip flexors', 'Abdominaux', 'Cardio'],
-        desc: "Debout, courir sur place en levant alternativement chaque genou à hauteur des hanches. Pomper les bras en opposition avec les jambes pour maintenir le rythme. Atterrir sur l'avant du pied à chaque foulée.",
-        tips: [
-          'Genoux montent au minimum à hauteur du nombril',
-          'Dos droit, ne pas se pencher en arrière',
-          'Bras actifs pour maintenir la cadence'
-        ]
-      },
-      {
         name: 'Fentes arrières',
-        series: '15',
+        series: '3×15',
         rest: '60s',
         hasWeight: false,
         cat: 'Bas du corps',
@@ -317,8 +332,8 @@ export const days: Day[] = [
         ]
       },
       {
-        name: 'Mountains climbers',
-        series: '30',
+        name: 'Mountain climbers',
+        series: '3×30',
         rest: '60s',
         hasWeight: false,
         cat: 'Full body',
@@ -329,6 +344,21 @@ export const days: Day[] = [
           'Hanches restent basses, ne pas les lever vers le plafond',
           'Bras tendus et stables sous les épaules',
           'Inspirer/expirer régulièrement sans bloquer la respiration'
+        ]
+      },
+      {
+        name: 'Hip thrust',
+        series: '3×15',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Bas du corps',
+        img: '/images/exercises/Woman_Performing_Hip_Thrusts_at_Home.webp',
+        muscles: ['Fessiers', 'Ischio-jambiers', 'Abdominaux'],
+        desc: "Allongé sur le dos, pieds à plat au sol à largeur des hanches, genoux fléchis à 90°. Pousser dans les talons pour lever le bassin jusqu'à alignement épaules-hanches-genoux. Contracter les fessiers en haut, puis redescendre lentement.",
+        tips: [
+          'Contraction maximale des fessiers en haut, tenir 1 sec',
+          'Ne pas creuser le bas du dos en haut du mouvement',
+          'Pieds ni trop près ni trop loin des fessiers'
         ]
       }
     ]
