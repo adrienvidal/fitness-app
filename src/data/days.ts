@@ -287,18 +287,48 @@ export const days: Day[] = [
         ]
       },
       {
-        name: 'Dead bug',
-        series: '3×10',
+        name: 'Crunchs',
+        series: '3×15',
         rest: '60s',
         hasWeight: false,
-        cat: 'Gainage',
-        img: '/images/exercises/dead-bug.webp',
-        muscles: ['Abdominaux', 'Transverse', 'Stabilisateurs'],
-        desc: "Allongé sur le dos, bras tendus vers le plafond, hanches et genoux à 90°. Abaisser simultanément le bras droit et la jambe gauche vers le sol sans les poser, en gardant le bas du dos collé au sol. Revenir et alterner.",
+        cat: 'Core',
+        img: '/images/exercises/crunchs.webp',
+        muscles: ['Abdominaux', 'Rectus abdominis'],
+        desc: 'Allongé sur le dos, genoux fléchis, pieds à plat au sol. Mains derrière la nuque sans tirer dessus. Contracter les abdos pour décoller les omoplates du sol, en gardant le bas du dos au sol. Redescendre lentement.',
+        tips: [
+          'Ne pas tirer sur la nuque avec les mains',
+          'Expirer à la montée, inspirer à la descente',
+          'Mouvement court et contrôlé — pas besoin de monter haut'
+        ]
+      },
+      {
+        name: 'Twists obliques',
+        series: '3×20',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Core rotation',
+        img: '/images/exercises/twists-obliques.webp',
+        muscles: ['Obliques', 'Abdominaux', 'Transverse'],
+        desc: 'Assis au sol, genoux fléchis, pieds légèrement soulevés ou posés selon le niveau. Pencher légèrement le buste en arrière, mains jointes devant la poitrine. Tourner le buste alternativement à droite et à gauche en contractant les obliques.',
+        tips: [
+          'Rotation vient du buste, pas des hanches',
+          "Dos droit, ne pas s'affaisser",
+          'Contrôler le mouvement, ne pas aller trop vite'
+        ]
+      },
+      {
+        name: 'Relevé de jambes',
+        series: '3×12',
+        rest: '60s',
+        hasWeight: false,
+        cat: 'Core',
+        img: '/images/exercises/releve-de-jambes.webp',
+        muscles: ['Abdominaux bas', 'Hip flexors', 'Transverse'],
+        desc: "Allongé sur le dos, mains sous les fessiers ou le long du corps. Jambes tendues, les lever jusqu'à la verticale en contractant les abdos. Redescendre lentement sans laisser les talons toucher le sol.",
         tips: [
           'Bas du dos plaqué au sol en permanence',
-          'Expirer lentement pendant la descente',
-          'Mouvement lent et contrôlé, pas de balancement'
+          "Ne pas prendre d'élan — mouvement contrôlé",
+          'Jambes le plus tendues possible'
         ]
       },
       {
@@ -317,18 +347,18 @@ export const days: Day[] = [
         ]
       },
       {
-        name: 'Fentes arrières',
-        series: '3×15',
+        name: 'Jambe tendue',
+        series: '3×12',
         rest: '60s',
         hasWeight: false,
         cat: 'Bas du corps',
-        img: '/images/exercises/fentes-arrieres.webp',
-        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
-        desc: "Debout, pieds joints. Reculer un pied en faisant un grand pas vers l'arrière et descendre le genou arrière à quelques centimètres du sol. Le genou avant reste dans l'axe du pied, à 90°. Pousser dans le talon avant pour revenir à la position initiale. Alterner les jambes.",
+        img: '/images/exercises/jambe-tendue.webp',
+        muscles: ['Ischio-jambiers', 'Fessiers', 'Quadriceps'],
+        desc: "Debout, pieds à largeur des hanches. Tendre une jambe vers l'avant à hauteur de hanche en gardant le dos droit et la jambe d'appui légèrement fléchie. Redescendre lentement et alterner les jambes.",
         tips: [
-          'Genou avant ne dépasse pas la pointe du pied',
-          'Dos droit et regard devant soi',
-          'Contrôler la descente, ne pas laisser le genou arrière taper le sol'
+          'Garder le dos droit, ne pas se pencher en avant',
+          'Jambe tendue mais genou non verrouillé',
+          'Contracter le fessier de la jambe levée'
         ]
       },
       {
@@ -344,21 +374,6 @@ export const days: Day[] = [
           'Hanches restent basses, ne pas les lever vers le plafond',
           'Bras tendus et stables sous les épaules',
           'Inspirer/expirer régulièrement sans bloquer la respiration'
-        ]
-      },
-      {
-        name: 'Hip thrust',
-        series: '3×15',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Bas du corps',
-        img: '/images/exercises/Woman_Performing_Hip_Thrusts_at_Home.webp',
-        muscles: ['Fessiers', 'Ischio-jambiers', 'Abdominaux'],
-        desc: "Allongé sur le dos, pieds à plat au sol à largeur des hanches, genoux fléchis à 90°. Pousser dans les talons pour lever le bassin jusqu'à alignement épaules-hanches-genoux. Contracter les fessiers en haut, puis redescendre lentement.",
-        tips: [
-          'Contraction maximale des fessiers en haut, tenir 1 sec',
-          'Ne pas creuser le bas du dos en haut du mouvement',
-          'Pieds ni trop près ni trop loin des fessiers'
         ]
       }
     ]
