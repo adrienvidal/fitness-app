@@ -7,6 +7,7 @@ import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
+import { WorkoutOMAD } from "./components/WorkoutOMAD/WorkoutOMAD";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
 import "./App.scss";
@@ -21,6 +22,7 @@ export default function App() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
+  const [activeSection, setActiveSection] = useState<"workout" | "nutrition">("workout");
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -88,51 +90,72 @@ export default function App() {
         isGuest={isGuest}
       />
 
-      <DayTabs
-        days={days}
-        activeDay={activeDay}
-        onSelect={handleDaySelect}
-      />
-
-      <SessionProgress
-        completed={sessionFinished ? day.exercises.length : completedExercises.size}
-        total={day.exercises.length}
-        accentColor={day.accent}
-      />
-
-      <div className="app__list">
-        {day.exercises.map((ex, i) => {
-          const exKey = `d${activeDay}-${ex.name.replace(/\s+/g, "_")}`;
-          return (
-            <ExerciseCard
-              key={exKey}
-              ex={{ ...ex, index: i + 1 }}
-              dayColor={day.color}
-              accentColor={day.accent}
-              exKey={exKey}
-              isOpen={activeExercise === i}
-              onClick={() => setActiveExercise(activeExercise === i ? null : i)}
-              isCompleted={completedExercises.has(exKey)}
-              onToggleComplete={() => toggleComplete(exKey)}
-              userId={userId}
-            />
-          );
-        })}
-      </div>
-
-      <div className="app__finish">
+      <div className="app__section-tabs">
         <button
-          className="app__finish-btn"
-          style={{ borderColor: day.accent, color: day.accent }}
-          onClick={handleFinishSession}
+          className={`app__section-btn${activeSection === "workout" ? " app__section-btn--active" : ""}`}
+          onClick={() => setActiveSection("workout")}
         >
-          Terminer la séance
+          🏋️ Entraînement
+        </button>
+        <button
+          className={`app__section-btn${activeSection === "nutrition" ? " app__section-btn--active" : ""}`}
+          onClick={() => setActiveSection("nutrition")}
+        >
+          🥗 Nutrition
         </button>
       </div>
 
-      <div className="app__footer">
-        Jour {day.id} · {day.label}
-      </div>
+      {activeSection === "workout" && (
+        <>
+          <DayTabs
+            days={days}
+            activeDay={activeDay}
+            onSelect={handleDaySelect}
+          />
+
+          <SessionProgress
+            completed={sessionFinished ? day.exercises.length : completedExercises.size}
+            total={day.exercises.length}
+            accentColor={day.accent}
+          />
+
+          <div className="app__list">
+            {day.exercises.map((ex, i) => {
+              const exKey = `d${activeDay}-${ex.name.replace(/\s+/g, "_")}`;
+              return (
+                <ExerciseCard
+                  key={exKey}
+                  ex={{ ...ex, index: i + 1 }}
+                  dayColor={day.color}
+                  accentColor={day.accent}
+                  exKey={exKey}
+                  isOpen={activeExercise === i}
+                  onClick={() => setActiveExercise(activeExercise === i ? null : i)}
+                  isCompleted={completedExercises.has(exKey)}
+                  onToggleComplete={() => toggleComplete(exKey)}
+                  userId={userId}
+                />
+              );
+            })}
+          </div>
+
+          <div className="app__finish">
+            <button
+              className="app__finish-btn"
+              style={{ borderColor: day.accent, color: day.accent }}
+              onClick={handleFinishSession}
+            >
+              Terminer la séance
+            </button>
+          </div>
+
+          <div className="app__footer">
+            Jour {day.id} · {day.label}
+          </div>
+        </>
+      )}
+
+      {activeSection === "nutrition" && <WorkoutOMAD />}
 
       {showConfirmModal && (
         <div className="app__modal-backdrop" onClick={() => setShowConfirmModal(false)}>
