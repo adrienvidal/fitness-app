@@ -7,6 +7,7 @@ import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
+import { LogSessionModal } from "./components/LogSessionModal/LogSessionModal";
 import { WorkoutOMAD } from "./components/WorkoutOMAD/WorkoutOMAD";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
@@ -27,6 +28,7 @@ export default function App() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [showRestTimer, setShowRestTimer] = useState(false);
+  const [pendingLogDate, setPendingLogDate] = useState<string | null>(null);
 
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
@@ -88,6 +90,7 @@ export default function App() {
         workoutLog={workoutLog}
         onSignOut={signOut}
         isGuest={isGuest}
+        onSelectDate={!isGuest ? setPendingLogDate : undefined}
       />
 
       <div className="app__section-tabs">
@@ -188,6 +191,18 @@ export default function App() {
         <RestTimerModal
           accentColor={day.accent}
           onClose={() => setShowRestTimer(false)}
+        />
+      )}
+
+      {pendingLogDate && (
+        <LogSessionModal
+          dateStr={pendingLogDate}
+          currentType={workoutLog[pendingLogDate] ?? null}
+          onSave={(dateStr, dayType) => {
+            if (userId) saveSession(dateStr, dayType, userId);
+            setPendingLogDate(null);
+          }}
+          onClose={() => setPendingLogDate(null)}
         />
       )}
     </div>

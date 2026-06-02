@@ -20,9 +20,10 @@ const WEEKDAYS = ["L", "M", "M", "J", "V", "S", "D"];
 
 interface Props {
   workoutLog: Record<string, DayType>;
+  onSelectDate?: (dateStr: string) => void;
 }
 
-export function WorkoutCalendar({ workoutLog }: Props) {
+export function WorkoutCalendar({ workoutLog, onSelectDate }: Props) {
   const today = new Date();
   const [viewDate, setViewDate] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
 
@@ -58,10 +59,12 @@ export function WorkoutCalendar({ workoutLog }: Props) {
           const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
           const workout = workoutLog[dateStr];
           const isToday = dateStr === todayStr;
+          const isClickable = onSelectDate && dateStr <= todayStr;
           return (
             <div
               key={dateStr}
-              className={`workout-calendar__day${isToday ? " workout-calendar__day--today" : ""}`}
+              className={`workout-calendar__day${isToday ? " workout-calendar__day--today" : ""}${isClickable ? " workout-calendar__day--clickable" : ""}`}
+              onClick={isClickable ? () => onSelectDate(dateStr) : undefined}
             >
               <span className="workout-calendar__day-num">{day}</span>
               {workout && (

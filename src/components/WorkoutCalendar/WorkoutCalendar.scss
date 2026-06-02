@@ -59,6 +59,14 @@
     border-radius: 5px;
     min-height: 30px;
 
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.07);
+      }
+    }
+
     &--today &-num {
       background: rgba(255, 255, 255, 0.15);
       color: var(--text-primary, #fff);
