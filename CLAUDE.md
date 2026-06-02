@@ -38,6 +38,7 @@ All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
 - `showConfirmModal` (boolean) — controls the session-finish confirmation modal
 - `showToast` (boolean) — controls the "✓ Séance enregistrée !" toast (auto-hides after 3 s)
 - `showRestTimer` (boolean) — controls the rest timer modal visibility
+- `pendingLogDate` (string | null) — ISO date string of the day selected in the calendar for retroactive logging; when set, opens `LogSessionModal`
 - `theme` (`"dark" | "light"`) — persisted in `localStorage` under key `"theme"`
 - `workoutLog` (`Record<string, DayType>`) — maps ISO date strings (`"YYYY-MM-DD"`) to day type; persisted in `localStorage` under key `"workoutLog"`; updated by `confirmFinishSession` which records the current day's type for today's date
 
@@ -64,6 +65,8 @@ No Context, Redux, or Zustand.
 `WeightInput` now delegates entirely to `useExerciseWeight` instead of managing `localStorage` directly. It receives `userId` as a prop.
 
 **Session logging**: `App.tsx` exposes a "Terminer la séance" button. Clicking it opens a confirmation modal (`showConfirmModal`). On confirm, `confirmFinishSession` calls `saveSession(dateStr, day.type, userId)` (skipped for guests) and shows a toast notification for 3 s. Session saving is skipped when `isGuest` is true.
+
+**Retroactive session logging**: Past dates (≤ today) in `WorkoutCalendar` are clickable for non-guest users. Clicking a date sets `pendingLogDate` in `App.tsx`, which opens `LogSessionModal`. The modal shows the 4 day types; tapping one calls `saveSession(dateStr, dayType, userId)` and closes. Already-logged dates show their current type pre-highlighted and can be overwritten (upsert). Guest users cannot click calendar dates.
 
 ### Styling
 
@@ -92,8 +95,17 @@ No Context, Redux, or Zustand.
 
 [src/components/SidePanel/SidePanel.tsx](src/components/SidePanel/SidePanel.tsx) is a right-side drawer controlled by `isPanelOpen` in `App.tsx`. It slides in with a CSS `translateX` transition and renders a backdrop overlay that closes it on click. Contains:
 - Theme toggle (moved out of the Header; Header now has a `☰` burger button via `onOpenPanel` prop and a `⏱` timer button via `onOpenTimer` prop)
-- Workout history via [src/components/WorkoutCalendar/WorkoutCalendar.tsx](src/components/WorkoutCalendar/WorkoutCalendar.tsx), which receives `workoutLog` and renders a calendar view of past sessions
+- Workout history via [src/components/WorkoutCalendar/WorkoutCalendar.tsx](src/components/WorkoutCalendar/WorkoutCalendar.tsx), which receives `workoutLog` and `onSelectDate` (absent for guests) and renders a calendar view of past sessions; past/today dates are clickable when `onSelectDate` is provided
 - Sign-out button ("Déconnexion") via `onSignOut` prop — hidden when `isGuest` is true
+
+### Log session modal
+
+[src/components/LogSessionModal/LogSessionModal.tsx](src/components/LogSessionModal/LogSessionModal.tsx) is a bottom-sheet modal controlled by `pendingLogDate` in `App.tsx`. Opened when a past/today date is tapped in the calendar. Features:
+- Date formatted in French (weekday + day + month)
+- 2×2 grid of day-type buttons (PUSH / PULL / CALI / CARDIO) with their respective colors
+- If the date already has a session, the matching type button appears filled/selected
+- Tapping a type immediately calls `onSave(dateStr, dayType)` — no separate confirm step
+- Backdrop click or ✕ button calls `onClose` without saving
 
 ### Session progress
 
