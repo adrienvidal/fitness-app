@@ -18,7 +18,7 @@ export const days: Day[] = [
         defaultWeight: 40,
         img: '/images/exercises/developpe-couche-halteres.webp',
         muscles: ['Pectoraux', 'Triceps', 'Épaules ant.'],
-        desc: 'Allongé sur un banc plat, pieds à plat au sol. Saisir la barre en prise pronation, mains légèrement plus larges que les épaules. Descendre lentement la barre vers le milieu des pectoraux, puis pousser de manière explosive. Coudes à 45–75° du corps. (Poids barre à vide: 20kg) ',
+        desc: 'Allongé sur un banc plat, pieds à plat au sol. Saisir la barre en prise pronation, mains légèrement plus larges que les épaules. Descendre lentement la barre vers le milieu des pectoraux, puis pousser de manière explosive. Coudes à 45–75° du corps. (Poids barre à vide: 20kg)',
         tips: [
           'Omoplates serrées et fesses sur le banc',
           'Ne jamais rebondir la barre sur la poitrine',
@@ -99,21 +99,6 @@ export const days: Day[] = [
           'Coudes ne bougent pas — seuls les avant-bras se déplacent',
           'Extension complète à chaque rep',
           'Contraction maximale en bas'
-        ]
-      },
-      {
-        name: 'Barre au front',
-        series: '3×10',
-        rest: '60s',
-        hasWeight: true,
-        defaultWeight: 0,
-        img: '/images/exercises/barre-au-front.webp',
-        muscles: ['Triceps'],
-        desc: 'Allongé sur un banc, barre EZ au-dessus de la poitrine, bras tendus. Fléchir les coudes pour descendre la barre vers le front (ou légèrement derrière la tête). Remonter en extension sans bouger les coudes.',
-        tips: [
-          'Coudes pointés vers le plafond et fixes',
-          'Descendre lentement pour contrôler',
-          'Ne pas verrouiller brutalement les coudes en haut'
         ]
       },
       {
@@ -250,136 +235,235 @@ export const days: Day[] = [
   },
   {
     id: 3,
-    label: 'CALI',
-    type: 'cali',
-    color: '#0D2B0D',
-    accent: '#2ECC71',
-    emoji: '🟢',
+    label: 'LEGS',
+    type: 'legs',
+    color: '#1A0033',
+    accent: '#9B59B6',
+    emoji: '🦵',
     exercises: [
       {
-        name: 'Jumping Jacks',
-        series: '3×30s',
-        rest: '30s',
-        hasWeight: false,
-        cat: 'Full body',
-        img: '/images/exercises/jumping-jacks.webp',
-        muscles: ['Corps entier', 'Cardio', 'Mollets'],
-        desc: "Debout, pieds joints et bras le long du corps. Sauter en écartant les jambes à largeur d'épaules tout en levant les bras au-dessus de la tête. Revenir à la position de départ. Maintenir un rythme régulier.",
+        name: 'Squat barre',
+        warmupSeries: '2×15',
+        series: '4×8',
+        rest: '2 min',
+        hasWeight: true,
+        defaultWeight: 40,
+        img: '/images/exercises/squat-barre.webp',
+        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Barre posée sur les trapèzes, pieds à largeur d'épaules, orteils légèrement vers l'extérieur. Descendre en gardant le dos droit et les genoux dans l'axe des orteils. Cuisses parallèles au sol minimum. Remonter en poussant dans les talons.",
         tips: [
-          "Atterrir doucement sur l'avant du pied",
-          "Bras tendus jusqu'au-dessus de la tête",
-          'Maintenir le rythme sur toute la durée'
+          'Regard droit devant, ne pas baisser la tête',
+          'Genoux dans l\'axe des orteils, ne pas les laisser rentrer',
+          'Descendre lentement (3 sec), remonter fort'
         ]
       },
       {
-        name: 'Pompes',
+        name: 'Presse à cuisses',
         series: '3×12',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Haut du corps',
-        img: '/images/exercises/pompes.webp',
-        muscles: ['Pectoraux', 'Triceps', 'Épaules ant.'],
-        desc: "Mains à largeur d'épaules, corps aligné des épaules aux talons. Descendre la poitrine vers le sol en fléchissant les coudes à 45° du corps. Remonter en extension complète sans verrouiller brutalement les coudes.",
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 60,
+        img: '/images/exercises/presse-cuisses.webp',
+        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Pieds à largeur d'épaules sur la plateforme, à mi-hauteur. Descendre la plateforme lentement jusqu'à 90° de flexion du genou, puis repousser sans verrouiller les genoux en haut. Ne jamais laisser les fesses décoller du siège.",
         tips: [
-          'Corps gainé de la tête aux talons — ne pas cambrer',
-          'Coudes à 45° du corps, pas écartés à 90°',
-          'Amplitude complète : poitrine au ras du sol'
+          'Pieds ni trop hauts ni trop bas sur la plateforme',
+          'Ne pas verrouiller les genoux en extension',
+          'Fesses collées au siège en permanence'
         ]
       },
       {
-        name: 'Crunchs',
-        series: '3×15',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Core',
-        img: '/images/exercises/crunchs.webp',
-        muscles: ['Abdominaux', 'Rectus abdominis'],
-        desc: 'Allongé sur le dos, genoux fléchis, pieds à plat au sol. Mains derrière la nuque sans tirer dessus. Contracter les abdos pour décoller les omoplates du sol, en gardant le bas du dos au sol. Redescendre lentement.',
+        name: 'Leg curl couché',
+        series: '3×12',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 25,
+        img: '/images/exercises/leg-curl.webp',
+        muscles: ['Ischio-jambiers', 'Mollets'],
+        desc: "Allongé sur la machine, coussin au-dessus des chevilles. Fléchir les genoux pour ramener les talons vers les fessiers. Contracter les ischio-jambiers en haut, redescendre lentement. Hanches plaquées sur le coussin.",
         tips: [
-          'Ne pas tirer sur la nuque avec les mains',
-          'Expirer à la montée, inspirer à la descente',
-          'Mouvement court et contrôlé — pas besoin de monter haut'
+          'Ne pas décoller les hanches du coussin',
+          'Contraction maximale en haut (1 sec)',
+          'Descente lente et contrôlée (3 sec)'
         ]
       },
       {
-        name: 'Twists obliques',
+        name: 'Leg extension',
+        series: '3×12',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 25,
+        img: '/images/exercises/leg-extension.webp',
+        muscles: ['Quadriceps'],
+        desc: "Assis sur la machine, coussin sur le dessus des chevilles. Étendre les jambes jusqu'à la position horizontale en contractant les quadriceps. Redescendre lentement sans laisser les poids toucher la pile.",
+        tips: [
+          'Extension complète à chaque répétition',
+          'Contraction 1 sec en haut',
+          'Ne pas prendre d\'élan avec le buste'
+        ]
+      },
+      {
+        name: 'Fentes haltères',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 12,
+        img: '/images/exercises/fentes-halteres.webp',
+        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Debout, haltères en main, faire un grand pas en avant. Descendre le genou arrière vers le sol sans le toucher. Genou avant dans l'axe du pied, jamais en avant du pied. Repousser pour revenir à la position initiale et alterner.",
+        tips: [
+          'Grand pas pour protéger le genou avant',
+          'Buste droit, regard devant',
+          'Descente lente, poussée explosive'
+        ]
+      },
+      {
+        name: 'Mollets debout',
+        series: '4×15',
+        rest: '60s',
+        hasWeight: true,
+        defaultWeight: 0,
+        img: '/images/exercises/mollets-debout.webp',
+        muscles: ['Mollets', 'Soléaire'],
+        desc: "Sur une marche ou au sol. Monter sur la pointe des pieds le plus haut possible, contraction maximale, redescendre lentement jusqu'à l'étirement complet. Ajouter du poids (haltère, barre) quand le poids du corps devient insuffisant.",
+        tips: [
+          'Amplitude complète : étirement total en bas',
+          'Contraction 1 sec en haut',
+          'Mouvement lent et contrôlé, pas de rebond'
+        ]
+      },
+      {
+        name: 'Lombaires (finish)',
         series: '3×20',
         rest: '60s',
         hasWeight: false,
-        cat: 'Core rotation',
-        img: '/images/exercises/twists-obliques.webp',
-        muscles: ['Obliques', 'Abdominaux', 'Transverse'],
-        desc: 'Assis au sol, genoux fléchis, pieds légèrement soulevés ou posés selon le niveau. Pencher légèrement le buste en arrière, mains jointes devant la poitrine. Tourner le buste alternativement à droite et à gauche en contractant les obliques.',
+        img: '/images/exercises/lombaires.webp',
+        muscles: ['Érecteurs du dos', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
         tips: [
-          'Rotation vient du buste, pas des hanches',
-          "Dos droit, ne pas s'affaisser",
-          'Contrôler le mouvement, ne pas aller trop vite'
-        ]
-      },
-      {
-        name: 'Relevé de jambes',
-        series: '3×12',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Core',
-        img: '/images/exercises/releve-de-jambes.webp',
-        muscles: ['Abdominaux bas', 'Hip flexors', 'Transverse'],
-        desc: "Allongé sur le dos, mains sous les fessiers ou le long du corps. Jambes tendues, les lever jusqu'à la verticale en contractant les abdos. Redescendre lentement sans laisser les talons toucher le sol.",
-        tips: [
-          'Bas du dos plaqué au sol en permanence',
-          "Ne pas prendre d'élan — mouvement contrôlé",
-          'Jambes le plus tendues possible'
-        ]
-      },
-      {
-        name: 'Squats',
-        series: '3×30',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Bas du corps',
-        img: '/images/exercises/squats.webp',
-        muscles: ['Quadriceps', 'Fessiers', 'Ischio-jambiers'],
-        desc: "Pieds à largeur d'épaules, orteils légèrement vers l'extérieur. Descendre en poussant les hanches vers l'arrière et en fléchissant les genoux, comme pour s'asseoir sur une chaise. Cuisses parallèles au sol. Remonter en poussant dans les talons.",
-        tips: [
-          "Genoux dans l'axe des orteils, ne pas les laisser rentrer",
-          'Dos droit, regard devant soi',
-          'Talons au sol tout au long'
-        ]
-      },
-      {
-        name: 'Jambe tendue',
-        series: '3×12',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Bas du corps',
-        img: '/images/exercises/jambe-tendue.webp',
-        muscles: ['Ischio-jambiers', 'Fessiers', 'Quadriceps'],
-        desc: "Debout, pieds à largeur des hanches. Tendre une jambe vers l'avant à hauteur de hanche en gardant le dos droit et la jambe d'appui légèrement fléchie. Redescendre lentement et alterner les jambes.",
-        tips: [
-          'Garder le dos droit, ne pas se pencher en avant',
-          'Jambe tendue mais genou non verrouillé',
-          'Contracter le fessier de la jambe levée'
-        ]
-      },
-      {
-        name: 'Mountain climbers',
-        series: '3×30',
-        rest: '60s',
-        hasWeight: false,
-        cat: 'Full body',
-        img: '/images/exercises/mountains-climbers.gif',
-        muscles: ['Abdominaux', 'Épaules', 'Hip flexors'],
-        desc: 'Position de pompes bras tendus, corps aligné des épaules aux talons. Ramener alternativement chaque genou vers la poitrine en courant sur place. Hanches basses et stables tout au long du mouvement.',
-        tips: [
-          'Hanches restent basses, ne pas les lever vers le plafond',
-          'Bras tendus et stables sous les épaules',
-          'Inspirer/expirer régulièrement sans bloquer la respiration'
+          'Ne pas dépasser la ligne droite en haut',
+          'Gainage abdominal léger pendant le mouvement',
+          'Respiration régulière'
         ]
       }
     ]
   },
   {
     id: 4,
+    label: 'FULL BODY',
+    type: 'fullbody',
+    color: '#1A1A00',
+    accent: '#F1C40F',
+    emoji: '⚡',
+    exercises: [
+      {
+        name: 'Soulevé de terre roumain',
+        warmupSeries: '2×15',
+        series: '3×10',
+        rest: '2 min',
+        hasWeight: true,
+        defaultWeight: 40,
+        img: '/images/exercises/soulevé-terre-roumain.webp',
+        muscles: ['Ischio-jambiers', 'Fessiers', 'Érecteurs du dos'],
+        desc: "Barre en pronation, pieds à largeur des hanches. Descendre la barre le long des jambes en poussant les hanches vers l'arrière, dos parfaitement droit. Sentir l'étirement des ischio-jambiers. Remonter en contractant les fessiers.",
+        tips: [
+          'Le mouvement vient des hanches, pas du dos',
+          'Barre proche du corps tout au long',
+          'Genoux légèrement fléchis mais fixes'
+        ]
+      },
+      {
+        name: 'Développé couché haltères',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 14,
+        img: '/images/exercises/developpe-couche-halteres.webp',
+        muscles: ['Pectoraux', 'Triceps', 'Épaules ant.'],
+        desc: "Allongé sur banc plat, haltères au niveau des épaules. Pousser verticalement jusqu'à extension presque complète, revenir lentement. Plus grande amplitude que la barre, meilleur étirement pectoral.",
+        tips: [
+          'Omoplates serrées sur le banc',
+          'Descente lente en 3 sec',
+          'Ne pas cogner les haltères en haut'
+        ]
+      },
+      {
+        name: 'Tirage horizontal unilatéral',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 16,
+        img: '/images/exercises/tirage-horizontal-seated-row.webp',
+        muscles: ['Grand dorsal', 'Rhomboïdes', 'Biceps'],
+        desc: "Un genou et une main sur un banc, haltère dans l'autre main. Tirer l'haltère vers la hanche en gardant le coude près du corps. Dos horizontal, gainage actif. Alterner les côtés.",
+        tips: [
+          'Coude proche du corps, pas écarté',
+          'Rotation du buste minimale',
+          'Amplitude maximale : bras tendu en bas'
+        ]
+      },
+      {
+        name: 'Squat goblet',
+        series: '3×15',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 16,
+        img: '/images/exercises/squat-barre.webp',
+        muscles: ['Quadriceps', 'Fessiers', 'Core'],
+        desc: "Tenir un haltère verticalement contre la poitrine. Pieds légèrement plus larges que les épaules, orteils vers l'extérieur. Descendre profondément en gardant le buste droit. Le goblet squat force une posture verticale et cible davantage les quadriceps.",
+        tips: [
+          'Coudes restent à l\'intérieur des genoux en bas',
+          'Descendre le plus bas possible',
+          'Talons au sol en permanence'
+        ]
+      },
+      {
+        name: 'Développé militaire haltères',
+        series: '3×10',
+        rest: '90s',
+        hasWeight: true,
+        defaultWeight: 10,
+        img: '/images/exercises/developpe-militaire-machine.gif',
+        muscles: ['Épaules (deltoïdes)', 'Triceps', 'Trapèzes'],
+        desc: "Assis ou debout, haltères à hauteur des épaules, paumes vers l'avant. Pousser verticalement jusqu'à extension presque complète. Revenir lentement. Le travail libre active davantage les stabilisateurs.",
+        tips: [
+          'Gainage abdominal serré pour protéger le dos',
+          'Ne pas verrouiller les coudes en haut',
+          'Expirer à la poussée'
+        ]
+      },
+      {
+        name: 'Gainage planche',
+        series: '3×45s',
+        rest: '60s',
+        hasWeight: false,
+        img: '/images/exercises/gainage-planche.webp',
+        muscles: ['Core', 'Transverse', 'Épaules'],
+        desc: "Avant-bras au sol, corps aligné de la tête aux talons. Contracter abdominaux, fessiers et jambes simultanément. Maintenir la position sans laisser les hanches monter ou descendre.",
+        tips: [
+          'Hanches dans le prolongement du corps — ni trop hautes ni trop basses',
+          'Respirer normalement sans bloquer',
+          'Regard vers le sol, nuque neutre'
+        ]
+      },
+      {
+        name: 'Lombaires (finish)',
+        series: '3×20',
+        rest: '60s',
+        hasWeight: false,
+        img: '/images/exercises/lombaires.webp',
+        muscles: ['Érecteurs du dos', 'Fessiers', 'Ischio-jambiers'],
+        desc: "Sur banc à lombaires ou au sol. Partir en flexion avant, dos arrondi, puis étendre le dos jusqu'à la position neutre (ligne droite). Ne pas hyper-étendre. Mouvement lent et contrôlé.",
+        tips: [
+          'Ne pas dépasser la ligne droite en haut',
+          'Gainage abdominal léger pendant le mouvement',
+          'Respiration régulière'
+        ]
+      }
+    ]
+  },
+  {
+    id: 5,
     label: 'CARDIO',
     type: 'cardio',
     color: '#001A2E',
