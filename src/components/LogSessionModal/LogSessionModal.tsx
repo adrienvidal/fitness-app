@@ -4,7 +4,8 @@ import "./LogSessionModal.scss";
 const DAY_TYPES: { type: DayType; label: string; color: string }[] = [
   { type: "push", label: "PUSH", color: "#FF6B35" },
   { type: "pull", label: "PULL", color: "#4A90D9" },
-  { type: "cali", label: "CALI", color: "#2ECC71" },
+  { type: "legs", label: "LEGS", color: "#9B59B6" },
+  { type: "fullbody", label: "FULL BODY", color: "#F1C40F" },
   { type: "cardio", label: "CARDIO", color: "#7b00ce" },
 ];
 

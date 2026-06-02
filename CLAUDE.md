@@ -13,7 +13,7 @@ npm run preview    # Preview production build locally
 
 ## Architecture
 
-**Single-page React 19 + TypeScript + Vite app** — a workout reference tool organized by training day (PUSH / PULL / CALI / CARDIO), with no routing.
+**Single-page React 19 + TypeScript + Vite app** — a workout + nutrition reference tool. Two main sections (Entraînement / Nutrition) switched via tabs in `App.tsx`. Workout section is organized by training day (PUSH / PULL / LEGS / FULL BODY / CARDIO); Nutrition section shows a WorkoutOMAD intermittent-fasting plan. No routing.
 
 ### Data model
 
@@ -23,16 +23,17 @@ All workout content lives in [src/data/days.ts](src/data/days.ts). The type hier
 Day → Exercise[]
 ```
 
-- 4 days: Jour 1 PUSH (8 exercises), Jour 2 PULL (7 exercises), Jour 3 CALI (13 exercises), Jour 4 CARDIO (3 activities)
-- Each `Day` has: `id`, `label`, `type` (`push | pull | cali | cardio`), `color`, `accent`, `emoji`, `exercises[]`
+- 5 days: Jour 1 PUSH (7 exercises), Jour 2 PULL (7 exercises), Jour 3 LEGS (7 exercises), Jour 4 FULL BODY (7 exercises), Jour 5 CARDIO (3 activities)
+- Each `Day` has: `id`, `label`, `type` (`push | pull | legs | fullbody | cardio`), `color`, `accent`, `emoji`, `exercises[]`
 - Each exercise carries metadata: muscle groups, sets/reps/rest, images, description, tips, optional `warmupSeries` (e.g. "2×15" for warm-up sets before working sets), `hasWeight` flag, optional `assistedWeight` (boolean, for machine-assisted moves where weight means assistance), and optional `defaultWeight` (number, pre-filled value in WeightInput)
 
 ### State management
 
 All UI state lives in [src/App.tsx](src/App.tsx) as plain `useState`:
-- `activeDay` (0–3)
+- `activeDay` (0–4)
 - `activeExercise` (null or index)
 - `completedExercises` (`Set<string>`) — set of `exKey` strings for exercises marked done; reset on day change
+- `activeSection` (`"workout" | "nutrition"`) — controls the main content tab (Entraînement vs Nutrition)
 - `isPanelOpen` (boolean) — controls the right side panel visibility
 - `isGuest` (boolean) — true when user chose "Continuer sans compte"; bypasses auth gate, disables session saving and sign-out button
 - `showConfirmModal` (boolean) — controls the session-finish confirmation modal
@@ -64,9 +65,9 @@ No Context, Redux, or Zustand.
 
 `WeightInput` now delegates entirely to `useExerciseWeight` instead of managing `localStorage` directly. It receives `userId` as a prop.
 
-**Session logging**: `App.tsx` exposes a "Terminer la séance" button. Clicking it opens a confirmation modal (`showConfirmModal`). On confirm, `confirmFinishSession` calls `saveSession(dateStr, day.type, userId)` (skipped for guests) and shows a toast notification for 3 s. Session saving is skipped when `isGuest` is true.
+**Session logging**: `App.tsx` exposes a "Terminer la séance" button. Clicking it opens a confirmation modal (`showConfirmModal`). On confirm, `confirmFinishSession` calls `saveSession(dateStr, day.type, userId)` and shows a toast notification for 3 s. Session saving is skipped when `!userId` (guests have no userId).
 
-**Retroactive session logging**: Past dates (≤ today) in `WorkoutCalendar` are clickable for non-guest users. Clicking a date sets `pendingLogDate` in `App.tsx`, which opens `LogSessionModal`. The modal shows the 4 day types; tapping one calls `saveSession(dateStr, dayType, userId)` and closes. Already-logged dates show their current type pre-highlighted and can be overwritten (upsert). Guest users cannot click calendar dates.
+**Retroactive session logging**: Past dates (≤ today) in `WorkoutCalendar` are clickable for non-guest users. Clicking a date sets `pendingLogDate` in `App.tsx`, which opens `LogSessionModal`. The modal shows the 5 day types; tapping one calls `saveSession(dateStr, dayType, userId)` and closes. Already-logged dates show their current type pre-highlighted and can be overwritten (upsert). Guest users cannot click calendar dates.
 
 ### Styling
 
@@ -74,7 +75,6 @@ No Context, Redux, or Zustand.
 - Dynamic colors (day theme, muscle group tags, category badges) are applied via inline `style` props using values from [src/constants/colors.ts](src/constants/colors.ts)
 - Dark-themed mobile-first layout (max-width 600px)
 - Each day has a `color` (primary) and `accent` (highlight) defined in the days data
-- J3 (CALI) exercises use `cat` badges with colors from `catColors` (Mobilité, Gainage, Force au sol, Flexibilité)
 
 ### Authentication
 
@@ -89,6 +89,7 @@ No Context, Redux, or Zustand.
 - Circular SVG arc progress indicator that drains as time elapses
 - Displays countdown in `MM:SS`; shows a green `✓` when done
 - Uses `setInterval` (1 s tick); clears on unmount or when timer reaches 0
+- On completion: triggers `navigator.vibrate([400, 150, 400, 150, 400])` + a 880 Hz sine-wave beep via Web Audio API (`AudioContext` stored in a `useRef`, created lazily on first start to satisfy browser autoplay policy)
 - Receives `accentColor` (current day's accent) and `onClose` as props
 
 ### Side panel
@@ -102,7 +103,7 @@ No Context, Redux, or Zustand.
 
 [src/components/LogSessionModal/LogSessionModal.tsx](src/components/LogSessionModal/LogSessionModal.tsx) is a bottom-sheet modal controlled by `pendingLogDate` in `App.tsx`. Opened when a past/today date is tapped in the calendar. Features:
 - Date formatted in French (weekday + day + month)
-- 2×2 grid of day-type buttons (PUSH / PULL / CALI / CARDIO) with their respective colors
+- 2-column grid of day-type buttons (PUSH / PULL / LEGS / FULL BODY / CARDIO) with their respective colors; the 5th button (CARDIO) spans both columns
 - If the date already has a session, the matching type button appears filled/selected
 - Tapping a type immediately calls `onSave(dateStr, dayType)` — no separate confirm step
 - Backdrop click or ✕ button calls `onClose` without saving
@@ -112,3 +113,12 @@ No Context, Redux, or Zustand.
 [src/components/SessionProgress/SessionProgress.tsx](src/components/SessionProgress/SessionProgress.tsx) renders a thin progress bar + `X / Y exercices` label above the exercise list. It receives `completed`, `total`, and `accentColor` as props — no internal state.
 
 Each `ExerciseCard` has a circular checkbox button (top-right, `stopPropagation` so it doesn't toggle the accordion). When completed: index badge turns green ✓, name gets a strikethrough, card opacity drops to 0.6.
+
+### Nutrition tab (WorkoutOMAD)
+
+[src/components/WorkoutOMAD/WorkoutOMAD.tsx](src/components/WorkoutOMAD/WorkoutOMAD.tsx) is rendered when `activeSection === "nutrition"`. It documents a 18/6 intermittent fasting + morning lifting protocol. All its state is local (no Supabase, no localStorage). Features:
+- **Header** with 24h mini-timeline bar and live calorie/protein totals
+- **Day selector** (Mon–Sun); weekends show a special notice (no workout shakes)
+- **Three tabs**: Timeline (step-by-step day schedule), Repas (meal builder), Tips
+- **Meal builder** — four independent selectors (pre-workout shake, post-workout shake + eggs, main meal, optional collation); each updates the running total displayed in the header stats
+- Uses inline styles + scoped CSS-in-JS (`<style>` tag) with `DM Sans` + `Syne` fonts from Google Fonts; animations: `omadFadeUp`, `omadGlow`

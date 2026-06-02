@@ -14,7 +14,7 @@ export type Exercise = {
   index?: number
 }
 
-export type DayType = 'push' | 'pull' | 'cali' | 'cardio'
+export type DayType = 'push' | 'pull' | 'legs' | 'fullbody' | 'cardio'
 
 export type Day = {
   id: number

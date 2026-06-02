@@ -9,10 +9,11 @@ interface Props {
 }
 
 const coolGradients: Record<string, string> = {
-  push:   "linear-gradient(135deg, #1a3a5c 0%, #4a9eff 100%)",
-  pull:   "linear-gradient(135deg, #1a4a3a 0%, #3acfaa 100%)",
-  cali:   "linear-gradient(135deg, #2a1a5c 0%, #7a6aff 100%)",
-  cardio: "linear-gradient(135deg, #1a4a5c 0%, #3abfcf 100%)",
+  push:     "linear-gradient(135deg, #1a3a5c 0%, #4a9eff 100%)",
+  pull:     "linear-gradient(135deg, #1a4a3a 0%, #3acfaa 100%)",
+  legs:     "linear-gradient(135deg, #2a1a5c 0%, #9B59B6 100%)",
+  fullbody: "linear-gradient(135deg, #2a2000 0%, #F1C40F 100%)",
+  cardio:   "linear-gradient(135deg, #1a4a5c 0%, #3abfcf 100%)",
 };
 
 export function Header({ day, theme, onOpenPanel, onOpenTimer }: Props) {

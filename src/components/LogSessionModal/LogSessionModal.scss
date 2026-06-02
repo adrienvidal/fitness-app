@@ -59,6 +59,10 @@
     gap: 10px;
     width: 100%;
     margin-top: 4px;
+
+    & > *:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
   }
 
   &__type-btn {
