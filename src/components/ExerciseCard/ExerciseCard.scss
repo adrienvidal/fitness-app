@@ -1,12 +1,12 @@
 .exercise-card {
-  border-radius: 16px;
+  border-radius: 20px;
   background: var(--bg-secondary);
   overflow: hidden;
-  transition: all 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s;
   position: relative;
 
   &--done {
-    opacity: 0.6;
+    opacity: 0.75;
 
     .exercise-card__name {
       text-decoration: line-through;
@@ -15,11 +15,15 @@
   }
 
   &__validate {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     width: 100%;
+    min-height: 46px;
     margin-top: 16px;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: 14px;
     border: 1.5px solid;
     cursor: pointer;
     font-size: 14px;
@@ -103,8 +107,9 @@
   }
 
   &__chevron {
-    font-size: 20px;
-    transition: transform 0.25s;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 
   &__body {
@@ -182,6 +187,9 @@
   }
 
   &__tips-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-size: 11px;
     font-weight: 700;
     margin-bottom: 8px;
@@ -191,7 +199,8 @@
 
   &__tip {
     display: flex;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 8px;
     margin-bottom: 7px;
     font-size: 13px;
     color: var(--text-muted);
@@ -199,7 +208,9 @@
 
     &-arrow {
       flex-shrink: 0;
-      font-weight: 700;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
     }
   }
 }

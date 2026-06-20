@@ -6,12 +6,17 @@
   &__btn {
     flex: 1;
     padding: 10px 6px;
-    border-radius: 12px;
+    min-height: 72px;
+    border-radius: 14px;
     font-weight: 700;
     font-size: 12px;
     transition: all 0.2s;
     line-height: 1.4;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   &__emoji {

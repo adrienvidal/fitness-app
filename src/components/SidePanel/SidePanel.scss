@@ -39,13 +39,16 @@
   }
 
   &__close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     color: var(--text-secondary, #999);
-    font-size: 16px;
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
+    border-radius: 10px;
     transition: background 0.15s, color 0.15s;
 
     &:hover {
@@ -101,6 +104,8 @@
   }
 
   &__theme-icon {
+    display: flex;
+    align-items: center;
     font-size: 18px;
   }
 

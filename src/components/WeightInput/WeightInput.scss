@@ -4,6 +4,9 @@
   border-radius: 10px;
 
   &__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-size: 12px;
     font-weight: 700;
     margin-bottom: 8px;

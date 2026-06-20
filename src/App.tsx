@@ -98,13 +98,13 @@ export default function App() {
           className={`app__section-btn${activeSection === "workout" ? " app__section-btn--active" : ""}`}
           onClick={() => setActiveSection("workout")}
         >
-          🏋️ Entraînement
+          <span aria-hidden="true">🏋️</span> Entraînement
         </button>
         <button
           className={`app__section-btn${activeSection === "nutrition" ? " app__section-btn--active" : ""}`}
           onClick={() => setActiveSection("nutrition")}
         >
-          🥗 Nutrition
+          <span aria-hidden="true">🥗</span> Nutrition
         </button>
       </div>
 
@@ -182,8 +182,8 @@ export default function App() {
       )}
 
       {showToast && (
-        <div className="app__toast">
-          ✓ Séance enregistrée !
+        <div className="app__toast" role="status" aria-live="polite">
+          <span aria-hidden="true">✓</span> Séance enregistrée !
         </div>
       )}
 

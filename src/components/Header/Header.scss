@@ -1,65 +1,57 @@
 .header {
-  padding: 22px 20px 18px;
+  padding: 24px 20px 20px;
   text-align: center;
   transition: background 0.5s;
   position: relative;
 
-  &__timer-btn {
+  &__timer-btn,
+  &__menu-btn {
     position: absolute;
-    top: 12px;
-    left: 14px;
-    width: 34px;
-    height: 34px;
+    top: 14px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: none;
     background: rgba(0, 0, 0, 0.2);
-    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s, transform 0.15s;
     color: #f5f7fa;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.35);
+    }
 
     &:active {
       transform: scale(0.9);
     }
   }
 
-  &__menu-btn {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(0, 0, 0, 0.2);
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: background 0.2s, transform 0.2s;
-    color: #f5f7fa;
+  &__timer-btn {
+    left: 14px;
+  }
 
-    &:active {
-      transform: scale(0.9);
-    }
+  &__menu-btn {
+    right: 14px;
   }
 
   &__title {
     font-weight: 800;
     font-size: 22px;
     color: #f5f7fa;
+    letter-spacing: -0.02em;
   }
 
   &__subtitle {
     font-size: 12px;
-    opacity: 0.8;
+    font-weight: 600;
+    opacity: 0.85;
     margin-top: 4px;
     color: #f5f7fa;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 }

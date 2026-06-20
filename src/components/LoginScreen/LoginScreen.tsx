@@ -9,8 +9,12 @@ export function LoginScreen({ onSignIn, onGuestAccess }: Props) {
   return (
     <div className="login">
       <div className="login__content">
-        <div className="login__emoji">🏋️</div>
-        <h1 className="login__title">Fitness App</h1>
+        <div className="login__icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 4v16M18 4v16M6 8H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2M18 8h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 12h12"/>
+          </svg>
+        </div>
+        <h1 className="login__title">FitnessPal</h1>
         <p className="login__subtitle">Connecte-toi pour synchroniser tes données sur tous tes appareils.</p>
         <button className="login__btn" onClick={onSignIn}>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

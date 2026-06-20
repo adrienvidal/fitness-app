@@ -16,6 +16,30 @@ interface Props {
   userId: string | null
 }
 
+const IconCheck = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+)
+
+const IconChevronDown = ({ style }: { style?: React.CSSProperties }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={style}>
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>
+)
+
+const IconArrow = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="9 18 15 12 9 6"/>
+  </svg>
+)
+
+const IconStar = () => (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+  </svg>
+)
+
 export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey, isCompleted, onToggleComplete, userId }: Props) {
   const [imgOk, setImgOk] = useState(true)
   const catColor = (ex.cat && catColors[ex.cat]) || accentColor
@@ -25,10 +49,10 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
       className={`exercise-card${isCompleted ? ' exercise-card--done' : ''}`}
       style={{
         border: `1.5px solid ${isCompleted ? 'var(--card-done-border)' : isOpen ? accentColor : 'var(--card-inactive-border)'}`,
-        boxShadow: isOpen && !isCompleted ? `0 4px 24px ${accentColor}28` : 'none'
+        boxShadow: isOpen && !isCompleted ? `0 4px 28px ${accentColor}30` : 'none'
       }}
     >
-      <button onClick={onClick} className='exercise-card__header'>
+      <button onClick={onClick} className='exercise-card__header' aria-expanded={isOpen}>
         <div
           className='exercise-card__index'
           style={{
@@ -36,7 +60,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
             color: isCompleted ? '#4caf50' : isOpen ? '#fff' : accentColor
           }}
         >
-          {isCompleted ? '✓' : ex.index}
+          {isCompleted ? <IconCheck size={15} /> : ex.index}
         </div>
         <div className='exercise-card__meta'>
           <div className='exercise-card__title-row'>
@@ -66,14 +90,8 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
             <span>{ex.series}{ex.rest ? ` · Repos ${ex.rest}` : ''}</span>
           </div>
         </div>
-        <div
-          className='exercise-card__chevron'
-          style={{
-            color: accentColor,
-            transform: isOpen ? 'rotate(180deg)' : 'none'
-          }}
-        >
-          ▾
+        <div className='exercise-card__chevron' style={{ color: accentColor }}>
+          <IconChevronDown style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.25s' }} />
         </div>
       </button>
 
@@ -86,6 +104,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
                 alt={ex.name}
                 onError={() => setImgOk(false)}
                 className='exercise-card__image'
+                loading="lazy"
               />
             ) : (
               <div
@@ -95,7 +114,7 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
                   color: accentColor
                 }}
               >
-                <div className='exercise-card__image-fallback-icon'>🏋️</div>
+                <div className='exercise-card__image-fallback-icon' aria-hidden="true">🏋️</div>
                 <div className='exercise-card__image-fallback-name'>{ex.name}</div>
               </div>
             )}
@@ -134,13 +153,13 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
             </div>
 
             <div className='exercise-card__tips-title' style={{ color: accentColor }}>
-              ✦ Points clés
+              <IconStar /> Points clés
             </div>
 
             {ex.tips.map((tip, j) => (
               <div key={j} className='exercise-card__tip'>
                 <span className='exercise-card__tip-arrow' style={{ color: accentColor }}>
-                  ›
+                  <IconArrow />
                 </span>
                 <span>{tip}</span>
               </div>
@@ -154,7 +173,9 @@ export function ExerciseCard({ ex, accentColor, dayColor, isOpen, onClick, exKey
                 : { background: `${accentColor}18`, color: accentColor, borderColor: `${accentColor}60` }
               }
             >
-              {isCompleted ? '✓ Validé' : 'Valider'}
+              {isCompleted ? (
+                <><IconCheck size={14} /> Validé</>
+              ) : 'Valider'}
             </button>
           </div>
         </div>

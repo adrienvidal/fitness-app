@@ -15,13 +15,14 @@ export function DayTabs({ days, activeDay, onSelect }: Props) {
           key={i}
           onClick={() => onSelect(i)}
           className="day-tabs__btn"
+          aria-pressed={activeDay === i}
           style={{
             border: `2px solid ${activeDay === i ? d.accent : "transparent"}`,
             background: activeDay === i ? `${d.accent}1a` : "var(--bg-tab)",
-            color: activeDay === i ? d.accent : "#555",
+            color: activeDay === i ? d.accent : "var(--text-secondary)",
           }}
         >
-          <div className="day-tabs__emoji">{d.emoji}</div>
+          <div className="day-tabs__emoji" aria-hidden="true">{d.emoji}</div>
           <div className="day-tabs__num">J{d.id}</div>
           <div className="day-tabs__label">{d.label}</div>
         </button>

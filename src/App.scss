@@ -9,24 +9,29 @@
 
   &__section-tabs {
     display: flex;
-    gap: 6px;
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    gap: 4px;
+    padding: 8px 14px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-primary);
   }
 
   &__section-btn {
     flex: 1;
-    padding: 8px 10px;
-    border-radius: 8px;
+    min-height: 40px;
+    padding: 7px 12px;
+    border-radius: 999px;
     border: none;
     font-size: 13px;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
     background: transparent;
-    color: #6b7280;
+    color: var(--text-secondary);
     transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 
     &--active {
       background: #e8ff6b;
@@ -68,10 +73,11 @@
 
     &-btn {
       width: 100%;
+      min-height: 48px;
       padding: 13px;
       background: transparent;
       border: 1.5px solid;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
@@ -79,7 +85,7 @@
       transition: background 0.15s, opacity 0.15s;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(232, 255, 107, 0.06);
       }
 
       &:active {
@@ -134,8 +140,9 @@
 
     button {
       flex: 1;
+      min-height: 44px;
       padding: 11px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
