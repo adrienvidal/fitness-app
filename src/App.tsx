@@ -19,7 +19,12 @@ export default function App() {
   const { workoutLog, saveSession } = useWorkoutLog(userId);
   const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
-  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set());
+  const [completedExercises, setCompletedExercises] = useState<Set<string>>(() => {
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+    const saved = localStorage.getItem(`completedExercises:${todayStr}:${days[0].type}`);
+    return saved ? new Set(JSON.parse(saved)) : new Set();
+  });
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     return (localStorage.getItem("theme") as "dark" | "light") ?? "dark";
   });
@@ -55,7 +60,8 @@ export default function App() {
   function handleDaySelect(i: number) {
     setActiveDay(i);
     setActiveExercise(null);
-    setCompletedExercises(new Set());
+    const saved = localStorage.getItem(`completedExercises:${todayStr}:${days[i].type}`);
+    setCompletedExercises(saved ? new Set(JSON.parse(saved)) : new Set());
   }
 
   function handleFinishSession() {
@@ -66,6 +72,7 @@ export default function App() {
     setShowConfirmModal(false);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
+    localStorage.removeItem(`completedExercises:${todayStr}:${day.type}`);
     if (!userId) return;
     saveSession(todayStr, day.type, userId);
   }
@@ -75,6 +82,7 @@ export default function App() {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
       else next.add(key);
+      localStorage.setItem(`completedExercises:${todayStr}:${day.type}`, JSON.stringify([...next]));
       return next;
     });
   }
