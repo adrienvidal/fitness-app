@@ -513,5 +513,15 @@ export const days: Day[] = [
         ]
       }
     ]
+  },
+  {
+    id: 6,
+    label: 'EXPRESS',
+    type: 'express',
+    color: '#00262B',
+    accent: '#22B8CF',
+    emoji: '⚡',
+    // Construits selon la base PUSH ou PULL choisie : voir expressExercises (express.ts).
+    exercises: []
   }
 ]

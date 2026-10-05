@@ -41,4 +41,5 @@ export const onAccent: Record<DayType, string> = {
   legs: "#ffffff",
   fullbody: "#141414",
   cardio: "#ffffff",
+  express: "#0b1517",
 };
