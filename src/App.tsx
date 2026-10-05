@@ -7,11 +7,15 @@ import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
+import { FinishSessionSheet } from "./components/FinishSessionSheet/FinishSessionSheet";
 import { LogSessionModal } from "./components/LogSessionModal/LogSessionModal";
 import { onAccent } from "./constants/colors";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
 import "./App.scss";
+
+const longDateFormat = new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+const shortDateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long" });
 
 export default function App() {
   const { userId, isReady, signIn, signOut } = useSupabase();
@@ -30,9 +34,10 @@ export default function App() {
   });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [restSeconds, setRestSeconds] = useState<number | undefined>(undefined);
+  const [restExerciseName, setRestExerciseName] = useState<string | undefined>(undefined);
   const [pendingLogDate, setPendingLogDate] = useState<string | null>(null);
 
   const today = new Date();
@@ -70,21 +75,25 @@ export default function App() {
 
   function confirmFinishSession() {
     setShowConfirmModal(false);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+    setToastMessage(isGuest ? `Séance ${day.label} terminée` : `Séance ${day.label} enregistrée au ${shortDateFormat.format(today)}`);
+    setTimeout(() => setToastMessage(null), 3000);
     localStorage.removeItem(`completedExercises:${todayStr}:${day.type}`);
     if (!userId) return;
     saveSession(todayStr, day.type, userId);
   }
 
-  function openRestTimer(seconds?: number) {
+  function openRestTimer(seconds?: number, exerciseName?: string) {
     setRestSeconds(seconds);
+    setRestExerciseName(exerciseName);
     setShowRestTimer(true);
   }
 
   function exerciseKey(name: string) {
     return `d${activeDay}-${name.replace(/\s+/g, "_")}`;
   }
+
+  const completedCount = sessionFinished ? day.exercises.length : completedExercises.size;
+  const missingExercises = sessionFinished ? [] : day.exercises.filter(ex => !completedExercises.has(exerciseKey(ex.name))).map(ex => ex.name);
 
   const nextIndex = sessionFinished ? -1 : day.exercises.findIndex(ex => !completedExercises.has(exerciseKey(ex.name)));
 
@@ -128,7 +137,7 @@ export default function App() {
       <SessionProgress
         label={day.label}
         dayId={day.id}
-        completed={sessionFinished ? day.exercises.length : completedExercises.size}
+        completed={completedCount}
         total={day.exercises.length}
         accentColor={day.accent}
       />
@@ -148,7 +157,7 @@ export default function App() {
               onClick={() => setActiveExercise(activeExercise === i ? null : i)}
               isCompleted={completedExercises.has(exKey)}
               onToggleComplete={() => toggleComplete(exKey)}
-              onStartRest={openRestTimer}
+              onStartRest={seconds => openRestTimer(seconds, ex.name)}
               userId={userId}
             />
           );
@@ -162,36 +171,35 @@ export default function App() {
       </div>
 
       {showConfirmModal && (
-        <div className="app__modal-backdrop" onClick={() => setShowConfirmModal(false)}>
-          <div className="app__modal" onClick={e => e.stopPropagation()}>
-            <p className="app__modal-title">Terminer la séance ?</p>
-            <p className="app__modal-body">La séance sera enregistrée dans ton historique.</p>
-            <div className="app__modal-actions">
-              <button className="app__modal-cancel" onClick={() => setShowConfirmModal(false)}>
-                Annuler
-              </button>
-              <button
-                className="app__modal-confirm"
-                style={{ background: day.accent }}
-                onClick={confirmFinishSession}
-              >
-                Confirmer
-              </button>
-            </div>
-          </div>
-        </div>
+        <FinishSessionSheet
+          dayLabel={day.label}
+          accentColor={day.accent}
+          onAccentColor={onAccent[day.type]}
+          completed={completedCount}
+          total={day.exercises.length}
+          missing={missingExercises}
+          dateLabel={longDateFormat.format(today)}
+          isGuest={isGuest}
+          onCancel={() => setShowConfirmModal(false)}
+          onConfirm={confirmFinishSession}
+        />
       )}
 
-      {showToast && (
+      {toastMessage && (
         <div className="app__toast" role="status" aria-live="polite">
-          <span aria-hidden="true">✓</span> Séance enregistrée !
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          {toastMessage}
         </div>
       )}
 
       {showRestTimer && (
         <RestTimerModal
           accentColor={day.accent}
+          onAccentColor={onAccent[day.type]}
           initialSeconds={restSeconds}
+          exerciseName={restExerciseName}
           onClose={() => setShowRestTimer(false)}
         />
       )}
