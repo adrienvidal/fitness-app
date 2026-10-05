@@ -1,6 +1,6 @@
 # CLAUDE.md — Fitness App
 
-Outil de référence personnel pour suivre un programme d'entraînement (PUSH / PULL / LEGS / FULL BODY / CARDIO) et un protocole nutritionnel 18/6.
+Outil de référence personnel pour suivre un programme d'entraînement (PUSH / PULL / LEGS / FULL BODY / CARDIO).
 
 ## Session Continuity
 
@@ -137,7 +137,7 @@ npm test           # Run Vitest once (passes with no test files)
 
 ## Architecture
 
-**React 19 + TypeScript + Vite SPA** — workout + nutrition reference tool. Two tabs (Entraînement / Nutrition) in `App.tsx`. No routing.
+**React 19 + TypeScript + Vite SPA** — workout reference tool. Single screen in `App.tsx`. No routing.
 
 ### Data model
 
@@ -151,7 +151,7 @@ All workout content in [src/data/days.ts](src/data/days.ts), types in [src/types
 
 All state in [src/App.tsx](src/App.tsx) as `useState`. No Context/Redux/Zustand.
 
-Key state: `activeDay`, `activeExercise`, `completedExercises` (Set), `activeSection`, `isPanelOpen`, `isGuest`, `showConfirmModal`, `showToast`, `showRestTimer`, `pendingLogDate`, `theme`, `workoutLog`.
+Key state: `activeDay`, `activeExercise`, `completedExercises` (Set), `isPanelOpen`, `isGuest`, `showConfirmModal`, `showToast`, `showRestTimer`, `pendingLogDate`, `theme`, `workoutLog`.
 
 localStorage keys: `"theme"`, `"workoutLog"`, `weight:d{day}-{exerciseName}`.
 
@@ -185,4 +185,3 @@ Hooks in [src/hooks/](src/hooks/):
 | LogSessionModal | [src/components/LogSessionModal/](src/components/LogSessionModal/) | Bottom sheet to log/edit a session for a past date |
 | RestTimerModal | [src/components/RestTimerModal/](src/components/RestTimerModal/) | Rest timer with SVG arc, vibration + beep on end |
 | SessionProgress | [src/components/SessionProgress/](src/components/SessionProgress/) | Progress bar above exercise list |
-| WorkoutOMAD | [src/components/WorkoutOMAD/](src/components/WorkoutOMAD/) | Nutrition tab (18/6 IF protocol, meal builder) |
