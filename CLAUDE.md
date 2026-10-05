@@ -122,7 +122,7 @@ En anglais, à l'impératif, sans point final. Préfixe `feat:`, `fix:`, `test:`
 - Supabase (Postgres managé + Auth), RLS non activé : la sécurité est applicative, toute requête filtre sur l'utilisateur courant
 - Authentification Google OAuth via Supabase Auth, plus un mode invité sans écriture
 - Un compte égale un espace : pas de notion d'organisation ni d'invitation, ne pas en prévoir
-- Vitest pour les tests (pas encore installé : l'ajouter avec le script `npm test` au premier test écrit)
+- Vitest pour les tests, fichiers `*.test.ts(x)` à côté du code testé
 - Context7 obligatoire (resolve-library-id → query-docs) avant de coder avec une lib de la stack
 
 ## Commands
@@ -132,6 +132,7 @@ npm run dev        # Start Vite dev server (hot reload)
 npm run build      # Type-check (tsc -b) then build for production
 npm run lint       # Run ESLint
 npm run preview    # Preview production build locally
+npm test           # Run Vitest once (passes with no test files)
 ```
 
 ## Architecture
