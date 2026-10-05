@@ -15,7 +15,7 @@ export function LoginScreen({ onSignIn, onGuestAccess }: Props) {
       <div className="login__stripes" aria-hidden="true">
         {days.map(d => <i key={d.type} style={{ background: d.accent }} />)}
       </div>
-      <p className="login__lede">Ton programme PUSH, PULL, LEGS, FULL BODY et CARDIO, avec tes charges à portée de pouce.</p>
+      <p className="login__lede">Ton programme PUSH, PULL, LEGS, FULL BODY, CARDIO et EXPRESS, avec tes charges à portée de pouce.</p>
 
       <div className="login__actions">
         <button className="login__btn login__btn--google" onClick={onSignIn}>

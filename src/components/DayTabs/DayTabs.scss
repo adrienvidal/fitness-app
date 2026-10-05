@@ -1,6 +1,6 @@
 .day-tabs {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   padding: 8px 14px 4px;
 
   &__btn {
@@ -14,8 +14,8 @@
     color: var(--muted);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.04em;
+    font-size: 14px;
+    letter-spacing: 0.03em;
     transition: background 0.2s, color 0.2s;
   }
 }

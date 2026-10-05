@@ -35,6 +35,30 @@
     gap: 6px;
   }
 
+  &__group {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 4px 0;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+
+    &:first-child {
+      padding-top: 2px;
+    }
+
+    em {
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+  }
+
   &__dock {
     position: sticky;
     bottom: 0;
