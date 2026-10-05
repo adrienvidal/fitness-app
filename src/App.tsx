@@ -5,6 +5,7 @@ import { DayTabs } from "./components/DayTabs/DayTabs";
 import { ExerciseCard } from "./components/ExerciseCard/ExerciseCard";
 import { SessionProgress } from "./components/SessionProgress/SessionProgress";
 import { SidePanel } from "./components/SidePanel/SidePanel";
+import { LoadingScreen } from "./components/LoadingScreen/LoadingScreen";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
 import { FinishSessionSheet } from "./components/FinishSessionSheet/FinishSessionSheet";
@@ -20,7 +21,7 @@ const shortDateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month
 export default function App() {
   const { userId, isReady, signIn, signOut } = useSupabase();
   const [isGuest, setIsGuest] = useState(false);
-  const { workoutLog, saveSession } = useWorkoutLog(userId);
+  const { workoutLog, saveSession, removeSession } = useWorkoutLog(userId);
   const [activeDay, setActiveDay] = useState(0);
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(() => {
@@ -47,7 +48,11 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  if (isReady && !userId && !isGuest) {
+  if (!isReady) {
+    return <LoadingScreen />;
+  }
+
+  if (!userId && !isGuest) {
     return <LoginScreen onSignIn={signIn} onGuestAccess={() => setIsGuest(true)} />;
   }
 
@@ -117,6 +122,10 @@ export default function App() {
         onToggleTheme={toggleTheme}
         workoutLog={workoutLog}
         onSignOut={signOut}
+        onSignIn={() => {
+          setIsPanelOpen(false);
+          setIsGuest(false);
+        }}
         isGuest={isGuest}
         onSelectDate={!isGuest ? setPendingLogDate : undefined}
       />
@@ -210,6 +219,10 @@ export default function App() {
           currentType={workoutLog[pendingLogDate] ?? null}
           onSave={(dateStr, dayType) => {
             if (userId) saveSession(dateStr, dayType, userId);
+            setPendingLogDate(null);
+          }}
+          onRemove={dateStr => {
+            if (userId) removeSession(dateStr, userId);
             setPendingLogDate(null);
           }}
           onClose={() => setPendingLogDate(null)}
