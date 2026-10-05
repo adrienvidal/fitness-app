@@ -1,3 +1,5 @@
+import type { DayType } from "../types/index.types";
+
 export const muscleColors: Record<string, string> = {
   "Pectoraux": "#e74c3c",
   "Triceps": "#e67e22",
@@ -37,4 +39,13 @@ export const catColors: Record<string, string> = {
   "Gainage": "#e74c3c",
   "Force au sol": "#e67e22",
   "Flexibilité": "#27ae60",
+};
+
+// Couleur du texte posé sur l'accent du jour (bouton plein, onglet actif, case cochée).
+export const onAccent: Record<DayType, string> = {
+  push: "#141414",
+  pull: "#0f141a",
+  legs: "#ffffff",
+  fullbody: "#141414",
+  cardio: "#ffffff",
 };
