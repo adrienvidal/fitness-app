@@ -8,10 +8,12 @@
 - PR #1 fusionnée dans `dev`, branche supprimée
 - Lint au vert : helpers Supabase sortis de `useExerciseWeight` (+ annulation de l'effet au changement d'exercice)
 - `npm audit` à 0 : `npm audit fix` + `sharp` passé en 0.35.5 (seul usage : `scripts/optimize-images.mjs`)
+- PR #2 fusionnée dans `dev`, branche supprimée
+- PR #3 : `dev` fusionnée dans `main` (production, `e64a329`)
 
 ## Reste à faire
 
-- Fusionner la PR `fix/lint-errors` → `dev`
+- Vérifier à la main le chargement / l'enregistrement d'un poids d'exercice en étant connecté (non testé, demande une connexion Google)
 
 ## Blockers
 
@@ -19,5 +21,7 @@ Aucun.
 
 ## Décisions
 
+- `npm test` utilise `--passWithNoTests` tant qu'aucun test n'existe
+- Notes de session commitées via branche + PR vers `dev`, jamais directement sur `dev`
 - Stack de référence Next.js/Prisma/Tailwind écartée : on documente Vite + React + SCSS + Supabase tels quels
 - RLS non activé, sécurité applicative ; Vitest seul, pas de Playwright
