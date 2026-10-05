@@ -1,73 +1,69 @@
 .app {
-  font-family: "Segoe UI", system-ui, sans-serif;
-  background: var(--bg-primary);
+  background: var(--mat);
   min-height: 100vh;
-  color: var(--text-primary);
+  color: var(--chalk);
   transition: background-color 0.3s, color 0.3s;
   max-width: 600px;
   margin: 0 auto;
 
-  &__theme-badge {
-    text-align: center;
-    padding: 10px 16px 8px;
+  &__guest-banner {
+    margin: 4px 14px 0;
+    padding: 9px 12px;
+    border-radius: var(--radius-s);
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
 
-    span {
-      padding: 4px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-  }
-
-  &__count {
-    padding: 0 14px 8px;
-
-    span {
-      font-size: 12px;
-      color: #333;
-      font-weight: 600;
+    button {
+      border: none;
+      background: none;
+      padding: 4px 0;
+      font-weight: 700;
+      font-size: 12.5px;
+      white-space: nowrap;
     }
   }
 
   &__list {
-    padding: 0 14px 28px;
+    padding: 6px 12px 8px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
   }
 
-  &__finish {
-    padding: 0 14px 16px;
+  &__dock {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    padding: 10px 14px calc(18px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(to top, var(--mat) 70%, transparent);
+  }
 
-    &-btn {
-      width: 100%;
-      min-height: 48px;
-      padding: 13px;
-      background: transparent;
-      border: 1.5px solid;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.02em;
-      transition: background 0.15s, opacity 0.15s;
+  &__finish-btn {
+    width: 100%;
+    min-height: var(--tap);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-m);
+    background: transparent;
+    color: var(--chalk);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.15s;
 
-      &:hover {
-        background: rgba(232, 255, 107, 0.06);
-      }
-
-      &:active {
-        opacity: 0.7;
-        transform: scale(0.98);
-      }
+    &:hover {
+      background: var(--surface);
     }
-  }
 
-  &__footer {
-    text-align: center;
-    padding: 4px 16px 20px;
-    color: var(--text-secondary);
-    font-size: 11px;
+    &:active {
+      transform: scale(0.98);
+    }
   }
 
   &__modal-backdrop {

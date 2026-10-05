@@ -467,7 +467,7 @@ export const days: Day[] = [
     label: 'CARDIO',
     type: 'cardio',
     color: '#001A2E',
-    accent: '#7b00ce',
+    accent: '#9b3df0',
     emoji: '🏃',
     exercises: [
       {

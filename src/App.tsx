@@ -87,7 +87,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header day={day} theme={theme} onOpenPanel={() => setIsPanelOpen(true)} onOpenTimer={() => setShowRestTimer(true)} />
+      <Header onOpenPanel={() => setIsPanelOpen(true)} onOpenTimer={() => setShowRestTimer(true)} />
       <SidePanel
         isOpen={isPanelOpen}
         onClose={() => setIsPanelOpen(false)}
@@ -105,7 +105,16 @@ export default function App() {
         onSelect={handleDaySelect}
       />
 
+      {isGuest && (
+        <div className="app__guest-banner">
+          <span>Mode invité : rien n'est enregistré.</span>
+          <button onClick={() => setIsGuest(false)} style={{ color: day.accent }}>Se connecter</button>
+        </div>
+      )}
+
       <SessionProgress
+        label={day.label}
+        dayId={day.id}
         completed={sessionFinished ? day.exercises.length : completedExercises.size}
         total={day.exercises.length}
         accentColor={day.accent}
@@ -131,18 +140,10 @@ export default function App() {
         })}
       </div>
 
-      <div className="app__finish">
-        <button
-          className="app__finish-btn"
-          style={{ borderColor: day.accent, color: day.accent }}
-          onClick={handleFinishSession}
-        >
+      <div className="app__dock">
+        <button className="app__finish-btn" onClick={handleFinishSession}>
           Terminer la séance
         </button>
-      </div>
-
-      <div className="app__footer">
-        Jour {day.id} · {day.label}
       </div>
 
       {showConfirmModal && (

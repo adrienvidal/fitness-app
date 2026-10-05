@@ -1,4 +1,5 @@
 import type { Day } from "../../types/index.types";
+import { onAccent } from "../../constants/colors";
 import "./DayTabs.scss";
 
 interface Props {
@@ -10,23 +11,21 @@ interface Props {
 export function DayTabs({ days, activeDay, onSelect }: Props) {
   return (
     <div className="day-tabs">
-      {days.map((d, i) => (
-        <button
-          key={i}
-          onClick={() => onSelect(i)}
-          className="day-tabs__btn"
-          aria-pressed={activeDay === i}
-          style={{
-            border: `2px solid ${activeDay === i ? d.accent : "transparent"}`,
-            background: activeDay === i ? `${d.accent}1a` : "var(--bg-tab)",
-            color: activeDay === i ? d.accent : "var(--text-secondary)",
-          }}
-        >
-          <div className="day-tabs__emoji" aria-hidden="true">{d.emoji}</div>
-          <div className="day-tabs__num">J{d.id}</div>
-          <div className="day-tabs__label">{d.label}</div>
-        </button>
-      ))}
+      {days.map((d, i) => {
+        const isActive = activeDay === i;
+        return (
+          <button
+            key={d.id}
+            onClick={() => onSelect(i)}
+            className="day-tabs__btn"
+            aria-pressed={isActive}
+            aria-label={d.label}
+            style={isActive ? { background: d.accent, color: onAccent[d.type] } : undefined}
+          >
+            {d.label.split(" ")[0]}
+          </button>
+        );
+      })}
     </div>
   );
 }
