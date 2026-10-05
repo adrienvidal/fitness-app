@@ -14,13 +14,20 @@ const CIRCUMFERENCE = 2 * Math.PI * R
 
 interface Props {
   accentColor: string
+  initialSeconds?: number
   onClose: () => void
 }
 
-export function RestTimerModal({ accentColor, onClose }: Props) {
-  const [remaining, setRemaining] = useState<number | null>(null)
-  const [total, setTotal] = useState<number>(60)
+export function RestTimerModal({ accentColor, initialSeconds, onClose }: Props) {
+  const [remaining, setRemaining] = useState<number | null>(initialSeconds ?? null)
+  const [total, setTotal] = useState<number>(initialSeconds ?? 60)
   const audioCtxRef = useRef<AudioContext | null>(null)
+
+  // Ouvert depuis un exercice : le décompte part tout seul. Le contexte audio se crée ici,
+  // encore dans le geste de l'utilisateur, pour que le bip de fin soit autorisé.
+  useEffect(() => {
+    if (initialSeconds && !audioCtxRef.current) audioCtxRef.current = new AudioContext()
+  }, [initialSeconds])
 
   useEffect(() => {
     if (remaining === null || remaining <= 0) return
