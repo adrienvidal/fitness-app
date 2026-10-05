@@ -1,112 +1,131 @@
-.log-session-modal {
-  &__backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    z-index: 200;
-    padding-bottom: 40px;
+.log-session__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--scrim);
+}
+
+.log-session {
+  width: 100%;
+  max-width: 600px;
+  display: grid;
+  gap: 14px;
+  padding: 10px 18px calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  border-radius: 26px 26px 0 0;
+  background: var(--surface);
+  animation: log-session-in 0.22s ease-out;
+
+  &__grab {
+    width: 40px;
+    height: 5px;
+    margin: 0 auto;
+    border-radius: 3px;
+    background: var(--line);
   }
 
-  background: var(--bg-secondary, #1e1e1e);
-  border-radius: 20px;
-  padding: 44px 20px 28px;
-  width: 100%;
-  max-width: 360px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  position: relative;
-  animation: log-session-slide-up 0.22s ease;
+  &__date {
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: var(--muted);
 
-  &__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--text-secondary, #888);
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background 0.15s, color 0.15s;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-primary);
+    &::first-letter {
+      text-transform: uppercase;
     }
   }
 
   &__title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-primary, #fff);
     margin: 0;
-  }
-
-  &__date {
-    font-size: 12px;
-    color: var(--text-secondary, #888);
-    margin: 0;
-    text-transform: capitalize;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
   &__types {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    margin-top: 4px;
-
-    & > *:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-    }
+    gap: 6px;
   }
 
-  &__type-btn {
-    min-height: 44px;
-    padding: 14px 0;
+  &__type {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line);
     border-radius: 12px;
-    border: 1.5px solid;
-    background: transparent;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    transition: background 0.15s, opacity 0.15s;
+    background: var(--mat);
+    color: var(--chalk);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.03em;
 
-    &:active {
-      opacity: 0.7;
+    i {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
     }
 
-    &--selected {
-      font-weight: 800;
+    span {
+      margin-left: auto;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0;
+      color: var(--muted);
+    }
+
+    &[aria-checked="true"] {
+      border-color: var(--chalk);
     }
   }
 
-  &__cancel {
-    background: none;
-    border: none;
-    color: var(--text-secondary, #888);
-    font-size: 13px;
-    cursor: pointer;
-    padding: 6px 16px;
-    margin-top: 4px;
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
 
-    &:hover {
-      color: var(--text-primary);
+  &__btn {
+    min-height: var(--tap);
+    border: none;
+    border-radius: var(--radius-m);
+    background: var(--chalk);
+    color: var(--mat);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    &--ghost {
+      background: var(--surface-2);
+      color: var(--chalk);
     }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  &__remove {
+    padding: 6px;
+    border: none;
+    background: none;
+    color: var(--err);
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 
-@keyframes log-session-slide-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes log-session-in {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }
