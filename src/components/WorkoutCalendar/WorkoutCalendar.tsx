@@ -1,28 +1,19 @@
 import { useState } from "react";
 import type { DayType } from "../../types/index.types";
+import { days } from "../../data/days";
+import { onAccent } from "../../constants/colors";
 import "./WorkoutCalendar.scss";
 
-const DAY_TYPE_COLOR: Record<DayType, string> = {
-  push: "#FF6B35",
-  pull: "#4A90D9",
-  legs: "#9B59B6",
-  fullbody: "#F1C40F",
-  cardio: "#7b00ce",
-};
-
-const DAY_TYPE_LABEL: Record<DayType, string> = {
-  push: "PUSH",
-  pull: "PULL",
-  legs: "LEGS",
-  fullbody: "FULL BODY",
-  cardio: "CARDIO",
-};
-
 const WEEKDAYS = ["L", "M", "M", "J", "V", "S", "D"];
+const accentByType = Object.fromEntries(days.map(d => [d.type, d.accent])) as Record<DayType, string>;
 
 interface Props {
   workoutLog: Record<string, DayType>;
   onSelectDate?: (dateStr: string) => void;
+}
+
+function toDateStr(year: number, month: number, day: number): string {
+  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
 export function WorkoutCalendar({ workoutLog, onSelectDate }: Props) {
@@ -31,64 +22,80 @@ export function WorkoutCalendar({ workoutLog, onSelectDate }: Props) {
 
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
-
-  const firstDayOfMonth = new Date(year, month, 1);
-  const startOffset = (firstDayOfMonth.getDay() + 6) % 7; // lundi = 0
+  const startOffset = (new Date(year, month, 1).getDay() + 6) % 7; // lundi = 0
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  const cells: (number | null)[] = [
-    ...Array(startOffset).fill(null),
-    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
-  ];
-
+  const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+  const monthPrefix = toDateStr(year, month, 1).slice(0, 8);
+  const sessionsThisMonth = Object.keys(workoutLog).filter(d => d.startsWith(monthPrefix)).length;
   const monthLabel = viewDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
-  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
   return (
     <div className="workout-calendar">
       <div className="workout-calendar__nav">
-        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} aria-label="Mois précédent">‹</button>
         <span className="workout-calendar__month">{monthLabel}</span>
-        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} aria-label="Mois suivant">›</button>
+        <span className="workout-calendar__arrows">
+          <button onClick={() => setViewDate(new Date(year, month - 1, 1))} aria-label="Mois précédent">
+            <IconChevron direction="left" />
+          </button>
+          <button onClick={() => setViewDate(new Date(year, month + 1, 1))} aria-label="Mois suivant">
+            <IconChevron direction="right" />
+          </button>
+        </span>
       </div>
 
       <div className="workout-calendar__grid">
         {WEEKDAYS.map((d, i) => (
-          <div key={i} className="workout-calendar__weekday">{d}</div>
+          <span key={i} className="workout-calendar__weekday">{d}</span>
         ))}
-        {cells.map((day, i) => {
-          if (day === null) return <div key={`empty-${i}`} />;
-          const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+        {Array.from({ length: startOffset }, (_, i) => <span key={`empty-${i}`} />)}
+        {Array.from({ length: daysInMonth }, (_, i) => {
+          const day = i + 1;
+          const dateStr = toDateStr(year, month, day);
           const workout = workoutLog[dateStr];
-          const isToday = dateStr === todayStr;
-          const isClickable = onSelectDate && dateStr <= todayStr;
+          const isFuture = dateStr > todayStr;
+          const classes = ["workout-calendar__day"];
+          if (dateStr === todayStr) classes.push("workout-calendar__day--today");
+          if (isFuture) classes.push("workout-calendar__day--future");
+          const style = workout ? { background: accentByType[workout], color: onAccent[workout] } : undefined;
+
+          if (!onSelectDate || isFuture) {
+            return <span key={dateStr} className={classes.join(" ")} style={style}>{day}</span>;
+          }
           return (
-            <div
+            <button
               key={dateStr}
-              className={`workout-calendar__day${isToday ? " workout-calendar__day--today" : ""}${isClickable ? " workout-calendar__day--clickable" : ""}`}
-              onClick={isClickable ? () => onSelectDate(dateStr) : undefined}
+              className={classes.join(" ")}
+              style={style}
+              onClick={() => onSelectDate(dateStr)}
+              aria-label={workout ? `${day}, séance ${workout}` : `${day}, ajouter une séance`}
             >
-              <span className="workout-calendar__day-num">{day}</span>
-              {workout && (
-                <span
-                  className="workout-calendar__dot"
-                  style={{ backgroundColor: DAY_TYPE_COLOR[workout] }}
-                  title={DAY_TYPE_LABEL[workout]}
-                />
-              )}
-            </div>
+              {day}
+            </button>
           );
         })}
       </div>
 
+      <div className="workout-calendar__summary">
+        <span>Ce mois-ci</span>
+        <b>{sessionsThisMonth} séance{sessionsThisMonth > 1 ? "s" : ""}</b>
+      </div>
+
       <div className="workout-calendar__legend">
-        {(Object.keys(DAY_TYPE_COLOR) as DayType[]).map(type => (
-          <span key={type} className="workout-calendar__legend-item">
-            <span className="workout-calendar__legend-dot" style={{ backgroundColor: DAY_TYPE_COLOR[type] }} />
-            {DAY_TYPE_LABEL[type]}
+        {days.map(d => (
+          <span key={d.type}>
+            <i style={{ background: d.accent }} />
+            {d.label}
           </span>
         ))}
       </div>
     </div>
+  );
+}
+
+function IconChevron({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={direction === "left" ? "m15 6-6 6 6 6" : "m9 6 6 6-6 6"} />
+    </svg>
   );
 }
