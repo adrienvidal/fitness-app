@@ -8,6 +8,7 @@ import { SidePanel } from "./components/SidePanel/SidePanel";
 import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
 import { LogSessionModal } from "./components/LogSessionModal/LogSessionModal";
+import { onAccent } from "./constants/colors";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
 import "./App.scss";
@@ -31,6 +32,7 @@ export default function App() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [showRestTimer, setShowRestTimer] = useState(false);
+  const [restSeconds, setRestSeconds] = useState<number | undefined>(undefined);
   const [pendingLogDate, setPendingLogDate] = useState<string | null>(null);
 
   const today = new Date();
@@ -75,6 +77,17 @@ export default function App() {
     saveSession(todayStr, day.type, userId);
   }
 
+  function openRestTimer(seconds?: number) {
+    setRestSeconds(seconds);
+    setShowRestTimer(true);
+  }
+
+  function exerciseKey(name: string) {
+    return `d${activeDay}-${name.replace(/\s+/g, "_")}`;
+  }
+
+  const nextIndex = sessionFinished ? -1 : day.exercises.findIndex(ex => !completedExercises.has(exerciseKey(ex.name)));
+
   function toggleComplete(key: string) {
     setCompletedExercises(prev => {
       const next = new Set(prev);
@@ -87,7 +100,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header onOpenPanel={() => setIsPanelOpen(true)} onOpenTimer={() => setShowRestTimer(true)} />
+      <Header onOpenPanel={() => setIsPanelOpen(true)} onOpenTimer={() => openRestTimer()} />
       <SidePanel
         isOpen={isPanelOpen}
         onClose={() => setIsPanelOpen(false)}
@@ -122,18 +135,20 @@ export default function App() {
 
       <div className="app__list">
         {day.exercises.map((ex, i) => {
-          const exKey = `d${activeDay}-${ex.name.replace(/\s+/g, "_")}`;
+          const exKey = exerciseKey(ex.name);
           return (
             <ExerciseCard
               key={exKey}
               ex={{ ...ex, index: i + 1 }}
-              dayColor={day.color}
               accentColor={day.accent}
+              onAccentColor={onAccent[day.type]}
               exKey={exKey}
               isOpen={activeExercise === i}
+              isNext={nextIndex === i}
               onClick={() => setActiveExercise(activeExercise === i ? null : i)}
               isCompleted={completedExercises.has(exKey)}
               onToggleComplete={() => toggleComplete(exKey)}
+              onStartRest={openRestTimer}
               userId={userId}
             />
           );
@@ -176,6 +191,7 @@ export default function App() {
       {showRestTimer && (
         <RestTimerModal
           accentColor={day.accent}
+          initialSeconds={restSeconds}
           onClose={() => setShowRestTimer(false)}
         />
       )}
