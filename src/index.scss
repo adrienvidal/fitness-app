@@ -36,27 +36,6 @@
   color-scheme: light;
 }
 
-// Anciens noms, branchés sur les nouveaux tokens le temps de migrer les composants.
-:root,
-[data-theme="light"] {
-  --bg-primary: var(--mat);
-  --bg-secondary: var(--surface);
-  --bg-tertiary: var(--surface-2);
-  --bg-tab: var(--surface);
-  --bg-track: var(--surface-2);
-  --bg-image: var(--surface-2);
-  --text-primary: var(--chalk);
-  --text-secondary: var(--muted);
-  --text-muted: var(--muted);
-  --text-done: var(--muted);
-  --text-faint: var(--line);
-  --border-primary: var(--line);
-  --border-secondary: var(--line);
-  --check-done-bg: var(--surface-2);
-  --card-done-border: var(--surface-2);
-  --card-inactive-border: var(--line);
-}
-
 *,
 *::before,
 *::after {
