@@ -1,57 +1,40 @@
 .header {
-  padding: 24px 20px 20px;
-  text-align: center;
-  transition: background 0.5s;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 6px 18px;
 
-  &__timer-btn,
-  &__menu-btn {
-    position: absolute;
-    top: 14px;
+  &__brand {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__btn {
     width: 44px;
     height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     padding: 0;
-    transition: background 0.2s, transform 0.15s;
-    color: #f5f7fa;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--chalk);
 
     &:hover {
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--surface);
     }
 
-    &:active {
-      transform: scale(0.9);
+    svg {
+      width: 22px;
+      height: 22px;
     }
-  }
-
-  &__timer-btn {
-    left: 14px;
-  }
-
-  &__menu-btn {
-    right: 14px;
-  }
-
-  &__title {
-    font-weight: 800;
-    font-size: 22px;
-    color: #f5f7fa;
-    letter-spacing: -0.02em;
-  }
-
-  &__subtitle {
-    font-size: 12px;
-    font-weight: 600;
-    opacity: 0.85;
-    margin-top: 4px;
-    color: #f5f7fa;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 }
