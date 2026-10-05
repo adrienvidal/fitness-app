@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { days } from "./data/days";
 import { Header } from "./components/Header/Header";
 import { DayTabs } from "./components/DayTabs/DayTabs";
@@ -10,6 +10,10 @@ import { LoginScreen } from "./components/LoginScreen/LoginScreen";
 import { RestTimerModal } from "./components/RestTimerModal/RestTimerModal";
 import { FinishSessionSheet } from "./components/FinishSessionSheet/FinishSessionSheet";
 import { LogSessionModal } from "./components/LogSessionModal/LogSessionModal";
+import { ExpressBaseToggle } from "./components/ExpressBaseToggle/ExpressBaseToggle";
+import { SwitchBaseSheet } from "./components/SwitchBaseSheet/SwitchBaseSheet";
+import { expressExercises } from "./data/express";
+import type { Exercise, ExpressBase } from "./types/index.types";
 import { onAccent } from "./constants/colors";
 import { useSupabase } from "./hooks/useSupabase";
 import { useWorkoutLog } from "./hooks/useWorkoutLog";
@@ -44,6 +48,12 @@ export default function App() {
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
+  // Base de la séance EXPRESS, gardée pour la journée seulement (un rechargement ne la perd pas).
+  const [expressBase, setExpressBase] = useState<ExpressBase>(
+    () => (localStorage.getItem(`expressBase:${todayStr}`) as ExpressBase | null) ?? "push"
+  );
+  const [pendingBase, setPendingBase] = useState<ExpressBase | null>(null);
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -65,6 +75,9 @@ export default function App() {
   }
 
   const day = days[activeDay];
+  const isExpress = day.type === "express";
+  const dayExercises = isExpress ? expressExercises(expressBase) : day.exercises;
+  const baseDay = days.find(d => d.type === expressBase)!;
   const sessionFinished = workoutLog[todayStr] === day.type;
 
   function handleDaySelect(i: number) {
@@ -93,23 +106,43 @@ export default function App() {
     setShowRestTimer(true);
   }
 
-  function exerciseKey(name: string) {
-    return `d${activeDay}-${name.replace(/\s+/g, "_")}`;
+  // Un exercice EXPRESS repris de PUSH ou PULL garde la clé de son jour d'origine, donc sa charge.
+  function exerciseKey(ex: Exercise) {
+    return `d${ex.sourceDay ?? activeDay}-${ex.name.replace(/\s+/g, "_")}`;
   }
 
-  const completedCount = sessionFinished ? day.exercises.length : completedExercises.size;
-  const missingExercises = sessionFinished ? [] : day.exercises.filter(ex => !completedExercises.has(exerciseKey(ex.name))).map(ex => ex.name);
+  const completedCount = sessionFinished ? dayExercises.length : completedExercises.size;
+  const missingExercises = sessionFinished ? [] : dayExercises.filter(ex => !completedExercises.has(exerciseKey(ex))).map(ex => ex.name);
 
-  const nextIndex = sessionFinished ? -1 : day.exercises.findIndex(ex => !completedExercises.has(exerciseKey(ex.name)));
+  const nextIndex = sessionFinished ? -1 : dayExercises.findIndex(ex => !completedExercises.has(exerciseKey(ex)));
+
+  function saveCompleted(next: Set<string>) {
+    setCompletedExercises(next);
+    localStorage.setItem(`completedExercises:${todayStr}:${day.type}`, JSON.stringify([...next]));
+  }
 
   function toggleComplete(key: string) {
-    setCompletedExercises(prev => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      localStorage.setItem(`completedExercises:${todayStr}:${day.type}`, JSON.stringify([...next]));
-      return next;
-    });
+    const next = new Set(completedExercises);
+    if (next.has(key)) next.delete(key);
+    else next.add(key);
+    saveCompleted(next);
+  }
+
+  const forceKeys = dayExercises.filter(ex => ex.sourceDay !== undefined).map(exerciseKey);
+  const forceDone = forceKeys.filter(key => completedExercises.has(key)).length;
+
+  function handleBaseSelect(base: ExpressBase) {
+    if (base === expressBase) return;
+    if (forceDone > 0) setPendingBase(base);
+    else applyBase(base);
+  }
+
+  function applyBase(base: ExpressBase) {
+    saveCompleted(new Set([...completedExercises].filter(key => !forceKeys.includes(key))));
+    setExpressBase(base);
+    localStorage.setItem(`expressBase:${todayStr}`, base);
+    setActiveExercise(null);
+    setPendingBase(null);
   }
 
   return (
@@ -147,28 +180,38 @@ export default function App() {
         label={day.label}
         dayId={day.id}
         completed={completedCount}
-        total={day.exercises.length}
+        total={dayExercises.length}
         accentColor={day.accent}
       />
 
+      {isExpress && <ExpressBaseToggle base={expressBase} onSelect={handleBaseSelect} />}
+
       <div className="app__list">
-        {day.exercises.map((ex, i) => {
-          const exKey = exerciseKey(ex.name);
+        {dayExercises.map((ex, i) => {
+          const exKey = exerciseKey(ex);
+          const startsGroup = ex.group && ex.group.label !== dayExercises[i - 1]?.group?.label;
           return (
-            <ExerciseCard
-              key={exKey}
-              ex={{ ...ex, index: i + 1 }}
-              accentColor={day.accent}
-              onAccentColor={onAccent[day.type]}
-              exKey={exKey}
-              isOpen={activeExercise === i}
-              isNext={nextIndex === i}
-              onClick={() => setActiveExercise(activeExercise === i ? null : i)}
-              isCompleted={completedExercises.has(exKey)}
-              onToggleComplete={() => toggleComplete(exKey)}
-              onStartRest={seconds => openRestTimer(seconds, ex.name)}
-              userId={userId}
-            />
+            <Fragment key={exKey}>
+              {startsGroup && (
+                <div className="app__group">
+                  <span>{ex.group!.label}</span>
+                  <em>{ex.group!.note}</em>
+                </div>
+              )}
+              <ExerciseCard
+                ex={{ ...ex, index: i + 1 }}
+                accentColor={day.accent}
+                onAccentColor={onAccent[day.type]}
+                exKey={exKey}
+                isOpen={activeExercise === i}
+                isNext={nextIndex === i}
+                onClick={() => setActiveExercise(activeExercise === i ? null : i)}
+                isCompleted={completedExercises.has(exKey)}
+                onToggleComplete={() => toggleComplete(exKey)}
+                onStartRest={seconds => openRestTimer(seconds, ex.name)}
+                userId={userId}
+              />
+            </Fragment>
           );
         })}
       </div>
@@ -181,16 +224,28 @@ export default function App() {
 
       {showConfirmModal && (
         <FinishSessionSheet
-          dayLabel={day.label}
+          dayLabel={isExpress ? `${day.label} · ${baseDay.label}` : day.label}
           accentColor={day.accent}
           onAccentColor={onAccent[day.type]}
           completed={completedCount}
-          total={day.exercises.length}
+          total={dayExercises.length}
           missing={missingExercises}
           dateLabel={longDateFormat.format(today)}
           isGuest={isGuest}
           onCancel={() => setShowConfirmModal(false)}
           onConfirm={confirmFinishSession}
+        />
+      )}
+
+      {pendingBase && (
+        <SwitchBaseSheet
+          fromLabel={baseDay.label}
+          toLabel={days.find(d => d.type === pendingBase)!.label}
+          toAccent={days.find(d => d.type === pendingBase)!.accent}
+          toOnAccent={onAccent[pendingBase]}
+          forceDone={forceDone}
+          onCancel={() => setPendingBase(null)}
+          onConfirm={() => applyBase(pendingBase)}
         />
       )}
 
