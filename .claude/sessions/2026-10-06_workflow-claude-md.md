@@ -6,10 +6,12 @@
 - Vitest installé, script `npm test` (`vitest run --passWithNoTests`)
 - `.claude/sessions/` suivi par git (le reste de `.claude/` reste ignoré)
 - PR #1 fusionnée dans `dev`, branche supprimée
+- Lint au vert : helpers Supabase sortis de `useExerciseWeight` (+ annulation de l'effet au changement d'exercice)
+- `npm audit` à 0 : `npm audit fix` + `sharp` passé en 0.35.5 (seul usage : `scripts/optimize-images.mjs`)
 
 ## Reste à faire
 
-- Voir `reste-a-faire.md` (lint, npm audit)
+- Fusionner la PR `fix/lint-errors` → `dev`
 
 ## Blockers
 
