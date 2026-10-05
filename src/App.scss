@@ -7,38 +7,6 @@
   max-width: 600px;
   margin: 0 auto;
 
-  &__section-tabs {
-    display: flex;
-    gap: 4px;
-    padding: 8px 14px;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-primary);
-  }
-
-  &__section-btn {
-    flex: 1;
-    min-height: 40px;
-    padding: 7px 12px;
-    border-radius: 999px;
-    border: none;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    background: transparent;
-    color: var(--text-secondary);
-    transition: all 0.18s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    &--active {
-      background: #e8ff6b;
-      color: #0a0a0f;
-    }
-  }
-
   &__theme-badge {
     text-align: center;
     padding: 10px 16px 8px;
