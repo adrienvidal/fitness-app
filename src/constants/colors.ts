@@ -34,13 +34,6 @@ export const muscleColors: Record<string, string> = {
   "Abdominaux inf.": "#b71c1c",
 };
 
-export const catColors: Record<string, string> = {
-  "Mobilité": "#4A90D9",
-  "Gainage": "#e74c3c",
-  "Force au sol": "#e67e22",
-  "Flexibilité": "#27ae60",
-};
-
 // Couleur du texte posé sur l'accent du jour (bouton plein, onglet actif, case cochée).
 export const onAccent: Record<DayType, string> = {
   push: "#141414",
