@@ -12,7 +12,8 @@ dist
 dist-ssr
 *.local
 
-.claude
+.claude/*
+!.claude/sessions/
 
 # Editor directories and files
 .vscode/*
