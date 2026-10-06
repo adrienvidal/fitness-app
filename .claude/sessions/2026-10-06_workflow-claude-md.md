@@ -25,6 +25,8 @@
 
 ## Réalisé (suite) : jour EXPRESS
 
+- Mis en production : `dev` → `main` (suppression Nutrition, refonte mobile et EXPRESS)
+
 - Maquette validée : https://claude.ai/artifact/Bwa3HJzeTgtZuFJZ24dPMH (figée, le code fait foi)
 - 6ᵉ onglet EXPRESS (branche `feat/jour-express`) : sélecteur de base PUSH/PULL, 3 premiers exos de la base + Lombaires, circuit jumping jacks / pompes / squats (3 tours), marche inclinée 20 min
 - Les exos de force gardent la clé de charge de leur jour d'origine (`sourceDay`) : même charge qu'en PUSH/PULL
@@ -34,11 +36,12 @@
 
 ## Reste à faire
 
-- Mettre en production : PR `dev` → `main` (suppression Nutrition + refonte), en attente de l'accord d'Adrien
 - Vérifier en salle sur iPhone que le bip de fin de repos sonne encore (AudioContext désormais créé à l'ouverture du minuteur depuis une fiche)
 - Optionnel : ajouter `http://localhost:5199` aux Redirect URLs Supabase pour se connecter en local (aujourd'hui Google renvoie sur la prod)
-
 - Vérifier avec un compte réel qu'une séance EXPRESS s'enregistre dans `workout_logs` : si une contrainte Supabase limite `day_type` aux 5 anciens types, l'élargir (le schéma n'est pas dans le repo)
+  - Reporté par Adrien. Test impossible sans session : la clé anon ne lit aucune ligne de `workout_logs`. Pistes : ajouter `http://localhost:5199` aux Redirect URLs Supabase, ou se connecter sur la prod dans le navigateur Playwright et reprendre la session en local
+  - EXPRESS mis en production sans ce test, à la demande d'Adrien : si une séance EXPRESS n'apparaît pas dans le calendrier après rechargement, c'est ce point (contrainte sur `day_type`)
+- CLAUDE.md dit « RLS non activé », mais la clé anon ne voit aucune ligne : RLS (ou les droits) semble actif. Vérifier dans le dashboard puis corriger CLAUDE.md
 - Image manquante pour Pompes (`public/images/exercises/pompes.webp`) : la fiche affiche le fond de remplacement
 
 ## Blockers
