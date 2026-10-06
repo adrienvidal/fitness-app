@@ -1,39 +1,21 @@
 .day-tabs {
   display: flex;
-  gap: 8px;
-  padding: 14px 14px 0;
+  gap: 5px;
+  padding: 8px 14px 4px;
 
   &__btn {
     flex: 1;
-    padding: 10px 6px;
-    min-height: 72px;
-    border-radius: 14px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 4px;
+    border: none;
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font-display);
     font-weight: 700;
-    font-size: 12px;
-    transition: all 0.2s;
-    line-height: 1.4;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__emoji {
-    font-size: 20px;
-    margin-bottom: 2px;
-  }
-
-  &__num {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-  }
-
-  &__label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    opacity: 0.85;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, color 0.2s;
   }
 }

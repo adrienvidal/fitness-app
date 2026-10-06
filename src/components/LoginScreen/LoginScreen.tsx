@@ -1,3 +1,4 @@
+import { days } from "../../data/days";
 import "./LoginScreen.scss";
 
 interface Props {
@@ -7,17 +8,18 @@ interface Props {
 
 export function LoginScreen({ onSignIn, onGuestAccess }: Props) {
   return (
-    <div className="login">
-      <div className="login__content">
-        <div className="login__icon" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 4v16M18 4v16M6 8H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2M18 8h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 12h12"/>
-          </svg>
-        </div>
-        <h1 className="login__title">FitnessPal</h1>
-        <p className="login__subtitle">Connecte-toi pour synchroniser tes données sur tous tes appareils.</p>
-        <button className="login__btn" onClick={onSignIn}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <main className="login">
+      <h1 className="login__mark">
+        Fitness<span>Pal</span>
+      </h1>
+      <div className="login__stripes" aria-hidden="true">
+        {days.map(d => <i key={d.type} style={{ background: d.accent }} />)}
+      </div>
+      <p className="login__lede">Ton programme PUSH, PULL, LEGS, FULL BODY, CARDIO et EXPRESS, avec tes charges à portée de pouce.</p>
+
+      <div className="login__actions">
+        <button className="login__btn login__btn--google" onClick={onSignIn}>
+          <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden="true">
             <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
             <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.859-3.048.859-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
             <path d="M3.964 10.706A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/>
@@ -26,9 +28,10 @@ export function LoginScreen({ onSignIn, onGuestAccess }: Props) {
           Continuer avec Google
         </button>
         <button className="login__btn login__btn--guest" onClick={onGuestAccess}>
-          Continuer sans compte
+          Essayer sans compte
         </button>
+        <p className="login__note">Sans compte, tu vois le programme mais rien n'est enregistré.</p>
       </div>
-    </div>
+    </main>
   );
 }

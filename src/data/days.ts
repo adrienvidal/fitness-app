@@ -467,7 +467,7 @@ export const days: Day[] = [
     label: 'CARDIO',
     type: 'cardio',
     color: '#001A2E',
-    accent: '#7b00ce',
+    accent: '#9b3df0',
     emoji: '🏃',
     exercises: [
       {
@@ -513,5 +513,15 @@ export const days: Day[] = [
         ]
       }
     ]
+  },
+  {
+    id: 6,
+    label: 'EXPRESS',
+    type: 'express',
+    color: '#00262B',
+    accent: '#22B8CF',
+    emoji: '⚡',
+    // Construits selon la base PUSH ou PULL choisie : voir expressExercises (express.ts).
+    exercises: []
   }
 ]

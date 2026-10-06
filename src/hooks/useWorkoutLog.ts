@@ -75,5 +75,16 @@ export function useWorkoutLog(userId: string | null) {
     );
   }
 
-  return { workoutLog, saveSession };
+  async function removeSession(dateStr: string, uid: string) {
+    setWorkoutLog(prev => {
+      const next = { ...prev };
+      delete next[dateStr];
+      localStorage.setItem("workoutLog", JSON.stringify(next));
+      return next;
+    });
+
+    await supabase.from("workout_logs").delete().eq("user_id", uid).eq("session_date", dateStr);
+  }
+
+  return { workoutLog, saveSession, removeSession };
 }

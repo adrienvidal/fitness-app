@@ -1,14 +1,14 @@
-.log-session__scrim {
+.finish-sheet__scrim {
   position: fixed;
   inset: 0;
-  z-index: 130;
+  z-index: 100;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   background: var(--scrim);
 }
 
-.log-session {
+.finish-sheet {
   width: 100%;
   max-width: 600px;
   display: grid;
@@ -17,7 +17,7 @@
   border-top: 1px solid var(--line);
   border-radius: 26px 26px 0 0;
   background: var(--surface);
-  animation: log-session-in 0.22s ease-out;
+  animation: finish-sheet-in 0.22s ease-out;
 
   &__grab {
     width: 40px;
@@ -25,16 +25,6 @@
     margin: 0 auto;
     border-radius: 3px;
     background: var(--line);
-  }
-
-  &__date {
-    margin: 0 0 4px;
-    font-size: 13px;
-    color: var(--muted);
-
-    &::first-letter {
-      text-transform: uppercase;
-    }
   }
 
   &__title {
@@ -46,44 +36,37 @@
     text-transform: uppercase;
   }
 
-  &__types {
-    display: grid;
-    gap: 6px;
-  }
-
-  &__type {
-    min-height: 50px;
+  &__stats {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 14px;
-    border: 1.5px solid var(--line);
-    border-radius: 12px;
-    background: var(--mat);
-    color: var(--chalk);
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 19px;
-    letter-spacing: 0.03em;
+    gap: 18px;
 
-    i {
-      width: 14px;
-      height: 14px;
-      border-radius: 4px;
+    div {
+      display: grid;
+      align-content: start;
     }
 
-    span {
-      margin-left: auto;
-      font-family: var(--font-body);
-      font-weight: 600;
+    b {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 34px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    small {
       font-size: 12px;
-      letter-spacing: 0;
       color: var(--muted);
     }
+  }
 
-    &[aria-checked="true"] {
-      border-color: var(--chalk);
-    }
+  &__missing {
+    min-width: 0;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
   }
 
   &__actions {
@@ -96,8 +79,6 @@
     min-height: var(--tap);
     border: none;
     border-radius: var(--radius-m);
-    background: var(--chalk);
-    color: var(--mat);
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 19px;
@@ -109,23 +90,13 @@
       color: var(--chalk);
     }
 
-    &:disabled {
-      opacity: 0.4;
-      cursor: default;
+    &:active {
+      transform: scale(0.98);
     }
-  }
-
-  &__remove {
-    padding: 6px;
-    border: none;
-    background: none;
-    color: var(--err);
-    font-size: 14px;
-    font-weight: 600;
   }
 }
 
-@keyframes log-session-in {
+@keyframes finish-sheet-in {
   from { transform: translateY(24px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }

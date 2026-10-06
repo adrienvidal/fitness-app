@@ -1,75 +1,116 @@
 import { useState } from "react";
-import { useExerciseWeight } from "../../hooks/useExerciseWeight";
+import type { WeightSyncStatus } from "../../hooks/useExerciseWeight";
+import { formatKg, parseKg, stepWeight } from "../../utils/weight";
 import "./WeightInput.scss";
 
+const STEP_KG = 2.5;
+
 interface Props {
-  exKey: string;
-  accentColor: string;
+  weight: string;
+  status: WeightSyncStatus;
   defaultWeight?: number;
   assistedWeight?: boolean;
-  userId: string | null;
+  readOnly: boolean;
+  onChange: (value: string) => void;
+  onRetry: () => void;
 }
 
-const IconDumbbell = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M6 4v16M18 4v16M6 8H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2M18 8h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M6 12h12"/>
-  </svg>
-)
+export function WeightInput({ weight, status, defaultWeight, assistedWeight, readOnly, onChange, onRetry }: Props) {
+  const [draft, setDraft] = useState<string | null>(null);
+  const current = parseKg(weight);
+  const display = current !== null ? formatKg(current) : "";
 
-const IconHands = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
-    <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
-    <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
-    <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
-  </svg>
-)
+  function step(delta: number) {
+    onChange(String(stepWeight(current ?? defaultWeight ?? 0, delta)));
+  }
 
-export function WeightInput({ exKey, accentColor, defaultWeight, assistedWeight, userId }: Props) {
-  const { weight: value, saveWeight } = useExerciseWeight(exKey, userId);
-  const [saved, setSaved] = useState(false);
+  function commitDraft() {
+    if (draft === null) return;
+    const kg = parseKg(draft);
+    if (kg !== null && kg >= 0) onChange(String(kg));
+    if (draft.trim() === "") onChange("");
+    setDraft(null);
+  }
 
-  const handleSave = (val: string) => {
-    saveWeight(val, userId ?? "");
-    setSaved(true);
-    setTimeout(() => setSaved(false), 1500);
-  };
+  if (readOnly) {
+    return (
+      <div className="weight-input">
+        <div className="weight-input__label">
+          <span>{assistedWeight ? "Assistance conseillée" : "Charge conseillée"}</span>
+          <span className="weight-input__status">
+            <IconLock /> Lecture seule
+          </span>
+        </div>
+        <div className="weight-input__value weight-input__value--static">
+          {defaultWeight !== undefined ? formatKg(defaultWeight) : "–"}
+          <span>kg</span>
+        </div>
+        <p className="weight-input__hint">
+          {assistedWeight && "Moins d'assistance = plus difficile. "}
+          Connecte-toi pour noter la tienne.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className="weight-input"
-      style={{
-        background: `${accentColor}0f`,
-        border: `1px solid ${accentColor}30`,
-      }}
-    >
-      <div className="weight-input__label" style={{ color: accentColor }}>
-        {assistedWeight ? <IconHands /> : <IconDumbbell />}
-        {assistedWeight ? 'Mon assistance' : 'Mon poids utilisé'}
-      </div>
-      <div className="weight-input__row">
-        <input
-          type="number"
-          placeholder={defaultWeight ? `ex: ${defaultWeight}` : 'ex: 60'}
-          value={value}
-          onChange={e => handleSave(e.target.value)}
-          className="weight-input__field"
-          style={{ border: `1.5px solid ${value ? accentColor : "var(--border-primary)"}` }}
-        />
-        <span className="weight-input__unit">kg</span>
-        {saved && (
-          <span className="weight-input__saved" aria-label="Enregistré">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
+    <div className="weight-input">
+      <div className="weight-input__label">
+        <span>{assistedWeight ? "Mon assistance" : "Ma charge"}</span>
+        {status === "saved" && (
+          <span className="weight-input__status weight-input__status--ok">
+            <IconCheck /> Enregistrée
           </span>
         )}
+        {status === "error" && (
+          <span className="weight-input__status weight-input__status--err">Pas synchronisée</span>
+        )}
       </div>
-      {value && (
-        <div className="weight-input__info" style={{ color: accentColor }}>
-          {assistedWeight ? 'Assistance enregistrée' : 'Charge enregistrée'} : <strong>{value} kg</strong>
+
+      <div className="weight-input__stepper">
+        <button className="weight-input__step" onClick={() => step(-STEP_KG)} aria-label="Retirer 2,5 kg">−</button>
+        <label className="weight-input__value">
+          <input
+            type="text"
+            inputMode="decimal"
+            value={draft ?? display}
+            placeholder={defaultWeight !== undefined ? formatKg(defaultWeight) : "0"}
+            onFocus={() => setDraft(display)}
+            onChange={e => setDraft(e.target.value)}
+            onBlur={commitDraft}
+            onKeyDown={e => e.key === "Enter" && e.currentTarget.blur()}
+            aria-label={assistedWeight ? "Assistance en kg" : "Charge en kg"}
+          />
+          <span>kg</span>
+        </label>
+        <button className="weight-input__step" onClick={() => step(STEP_KG)} aria-label="Ajouter 2,5 kg">+</button>
+      </div>
+
+      {status === "error" ? (
+        <div className="weight-input__error" role="alert">
+          Pas de réseau. {display || "La charge"} kg est gardé sur ce téléphone mais pas encore dans ton compte.{" "}
+          <button onClick={onRetry}>Réessayer</button>
         </div>
+      ) : (
+        <p className="weight-input__hint">±2,5 kg · touche le chiffre pour le saisir</p>
       )}
     </div>
+  );
+}
+
+function IconCheck() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
+
+function IconLock() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <rect x="4" y="11" width="16" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
   );
 }

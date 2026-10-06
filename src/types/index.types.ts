@@ -12,9 +12,14 @@ export type Exercise = {
   tips: string[]
   cat?: string
   index?: number
+  // Jour EXPRESS : bloc d'affichage, et jour d'origine dont l'exercice partage la charge.
+  group?: { label: string; note: string }
+  sourceDay?: number
 }
 
-export type DayType = 'push' | 'pull' | 'legs' | 'fullbody' | 'cardio'
+export type DayType = 'push' | 'pull' | 'legs' | 'fullbody' | 'cardio' | 'express'
+
+export type ExpressBase = 'push' | 'pull'
 
 export type Day = {
   id: number
